@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:aokp="http://schemas.android.com/apk/res/com.roman.romcontrol">	
+
+	<PreferenceCategory
+		android:key="blackice"
+		android:title="@string/black_ice">
+		
+		<Preference
+			android:key="thanks_to_aokp"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:title="@string/thanks_to_aokp" 
+			android:summary="@string/black_ice_thanks"
+			android:selectable="false" />
+	
+	</PreferenceCategory>
+	
+	<PreferenceCategory
+		android:key="devs"
+		android:title="@string/devs">
+		
+		<com.roman.romcontrol.widgets.DeveloperPreference
+			android:title="travp624"
+			aokp:twitterHandle="travp624"
+			aokp:donateLink="@string/donate_travis" />
+
+		<com.roman.romcontrol.widgets.DeveloperPreference
+			android:title="Mastur_Mynd"
+			aokp:twitterHandle="Mastur_Mynd"
+			aokp:donateLink="@string/donate_andrew" />
+
+	</PreferenceCategory>
+ 
+</PreferenceScreen>

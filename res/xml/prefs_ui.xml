@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<CheckBoxPreference
+		android:key="disable_bootanimation"
+		android:title="@string/disable_bootanimation_title" />
+
+	<CheckBoxPreference
+		android:key="disable_bugmailer"
+		android:title="@string/disable_bugmailer_title" />
+
+	<CheckBoxPreference
+		android:key="rotate_180"
+		android:title="@string/rotate_180_title"
+		android:summary="@string/rotate_180_summary" />
+
+	<CheckBoxPreference
+		android:key="horizontal_recents_task_panel"
+		android:title="@string/horizontal_recents_task_panel_title"
+		android:summary="@string/horizontal_recents_task_panel_summary" />
+
+	<Preference
+		android:key="lcd_density_setup"
+		android:title="@string/lcd_density_title"
+		android:summary="@string/lcd_density_summary" />
+
+	<PreferenceCategory
+		android:key="crt"
+		android:title="@string/crt_animations_header">
+
+		<CheckBoxPreference
+			android:key="crt_on"
+			android:title="@string/crt_on_title" />
+
+		<CheckBoxPreference
+			android:key="crt_off"
+			android:title="@string/crt_off_title" />
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:key="misc"
+		android:title="@string/misc_short">
+
+		<CheckBoxPreference
+			android:key="ime_switcher"
+			android:title="@string/ime_switcher_title"
+			android:summary="@string/ime_switcher_summary" />
+
+		<Preference
+			android:key="custom_carrier_label"
+			android:title="@string/custom_carrier_label_title" />
+
+		<CheckBoxPreference
+			android:key="longpress_to_kill"
+			android:title="@string/longpress_to_kill_title"
+			android:summary="@string/longpress_to_kill_summary" />
+
+		<ListPreference
+			android:entries="@array/rotation_animation_delay_entries"
+			android:entryValues="@array/rotation_animation_delay_values"
+			android:key="rotation_animation_delay"
+			android:title="@string/rotation_animation_delay_title"
+			android:summary="@string/rotation_animation_delay_summary" />
+
+	</PreferenceCategory>
+
+</PreferenceScreen>
