@@ -12,14 +12,6 @@
 			android:defaultValue="true" android:title="@string/pt_zipalign"
 			android:summary="@string/ps_zipalign" android:dependency="enable_init_d"
 			android:shouldDisableView="true" />
-		<CheckBoxPreference android:key="enable_sd_boost"
-			android:defaultValue="true" android:title="@string/pt_enable_sd_boost"
-			android:summary="@string/ps_enable_sd_boost" android:dependency="enable_init_d"
-			android:shouldDisableView="true" />
-		<EditTextPreference android:key="sd_boost"
-			android:inputType="numberDecimal" android:name="@string/pt_sd_boost"
-			android:defaultValue="2048" android:title="@string/pt_sd_boost"
-			android:dependency="enable_sd_boost" android:shouldDisableView="true" />
 		<CheckBoxPreference android:key="fix_permissions"
 			android:defaultValue="false" android:title="@string/pt_fix_permissions"
 			android:summary="@string/ps_fix_permissions" android:dependency="enable_init_d"

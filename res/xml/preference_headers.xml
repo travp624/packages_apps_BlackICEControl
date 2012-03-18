@@ -15,7 +15,8 @@
 
 	<header android:title="@string/themer" />	
 	
-	<header android:icon="@drawable/ic_rom_control_masturmods"
+	<header 
+		android:icon="@drawable/ic_rom_control_masturmods" 
 		android:title="@string/mastur_mods_settings">
 		<intent
 			android:action="android.intent.action.MAIN"
@@ -96,6 +97,13 @@
 		android:summary="@string/header_summary_toggles" />
 
 	<header
+		android:id="@+id/notification_drawer"
+		android:fragment="com.roman.romcontrol.fragments.PowerWidget"
+		android:title="@string/power_widget_title"
+		android:icon="@drawable/ic_rom_control_toggles"
+		android:summary="@string/power_widget_title_summary" />
+
+	<header
 		android:id="@+id/statusbar_clock"
 		android:title="@string/clock"
 		android:fragment="com.roman.romcontrol.fragments.StatusBarClock"
@@ -115,6 +123,13 @@
 		android:fragment="com.roman.romcontrol.fragments.StatusBarSignal"
 		android:icon="@drawable/ic_rom_control_signaltext"
 		android:summary="@string/header_summary_signal" />
+
+	<!-- <header
+		android:id="@+id/statusbar_battery"
+		android:title="@string/wifi"
+		android:fragment="com.roman.romcontrol.fragments.StatusBarWifi"
+		android:icon="@drawable/ic_rom_control_wifitext"
+		android:summary="@string/header_summary_wifi" /> -->
 	
 	<header android:title="@string/tools" />
 	
@@ -126,10 +141,10 @@
 		android:icon="@drawable/ic_rom_control_init_d" />
 
 	<header
-		android:id="@+id/buildprop_modder"
+		android:id="@+id/propmodder"
 		android:title="@string/propmodder_title"
 		android:summary="@string/propmodder_title_summary"
-		android:fragment="com.roman.romcontrol.util.PropModder"
+		android:fragment="com.roman.romcontrol.fragments.PropModder"
 		android:icon="@drawable/ic_rom_control_propmodder" />
 
 	<header

@@ -18,7 +18,7 @@ import com.roman.romcontrol.util.CMDProcessor;
 
 public class BootService extends Service {
 
-    static final String TAG = "Liberty Settings Service";
+    static final String TAG = "Settings Service";
     private static final String CUR_GOV = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor";
     private static final String MAX_FREQ = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq";
     private static final String MIN_FREQ = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
