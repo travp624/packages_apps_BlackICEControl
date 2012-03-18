@@ -214,14 +214,14 @@
 
 		</activity>
 
-		<activity 
+		<!-- <activity 
 			android:name=".fragments.PowerWidget">
 
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
-			</intent-filter>
+			</intent-filter> 
 
-		</activity>
+		</activity> -->
 
 		<activity 
 			android:name=".fragments.PropModder">

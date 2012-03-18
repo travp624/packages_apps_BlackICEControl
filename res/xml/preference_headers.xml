@@ -96,12 +96,12 @@
 		android:icon="@drawable/ic_rom_control_toggles"
 		android:summary="@string/header_summary_toggles" />
 
-	<header
+	<!-- <header
 		android:id="@+id/notification_drawer"
 		android:fragment="com.roman.romcontrol.fragments.PowerWidget"
 		android:title="@string/power_widget_title"
 		android:icon="@drawable/ic_rom_control_toggles"
-		android:summary="@string/power_widget_title_summary" />
+		android:summary="@string/power_widget_title_summary" /> -->
 
 	<header
 		android:id="@+id/statusbar_clock"
