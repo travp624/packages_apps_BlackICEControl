@@ -151,7 +151,7 @@
             android:entries="@array/entries_sdcard_buffer_explain"
             android:entryValues="@array/entries_sdcard_buffer"
             android:persistent="true" />
-
-    </PreferenceCategory>
-
+	
+	</PreferenceCategory>
+    
 </PreferenceScreen>
