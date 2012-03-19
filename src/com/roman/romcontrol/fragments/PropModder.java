@@ -470,7 +470,7 @@ public class PropModder extends PreferenceFragment implements
     public boolean initLogcat(boolean swap0) {
         if (swap0) {
             cmd.su.runWaitFor(String.format("echo 'rm /dev/log/main' >  %s", INIT_SCRIPT_LOGCAT)).success();
-            return cmd.su.runWaitFor(String.format("chmod 755 %s", INIT_SCRIPT_LOGCAT)).success();
+            return cmd.su.runWaitFor(String.format("chmod 555 %s", INIT_SCRIPT_LOGCAT)).success();
         } else {
             return cmd.su.runWaitFor(String.format("rm -f %s", INIT_SCRIPT_LOGCAT)).success();
         }
@@ -479,7 +479,7 @@ public class PropModder extends PreferenceFragment implements
     public boolean initSdcard(boolean swap1) {
         if (swap1) {
             cmd.su.runWaitFor(String.format("echo 'rm /dev/log/main' >  %s", INIT_SCRIPT_LOGCAT)).success();
-            return cmd.su.runWaitFor(String.format("chmod 755 %s", INIT_SCRIPT_LOGCAT)).success();
+            return cmd.su.runWaitFor(String.format("chmod 555 %s", INIT_SCRIPT_LOGCAT)).success();
         } else {
             return cmd.su.runWaitFor(String.format("rm -f %s", INIT_SCRIPT_LOGCAT)).success();
         }
