@@ -467,6 +467,8 @@
 	<string name="dpi">DPI</string>
 	
 	<!--  Kernel Tweaks -->
+	<string name="pt_fast_charge_boot">Fast Charge</string>
+	<string name="ps_fast_charge_boot">Enable fast charge at boot</string>
     <string name="kernel">Kernel Tweaks</string>
     <string name="category_screen_title">WM8994 Settings ( voodoo )</string>
     <string name="color_tuning_title_head">Color Multipliers Tuning</string>
