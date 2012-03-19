@@ -47,6 +47,11 @@
 			android:key="ime_switcher"
 			android:title="@string/ime_switcher_title"
 			android:summary="@string/ime_switcher_summary" />
+			
+		<CheckBoxPreference
+			android:key="enable_volume_options"
+			android:title="@string/enable_volume_options"
+			android:summary="@string/enable_volume_options_summary" />
 
 		<Preference
 			android:key="custom_carrier_label"

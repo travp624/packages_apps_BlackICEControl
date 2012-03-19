@@ -439,6 +439,7 @@
 	<string name="ps_set_min">Set min CPU scaling frequency\nCurrent: %s</string>
 	<string name="ps_set_gov">Set current scaling governor\nCurrent: %s</string>
 	<string name="ps_cpu_boot">Apply CPU at boot</string>
+	
 	<!-- Performance -->
 	<string name="ps_set_cpu_activity">Set min/max frequencies and scaling governor
 	</string>
@@ -475,6 +476,10 @@
     <string name="color_red_title">Red</string>
     <string name="color_green_title">Green</string>
     <string name="color_blue_title">Blue</string>
+	
+	<!-- Volume Options to Volume rocker -->
+	<string name="enable_volume_options">Enable Volume Options</string>
+	<string name="enable_volume_options_summary">Adds clickable btn to volume slider</string>
 	
 	<!-- #teamkang stuff -->
 	<string name="donate_roman">https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=MZD7JLRX6P99Y</string>
