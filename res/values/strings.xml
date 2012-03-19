@@ -17,62 +17,62 @@
 	<!-- App Name -->
   	<string name="app_name">Black ICE Control</string>
 
-   <!-- Main -->
-   <string name="user_interface">User Interface</string>
-   <string name="general_ui">General UI</string>
-   <string name="lockscreen_options">Lockscreen options</string>
-   <string name="power_menu_optons">Power menu options</string>
-   <string name="functionality">Functionality</string>
-   <string name="power_saver">Power saver</string>
-   <string name="led_options">LED options</string>
-   <string name="statusbar">Statusbar</string>
-   <string name="general">General</string>
-   <string name="toggles_layout">Toggles</string>
-   <string name="clock">Clock</string>
-   <string name="battery">Battery</string>
-   <string name="nav_bar">Navigation bar</string>
-   <string name="tools">Start Tools &amp; Performance</string>
-   <string name="weather">Weather</string>
-   <string name="signal">Signal</string>
+	<!-- Main -->
+	<string name="user_interface">User Interface</string>
+	<string name="general_ui">General UI</string>
+	<string name="lockscreen_options">Lockscreen options</string>
+	<string name="power_menu_optons">Power menu options</string>
+	<string name="functionality">Functionality</string>
+	<string name="power_saver">Power saver</string>
+	<string name="led_options">LED options</string>
+	<string name="statusbar">Statusbar</string>
+	<string name="general">General</string>
+	<string name="toggles_layout">Toggles</string>
+	<string name="clock">Clock</string>
+	<string name="battery">Battery</string>
+	<string name="nav_bar">Navigation bar</string>
+	<string name="tools">Start Tools &amp; Performance</string>
+	<string name="weather">Weather</string>
+	<string name="signal">Signal</string>
 	<string name="wifi">Wifi</string>
 
 	<!-- Main summaries -->
-   <string name="header_summary_battery">Battery bar, 1% battery mod, etc</string>
-   <string name="header_summary_general_ui">Boot animation, bug mailer, rotation, IME switcher, etc</string>
-   <string name="header_summary_navigation_bar">Buttons to display, nav bar color, order</string>
-   <string name="header_summary_lockscreens">Custom apps to launch, layout</string>
-   <string name="header_summary_power_menu">What to display in your power menu</string>
-   <string name="header_summary_powersaver">Automatically disable data to save battery</string>
-   <string name="header_summary_led">Change default settings for Android to use</string>
-   <string name="header_summary_general">Settings button behavior</string>
-   <string name="header_summary_toggles">Customize toggles</string>
+	<string name="header_summary_battery">Battery bar, 1% battery mod, etc</string>
+	<string name="header_summary_general_ui">Boot animation, bug mailer, rotation, IME switcher, etc</string>
+	<string name="header_summary_navigation_bar">Buttons to display, nav bar color, order</string>
+	<string name="header_summary_lockscreens">Custom apps to launch, layout</string>
+	<string name="header_summary_power_menu">What to display in your power menu</string>
+	<string name="header_summary_powersaver">Automatically disable data to save battery</string>
+	<string name="header_summary_led">Change default settings for Android to use</string>
+	<string name="header_summary_general">Settings button behavior</string>
+	<string name="header_summary_toggles">Customize toggles</string>
 	<string name="header_summary_clock">Clock location, AM/PM style, color</string>
 	<string name="header_summary_weather">Enable/disable, set custom location or network, and interval</string>
 	<string name="header_summary_signal">Signal dBm text</string>
 	<string name="header_summary_wifi">Wifi text setting</string>
-   <string name="advanced_settings">Advanced settings</string>
-   <string name="misc_short">Misc</string>
+	<string name="advanced_settings">Advanced settings</string>
+	<string name="misc_short">Misc</string>
     
-   <!-- Navigation Bar -->
-   <string name="title_pref_menu_display">Menu location</string>
-   <string name="summary_pref_menu_display">Remember to remove your menu buttons if you\'re using the big menu button!</string>
-   <string name="navigation_bar">Navigation bar</string>
-   <string name="navigation_bar_tint_title">Navigation bar color</string>
-   <string name="title_pref_navigation_menu_display">Menu visibility</string>
-   <string name="summary_pref_navigation_menu_display">How and when do you want the menu buttons to appear?</string>
-   <string name="navbar_order_title">Navigation button order</string>
-   <string name="navbar_order_summary">Customize the order of your soft keys</string>
-   <string name="enabled_navbar_buttons_title">Enabled buttons</string>
-   <string name="enabled_navbar_buttons_summary">Choose which soft keys you would like to see</string>
-   <string name="button_transparency_title">Nav button transparency</string>
-   <string name="long_press_home_title">Long press home action</string>
-   <string name="long_press_home_summary">What to do when long pressing the home softkey. Reboot required to reflect changes.</string>
-   <string name="glow_times_title">Button glow animation</string>
-   <string name="glow_times_summary">Adjust how fast your buttons animate after you touch them. Lowering the speed can improve performance.</string>
+	<!-- Navigation Bar -->
+	<string name="title_pref_menu_display">Menu location</string>
+	<string name="summary_pref_menu_display">Remember to remove your menu buttons if you\'re using the big menu button!</string>
+	<string name="navigation_bar">Navigation bar</string>
+	<string name="navigation_bar_tint_title">Navigation bar color</string>
+	<string name="title_pref_navigation_menu_display">Menu visibility</string>
+	<string name="summary_pref_navigation_menu_display">How and when do you want the menu buttons to appear?</string>
+	<string name="navbar_order_title">Navigation button order</string>
+	<string name="navbar_order_summary">Customize the order of your soft keys</string>
+	<string name="enabled_navbar_buttons_title">Enabled buttons</string>
+	<string name="enabled_navbar_buttons_summary">Choose which soft keys you would like to see</string>
+	<string name="button_transparency_title">Nav button transparency</string>
+	<string name="long_press_home_title">Long press home action</string>
+	<string name="long_press_home_summary">What to do when long pressing the home softkey. Reboot required to reflect changes.</string>
+	<string name="glow_times_title">Button glow animation</string>
+	<string name="glow_times_summary">Adjust how fast your buttons animate after you touch them. Lowering the speed can improve performance.</string>
     
-   <!-- UI -->
-   <string name="rotation_animation_delay_title">Rotation delay</string>
-   <string name="rotation_animation_delay_summary">The number of milliseconds for which the device posture must be stable before an orientation change occurs. 200 ms default.</string>
+	<!-- UI -->
+	<string name="rotation_animation_delay_title">Rotation delay</string>
+	<string name="rotation_animation_delay_summary">The number of milliseconds for which the device posture must be stable before an orientation change occurs. 200 ms default.	</string>
 	<string name="ime_switcher_title">Show IME Switcher</string>
 	<string name="ime_switcher_summary">In statusbar, while typing (requires reboot)</string>
 	<string name="custom_carrier_label_title">Custom carrier label</string>
@@ -111,7 +111,7 @@
   	<!-- Lockscreens -->
   	<string name="pref_lockscreen_layout_title">Lockscreen style</string>
   	<string name="pref_lockscreen_layout_summary">Remember to scroll down and change your targets after changing styles</string>
-   <string name="title_pref_lockscreen_quad_targets">Quad Targets</string>	
+	<string name="title_pref_lockscreen_quad_targets">Quad Targets</string>	
   	<string name="summary_pref_lockscreen_quad_targets">Adds Phone and Messaging shortcuts on the lock screen</string>
   	<string name="title_pref_lockscreen_octo_targets">Octo Targets</string>	
   	<string name="summary_pref_lockscreen_octo_targets">Adds too many shortcuts on the lock screen</string>
@@ -129,70 +129,70 @@
   	<string name="volume_wake_summary">Tapping the volume keys while your phone is off will turn the screen on.</string>
   	<string name="volume_music_controls_title">Volume music controls</string>
   	<string name="volume_music_controls_summary">Long press volume buttons to skip tracks while screen is off. Volume wake will not work when music is playing.</string>
-   <string name="lockscreen_show_nav_title">Hide nav bar</string>
-   <string name="lockscreen_show_nav_summary">Hide the nav bar (if your device supports it) on the lockscreen.</string>
-   <string name="custom_app_n_dialog_title">Choose action for target %1$s</string>
-   <string name="custom_app_n">Custom app %1$s</string>
-   <string name="lockscreen_targets">Lockscreen targets</string>
-   <string name="lockscreen_action_unlock">Unlock</string>
-   <string name="lockscreen_action_sound">Sound toggle</string>
-   <string name="lockscreen_action_camera">Camera</string>
-   <string name="lockscreen_action_mms">SMS</string>
-   <string name="lockscreen_action_phone">Phone</string>
-   <string name="lockscreen_action_none">Empty</string>
-   <string name="lockscreen_landscape_title">Horizontal lockscreen</string>
-   <string name="lockscreen_landscape_summary">Whether horizontal lockscreen orientation will be enabled</string>
-   <string name="lockscreen_quick_unlock_control_title">Quick pin unlock</string>
-   <string name="lockscreen_quick_unlock_control_summary">Unlock password/pin lockscreen without pressing enter button</string>
-   <string name="enable_fast_torch_title">Enable fast torch</string>
-   <string name="enable_fast_torch_summary">While your screen is off, you can long-press the power key to turn the LED light on. Letting go of the power button will turn the torch off.</string>
-   <string name="lockscreen_wallpaper_title">Choose lockscreen wallpaper</string>
-   <string name="lockscreen_wallpaper_summary">You can remove the wallpaper from the menu in this window</string>
-   <string name="lockscreen_text_color_title">Lockscreen text color</string>
+	<string name="lockscreen_show_nav_title">Hide nav bar</string>
+	<string name="lockscreen_show_nav_summary">Hide the nav bar (if your device supports it) on the lockscreen.</string>
+	<string name="custom_app_n_dialog_title">Choose action for target %1$s</string>
+	<string name="custom_app_n">Custom app %1$s</string>
+	<string name="lockscreen_targets">Lockscreen targets</string>
+	<string name="lockscreen_action_unlock">Unlock</string>
+	<string name="lockscreen_action_sound">Sound toggle</string>
+	<string name="lockscreen_action_camera">Camera</string>
+	<string name="lockscreen_action_mms">SMS</string>
+	<string name="lockscreen_action_phone">Phone</string>
+	<string name="lockscreen_action_none">Empty</string>
+	<string name="lockscreen_landscape_title">Horizontal lockscreen</string>
+	<string name="lockscreen_landscape_summary">Whether horizontal lockscreen orientation will be enabled</string>
+	<string name="lockscreen_quick_unlock_control_title">Quick pin unlock</string>
+	<string name="lockscreen_quick_unlock_control_summary">Unlock password/pin lockscreen without pressing enter button</string>
+	<string name="enable_fast_torch_title">Enable fast torch</string>
+	<string name="enable_fast_torch_summary">While your screen is off, you can long-press the power key to turn the LED light on. Letting go of the power button will turn the torch off.</string>
+	<string name="lockscreen_wallpaper_title">Choose lockscreen wallpaper</string>
+	<string name="lockscreen_wallpaper_summary">You can remove the wallpaper from the menu in this window</string>
+	<string name="lockscreen_text_color_title">Lockscreen text color</string>
     
-   <!-- Power Menu -->
-   <string name="title_show_power_saver">Show power saver</string>
-   <string name="title_show_screenshot">Show screenshot</string>
-   <string name="title_show_torch_toggle">Show torch toggle</string>
-   <string name="title_show_airplane_toggle">Show airplane toggle</string>
-   <string name="title_show_navbar_hide">Show navigation bar toggle</string>
+	<!-- Power Menu -->
+	<string name="title_show_power_saver">Show power saver</string>
+	<string name="title_show_screenshot">Show screenshot</string>
+	<string name="title_show_torch_toggle">Show torch toggle</string>
+	<string name="title_show_airplane_toggle">Show airplane toggle</string>
+	<string name="title_show_navbar_hide">Show navigation bar toggle</string>
     
-   <!-- Power Saving -->
-   <string name="title_pref_powersaving_pref_mode">Enable power saver</string>
-   <string name="summary_pref_powersaving_pref_mode">@null</string>
-   <string name="title_pref_powersaving_data_screen_off">Screen off data action</string>
-   <string name="summary_pref_powersaving_data_screen_off">What to do with the data when the screen turns off</string>
-   <string name="title_pref_powersaving_data_screen_off_delay">Data action delay</string>
-   <string name="summary_pref_powersaving_data_screen_off_delay">How long to wait before applying data action?</string>
-   <string name="title_pref_powersaving_sync_screen_off">Sync action</string>
-   <string name="summary_pref_powersaving_sync_screen_off">What to do with your syncage?!</string>
-   <string name="title_pref_powersaving_sync_screen_off_delay">Sync time interval</string>
-   <string name="summary_pref_powersaving_sync_screen_off_delay">How long to wait between each forced sync</string>
-   <string name="powersaver_data_cat">Data</string>
-   <string name="powersaver_sync_cat">Sync</string>
+	<!-- Power Saving -->
+	<string name="title_pref_powersaving_pref_mode">Enable power saver</string>
+	<string name="summary_pref_powersaving_pref_mode">@null</string>
+	<string name="title_pref_powersaving_data_screen_off">Screen off data action</string>
+	<string name="summary_pref_powersaving_data_screen_off">What to do with the data when the screen turns off</string>
+	<string name="title_pref_powersaving_data_screen_off_delay">Data action delay</string>
+	<string name="summary_pref_powersaving_data_screen_off_delay">How long to wait before applying data action?</string>
+	<string name="title_pref_powersaving_sync_screen_off">Sync action</string>
+	<string name="summary_pref_powersaving_sync_screen_off">What to do with your syncage?!</string>
+	<string name="title_pref_powersaving_sync_screen_off_delay">Sync time interval</string>
+	<string name="summary_pref_powersaving_sync_screen_off_delay">How long to wait between each forced sync</string>
+	<string name="powersaver_data_cat">Data</string>
+	<string name="powersaver_sync_cat">Sync</string>
 
-   <!--  LED -->
-   <string name="title_led_on">LED pulse ON duration</string>
-   <string name="summary_led_on">@null</string>
-   <string name="title_led_off">LED pulse OFF duration</string>
-   <string name="summary_led_off">@null</string>
-   <string name="led_color_title">LED color</string>
-   <string name="title_led_screen_on">LED flash while screen ON</string>
-   <string name="summary_led_screen_on">@null</string>
+	<!--  LED -->
+	<string name="title_led_on">LED pulse ON duration</string>
+	<string name="summary_led_on">@null</string>
+	<string name="title_led_off">LED pulse OFF duration</string>
+	<string name="summary_led_off">@null</string>
+	<string name="led_color_title">LED color</string>
+	<string name="title_led_screen_on">LED flash while screen ON</string>
+	<string name="summary_led_screen_on">@null</string>
 
-   <!--  Statusbar | General -->
-   <string name="title_settings_behavior">Use default settings behavior</string>
-   <string name="summary_settings_behavior">Default behavior is to long press for toggles, press for settings. Uncheck to press for toggles, long press for settings</string>
-   <string name="title_auto_hide_toggles">Auto hide toggles</string>
-   <string name="summary_auto_hide_toggles">After collapse toggles will hide</string>
+	<!--  Statusbar | General -->
+	<string name="title_settings_behavior">Use default settings behavior</string>
+	<string name="summary_settings_behavior">Default behavior is to long press for toggles, press for settings. Uncheck to press for toggles, long press for settings</string>
+	<string name="title_auto_hide_toggles">Auto hide toggles</string>
+	<string name="summary_auto_hide_toggles">After collapse toggles will hide</string>
 	<string name="title_status_bar_brightness_toggle">Enable brightness control</string>
-   <string name="summary_status_bar_brightness_toggle">Slide finger slowly across statusbar to adjust brightness setting</string>
+	<string name="summary_status_bar_brightness_toggle">Slide finger slowly across statusbar to adjust brightness setting</string>
 	<string name="adb_icon_title">Enable USB debugging icon</string>
-   <string name="adb_icon_summary">Wutang</string>
-   <string name="statusbar_transparency">Transparency</string>
-   <string name="statusbar_transparency_summary">Turning this on might affect performance and battery life. (requires UI restart)</string>
-   <string name="statusbar_layout">Notification drawer layout</string>
-   <string name="statusbar_layout_summary">Change the notification drawer layout (requires UI restart)</string> 	 	
+	<string name="adb_icon_summary">Wutang</string>
+	<string name="statusbar_transparency">Transparency</string>
+	<string name="statusbar_transparency_summary">Turning this on might affect performance and battery life. (requires UI restart)</string>
+	<string name="statusbar_layout">Notification drawer layout</string>
+	<string name="statusbar_layout_summary">Change the notification drawer layout (requires UI restart)</string> 	 	
 
   	<!-- Statusbar | Battery -->
   	<string name="battery_icon">Battery icon style</string>
@@ -224,7 +224,7 @@
   	<string name="toggle_style_summary">Whether to show icons or text on your toggles.</string>
   	<string name="alternate_button_layout_title">Alternate toggles</string>
  	<string name="alternate_button_layout_summary">Use Toggle Buttons instead of switches for your toggles.</string>
-   <string name="enabled_toggles_title">Enabled toggles</string>
+	<string name="enabled_toggles_title">Enabled toggles</string>
   	<string name="enabled_toggles_summary">Choose toggles to display</string>
   	<string name="toggles_order_title">Toggle order</string>
   	<string name="toggles_order_summary">Choose the order which your toggles are displayed</string>
@@ -328,12 +328,12 @@
 	<string name="pt_cpu_boot">Set at boot</string>
  
 	<!-- Scrolling Cache -->
-   <string name="pref_scrollingcache_title">Scrolling cache</string>
-   <string name="pref_scrollingcache_summary">Scrolling cache may improve scrolling performance at the cost of memory</string>
-   <string name="pref_scrollingcache_force_enable">Force enable</string>
-   <string name="pref_scrollingcache_default_enable">Default enable</string>
-   <string name="pref_scrollingcache_default_disable">Default disable</string>
-   <string name="pref_scrollingcache_force_disable">Force disable</string>
+	<string name="pref_scrollingcache_title">Scrolling cache</string>
+	<string name="pref_scrollingcache_summary">Scrolling cache may improve scrolling performance at the cost of memory</string>
+	<string name="pref_scrollingcache_force_enable">Force enable</string>
+	<string name="pref_scrollingcache_default_enable">Default enable</string>
+	<string name="pref_scrollingcache_default_disable">Default disable</string>
+	<string name="pref_scrollingcache_force_disable">Force disable</string>
 
 	<!-- Preference Summaries -->
 	<!-- Main -->
@@ -367,24 +367,24 @@
 	<string name="ps_enable_cron">Enable scheduled cron jobs</string>
 	
 	<!-- PropModder -->
-   <string name="propmodder_title">PropModder</string>
+	<string name="propmodder_title">PropModder</string>
 	<string name="propmodder_title_summary">Edit build.prop specific settings</string>
-   <string name="buildprop_title">Build.prop mods</string>
-   <string name="nonprop_cat_title">Mods involving init.d script</string>
+	<string name="buildprop_title">Build.prop mods</string>
+	<string name="nonprop_cat_title">Mods involving init.d script</string>
 
-   <!-- WARN THE MASSES THIS CAN BE DANGEROUS!!! -->
-   <string name="main_warning_title">YOU HAVE BEEN WARNED</string>
-   <string name="main_warning_summary">This area makes changes to your build.prop.  It hacks your \'/system/build.prop\' WE ARE NOT RESPONSIBLE FOR YOUR ACTIONS! Your device your responsibility</string>
-   <string name="pref_wifi_scan_interval_title">Wifi scan interval</string>
-   <string name="pref_wifi_scan_interval_summary">The time between wifi scans when no stored access points are available (requires reboot)</string>
+	<!-- WARN THE MASSES THIS CAN BE DANGEROUS!!! -->
+	<string name="main_warning_title">YOU HAVE BEEN WARNED</string>
+	<string name="main_warning_summary">This area makes changes to your build.prop.  It hacks your \'/system/build.prop\' WE ARE NOT RESPONSIBLE FOR YOUR ACTIONS! Your device 	your responsibility</string>
+	<string name="pref_wifi_scan_interval_title">Wifi scan interval</string>
+	<string name="pref_wifi_scan_interval_summary">The time between wifi scans when no stored access points are available (requires reboot)</string>
 	<string name="pref_wifi_scan_alt_summary">Time between wifi scans: %s</string>
-   <string name="pref_lcd_density_title">LCD density</string>
-   <string name="pref_lcd_density_summary">This is the screen density allowing more high definition look (requires reboot)</string>
-   <string name="pref_max_events_title">Windows Manager\'s max events per second</string>
+	<string name="pref_lcd_density_title">LCD density</string>
+	<string name="pref_lcd_density_summary">This is the screen density allowing more high definition look (requires reboot)</string>
+	<string name="pref_max_events_title">Windows Manager\'s max events per second</string>
    
 	<!--TODO find good explanation of this value -->
   	<string name="pref_max_events_summary">This is a runtime value that controls the number of events the system will allow in a second (requires reboot)</string>
-   <string name="pref_max_events_alt_summary">Max number of system events: %s</string>
+	<string name="pref_max_events_alt_summary">Max number of system events: %s</string>
   	<string name="pref_usb_mode_title">Default USB mode</string>
   	<string name="pref_usb_mode_summary">This decides what the default setting is when you plug in to a computer via USB (requires reboot)</string>
  	<string name="pref_ring_delay_title">Telephone ringer delay</string>
@@ -442,8 +442,7 @@
 	<!-- Performance -->
 	<string name="ps_set_cpu_activity">Set min/max frequencies and scaling governor
 	</string>
-	<string name="ps_free_memory">Amount of RAM the minfree taskkiller will keep |
-		Current: %s</string>
+	<string name="ps_free_memory">Amount of RAM the minfree taskkiller will keep | Current: %s</string>
 	<string name="ps_free_memory_boot">Apply the amount above at boot</string>
 
 	<!-- Performance Settings | Warning dialog -->
@@ -464,8 +463,18 @@
 	<string name="error_values">Error getting values</string>
 	<string name="set_boot">Set On Boot</string>
 	<string name="apply_values">Apply Values</string>
-
 	<string name="dpi">DPI</string>
+	
+	<!--  Kernel Tweaks -->
+    <string name="kernel">Kernel Tweaks</string>
+    <string name="category_screen_title">WM8994 Settings ( voodoo )</string>
+    <string name="color_tuning_title_head">Color Multipliers Tuning</string>
+    <string name="color_tuning_summary_head">Calibrate multipliers screen color</string>
+    <string name="gamma_tuning_title_head">Color Gamma Tuning</string>
+    <string name="gamma_tuning_summary_head">Calibrate gamma color correction</string>
+    <string name="color_red_title">Red</string>
+    <string name="color_green_title">Green</string>
+    <string name="color_blue_title">Blue</string>
 	
 	<!-- #teamkang stuff -->
 	<string name="donate_roman">https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=MZD7JLRX6P99Y</string>
