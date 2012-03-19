@@ -34,7 +34,7 @@ public class UserInterface extends SettingsPreferenceFragment implements
     private static final String PREF_CRT_ON = "crt_on";
     private static final String PREF_CRT_OFF = "crt_off";
     private static final String PREF_IME_SWITCHER = "ime_switcher";
-    private static final string PREF_ENABLE_VOLUME_OPTIONS = "enable_volume_options";
+    private static final String PREF_ENABLE_VOLUME_OPTIONS = "enable_volume_options";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final String PREF_LONGPRESS_TO_KILL = "longpress_to_kill";
     private static final String PREF_ROTATION_ANIMATION = "rotation_animation_delay";
@@ -79,7 +79,7 @@ public class UserInterface extends SettingsPreferenceFragment implements
                 Settings.System.SHOW_STATUSBAR_IME_SWITCHER, 1) == 1);
 
 		mEnableVolumeOptions = (CheckBoxPreference) findPreference(PREF_ENABLE_VOLUME_OPTIONS);
-		mEnableVolumeOptions.setChecked(Setting.System.getInt(getActivity().getContentResolver(),
+		mEnableVolumeOptions.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
 				Settings.System.ENABLE_VOLUME_OPTIONS, 0) == 1);
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
