@@ -301,10 +301,13 @@ public class PropModder extends PreferenceFragment implements
         boolean value;
         if (preference == mLogcatPref) {
             value = mLogcatPref.isChecked();
-            mount("rw");
             boolean returnValue = false;
+            mount("rw");
             if (value) {
                 returnValue = cmd.su.runWaitFor(String.format("echo %s > %s", LOGCAT_ENABLE, INIT_SCRIPT_LOGCAT)).success();
+                if (returnValue) {
+					cmd.su.runWaitFor(String.format("chmod 555 %s", INIT_SCRIPT_LOGCAT)).success();
+				}
             } else {
                 returnValue = cmd.su.runWaitFor(String.format("rm %s", INIT_SCRIPT_LOGCAT)).success();
             }
@@ -387,7 +390,7 @@ public class PropModder extends PreferenceFragment implements
                     String newFormat = String.format(SDCARD_BUFFER_CMD, newValue.toString());
                     cmd.su.runWaitFor(String.format(SDCARD_BUFFER_CMD, newValue.toString()));
                     cmd.su.runWaitFor(String.format("echo '%s' > %s", newFormat, INIT_SCRIPT_SDCARD));
-                    cmd.su.runWaitFor(String.format("chmod 777 %s", INIT_SCRIPT_SDCARD));
+                    cmd.su.runWaitFor(String.format("chmod 555 %s", INIT_SCRIPT_SDCARD));
                     returnValue = true;
                 }
                 mount("ro");
@@ -479,7 +482,7 @@ public class PropModder extends PreferenceFragment implements
     public boolean initSdcard(boolean swap1) {
         if (swap1) {
             cmd.su.runWaitFor(String.format("echo 'rm /dev/log/main' >  %s", INIT_SCRIPT_LOGCAT)).success();
-            return cmd.su.runWaitFor(String.format("chmod 555 %s", INIT_SCRIPT_LOGCAT)).success();
+            return cmd.su.runWaitFor(String.format("chmod 755 %s", INIT_SCRIPT_LOGCAT)).success();
         } else {
             return cmd.su.runWaitFor(String.format("rm -f %s", INIT_SCRIPT_LOGCAT)).success();
         }
