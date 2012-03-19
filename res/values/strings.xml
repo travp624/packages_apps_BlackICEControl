@@ -242,63 +242,7 @@
 	<string name="hide_wifi_title">Hide Wifi icons</string>
 	<string name="hide_wifi_summary">Will also hide data indicator for now. Will be able to separate later.</string>
 
-	<!-- Powerwidget -->
-   	<string name="power_widget_title">Power Widget</string>
-	<string name="power_widget_title_summary">Use cm9 style toggles instead of AOKP style</string>
-   	<string name="title_expanded_widget">Enable Widget</string>
-   	<string name="summary_expanded_widget">Show the power widget in notification drawer</string>
-   	<string name="title_expanded_hide_onchange">Hide On Change</string>
-   	<string name="summary_expanded_hide_onchange">Hide notification drawer after pressing widget</string>
-   	<string name="title_expanded_hide_indicator">Hide Indicator</string>
-   	<string name="summary_expanded_hide_indicator">Hide the power widget indicator displays</string>
-   	<string name="title_expanded_hide_scrollbar">Hide Scrollbar</string>
-   	<string name="summary_expanded_hide_scrollbar">When more than the max number of widgets</string>
-   	<string name="title_widget_picker">Widget Buttons</string>
-   	<string name="summary_widget_picker">Select which buttons to display currently</string>
-   	<string name="title_widget_order">Widget Order</string>
-   	<string name="summary_widget_order">Select the order of notification widgets</string>
-   	<string name="title_buttons">Buttons</string>
-   	<string name="title_toggle_wifi">Wi-Fi</string>
-   	<string name="title_toggle_bluetooth">Bluetooth</string>
-   	<string name="title_toggle_gps">GPS</string>
-   	<string name="title_toggle_sound">Sound</string>
-   	<string name="title_toggle_brightness">Brightness</string>
-   	<string name="title_toggle_sync">Sync</string>
-   	<string name="title_toggle_wifiap">Wi-Fi AP</string>
-   	<string name="title_toggle_screentimeout">Screentimeout</string>
-   	<string name="title_toggle_mobiledata">Mobiledata</string>
-   	<string name="title_toggle_lockscreen">Lockscreen</string>
-   	<string name="title_toggle_networkmode">2G/3G</string>
-   	<string name="title_toggle_autorotate">Orientation</string>
-   	<string name="title_toggle_airplane">Airplane</string>
-   	<string name="title_toggle_flashlight">Flashlight</string>
-   	<string name="title_toggle_sleep">Sleep</string>
-   	<string name="title_toggle_media_play_pause">Play/Pause</string>
-   	<string name="title_toggle_media_previous">Skip (Prev)</string>
-   	<string name="title_toggle_media_next">Skip (Next)</string>
-   	<string name="title_toggle_lte">LTE</string>
-   	<string name="title_toggle_wimax">WiMAX</string>
-   	<string name="title_button_modes">Buttons</string>
-   	<string name="pref_brightness_mode_title">Brightness</string>
-   	<string name="pref_brightness_mode_summary">How brightness widget changes modes</string>
-   	<string name="brightness_mode_auto">Auto</string>
-   	<string name="brightness_mode_dim">Dim</string>
-   	<string name="pref_network_mode_title">Network</string>
-   	<string name="pref_network_mode_summary">How networkmode widget changes modes</string>
-   	<string name="pref_screentimeout_mode_title">Screentimeout</string>
-   	<string name="pref_screentimeout_mode_summary">How screentimeout widget changes modes</string>
-   	<string name="pref_ring_mode_title">Sound</string>
-   	<string name="pref_ring_mode_summary">How the sound widget changes modes</string>
-   	<string name="sound_mode_silent">Silent</string>
-   	<string name="sound_mode_vibrate">Vibrate</string>
-   	<string name="sound_mode_sound">Sound</string>
-   	<string name="sound_mode_soundVibrate">Sound+Vibrate</string>
-   	<string name="pref_flash_mode_title">Flash</string>
-   	<string name="pref_flash_mode_summary">High/Death Ray</string>
-   	<string name="expanded_haptic_feedback_title">Haptic Feedback</string>
-   	<string name="expanded_haptic_feedback_summary">Enable or disable haptic feedback</string>	
-
-	<!-- Color Picker -->
+  	<!-- Color Picker -->
   	<string name="dialog_color_picker">Color Picker</string>
   	<string name="press_color_to_apply">Press on Color to apply</string>   
   	<string name="arrow_right">→</string> 

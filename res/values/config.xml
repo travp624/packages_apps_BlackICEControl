@@ -18,7 +18,4 @@
     <!-- Whether or not to display the notification LED settings -->
     <bool name="has_notification_led">true</bool>
 
-    <!-- Whether the power control widget is enabled for this device -->
-    <bool name="has_powercontrol_widget">true</bool>
-
 </resources>
