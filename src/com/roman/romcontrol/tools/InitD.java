@@ -38,16 +38,16 @@ public class InitD extends Activity {
 
         private static final String KEY_ENABLE_INITD = "enable_init_d";
         private static final String KEY_ZIPALIGN = "zipalign";
-        private static final String KEY_ENABLE_SDBOOST = "enable_sd_boost";
-        private static final String KEY_SDBOOST = "sd_boost";
+        // private static final String KEY_ENABLE_SDBOOST = "enable_sd_boost";
+        // private static final String KEY_SDBOOST = "sd_boost";
         private static final String KEY_FIX_PERMS = "fix_permissions";
         private static final String KEY_CLEAR_CACHE = "clear_cache";
         private static final String KEY_ENABLE_SYSCTL = "enable_sysctl";
         private static final String KEY_ENABLE_CRON = "enable_cron";
 
         private static final String VAR_ZIPALIGN = "ZIPALIGN_AT_BOOT";
-        private static final String VAR_ENABLE_SDBOOST = "SD_BOOST_AT_BOOT";
-        private static final String VAR_SDBOOST = "READ_AHEAD_KB";
+        // private static final String VAR_ENABLE_SDBOOST = "SD_BOOST_AT_BOOT";
+        // private static final String VAR_SDBOOST = "READ_AHEAD_KB";
         private static final String VAR_FIX_PERMS = "FIX_PERMISSIONS_AT_BOOT";
         private static final String VAR_CLEAR_CACHE = "REMOVE_CACHE";
         private static final String VAR_ENABLE_SYSCTL = "ENABLE_SYSCTL";
@@ -74,17 +74,17 @@ public class InitD extends Activity {
             checked = isTweakEnabled(KEY_ZIPALIGN, VAR_ZIPALIGN);
             cb.setChecked(checked);
 
-            cb = (CheckBoxPreference) findPreference(KEY_ENABLE_SDBOOST);
+            /* cb = (CheckBoxPreference) findPreference(KEY_ENABLE_SDBOOST);
             checked = isTweakEnabled(KEY_ENABLE_SDBOOST, VAR_ENABLE_SDBOOST);
-            cb.setChecked(checked);
+            cb.setChecked(checked); */
 
             cb = (CheckBoxPreference) findPreference(KEY_FIX_PERMS);
             checked = isTweakEnabled(KEY_FIX_PERMS, VAR_FIX_PERMS);
             cb.setChecked(checked);
 
-            cb = (CheckBoxPreference) findPreference(KEY_ENABLE_SDBOOST);
+            /* cb = (CheckBoxPreference) findPreference(KEY_ENABLE_SDBOOST);
             checked = isTweakEnabled(KEY_ENABLE_SDBOOST, VAR_ENABLE_SDBOOST);
-            cb.setChecked(checked);
+            cb.setChecked(checked); */
 
             cb = (CheckBoxPreference) findPreference(KEY_CLEAR_CACHE);
             checked = isTweakEnabled(KEY_CLEAR_CACHE, VAR_CLEAR_CACHE);
@@ -127,7 +127,7 @@ public class InitD extends Activity {
                         + VAR_ZIPALIGN + "=" + value + "|' " + cfg);
                 Helpers.getMount("ro");
 
-            } else if (key.equals(KEY_ENABLE_SDBOOST)) {
+            /*} else if (key.equals(KEY_ENABLE_SDBOOST)) {
 
                 final boolean enable_boost = sharedPreferences.getBoolean(KEY_ENABLE_SDBOOST, true);
                 final String value = enable_boost ? "1" : "0";
@@ -142,7 +142,7 @@ public class InitD extends Activity {
                 Helpers.getMount("rw");
                 new CMDProcessor().su.runWaitFor("busybox sed -i 's|" + VAR_SDBOOST + "=.*|"
                         + VAR_SDBOOST + "=" + value + "|' " + cfg);
-                Helpers.getMount("ro");
+                Helpers.getMount("ro"); */
 
             } else if (key.equals(KEY_FIX_PERMS)) {
 
