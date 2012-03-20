@@ -62,7 +62,7 @@ public class InitD extends Activity {
             PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                     .registerOnSharedPreferenceChangeListener(this);
 
-            addPreferencesFromResource(R.xml.init_d);
+            addPreferencesFromResource(R.xml.propmodder_initd);
 
             cfg = new File("/system/etc/liberty.cfg");
 

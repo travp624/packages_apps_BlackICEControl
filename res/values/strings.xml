@@ -367,8 +367,8 @@
 	<string name="ps_enable_cron">Enable scheduled cron jobs</string>
 	
 	<!-- PropModder -->
-	<string name="propmodder_title">PropModder</string>
-	<string name="propmodder_title_summary">Edit build.prop specific settings</string>
+	<string name="propmodder_title">PropModder &amp; Init.D tweaks</string>
+	<string name="propmodder_title_summary">Edit build prop settings and init.d tweak settings</string>
 	<string name="buildprop_title">Build.prop mods</string>
 	<string name="nonprop_cat_title">Mods involving init.d script</string>
 

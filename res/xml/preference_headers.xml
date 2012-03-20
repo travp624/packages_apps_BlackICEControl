@@ -134,17 +134,10 @@
 	<header android:title="@string/tools" />
 	
 	<header
-		android:id="@+id/init_d"
-		android:title="@string/pt_init_d"
-		android:summary="@string/ps_init_d"
-		android:fragment="com.roman.romcontrol.fragments.InitD"
-		android:icon="@drawable/ic_rom_control_init_d" />
-
-	<header
-		android:id="@+id/propmodder"
+		android:id="@+id/propmodder_initd"
 		android:title="@string/propmodder_title"
-		android:summary="@string/propmodder_title_summary"
 		android:fragment="com.roman.romcontrol.fragments.PropModder"
+		android:summary="@string/propmodder_title_summary"
 		android:icon="@drawable/ic_rom_control_propmodder" />
 
 	<header

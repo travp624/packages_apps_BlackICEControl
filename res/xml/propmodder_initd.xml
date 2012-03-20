@@ -134,23 +134,72 @@
             android:summary="@string/pref_gpu_summary"
             android:persistent="true" />
 
-    </PreferenceCategory>
-
-    <PreferenceCategory android:key="nonProp_category"
-        android:title="@string/nonprop_cat_title">
-
-        <CheckBoxPreference android:key="pref_logcat"
-            android:title="@string/pref_logcat_title"
-            android:summary="@string/pref_logcat_summary"
-            android:persistent="true" />
-
-        <ListPreference android:key="pref_sdcard_buffer"
+        <ListPreference 
+			android:key="pref_sdcard_buffer"
             android:dialogTitle="@string/pref_sdcard_buffer_title"
             android:title="@string/pref_sdcard_buffer_title"
             android:summary="@string/pref_sdcard_buffer_summary"
             android:entries="@array/entries_sdcard_buffer_explain"
             android:entryValues="@array/entries_sdcard_buffer"
             android:persistent="true" />
+
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="@string/pc_init_d"
+		android:key="pc_init_d">
+	
+		<CheckBoxPreference android:key="enable_init_d"
+			android:defaultValue="true" 
+			android:title="@string/pt_enable_init_d"
+			android:summaryOn="@string/ps_enable_init_d" 
+			android:summaryOff="@string/ps_enable_init_d" />
+	
+	</PreferenceCategory>
+	
+	<PreferenceCategory android:title="@string/pc_init_d_tweaks"
+		android:key="pc_init_d_tweaks">
+
+		<CheckBoxPreference android:key="pref_logcat"
+            android:title="@string/pref_logcat_title"
+            android:summary="@string/pref_logcat_summary"
+            android:dependency="enable_init_d"
+            android:shouldDisableView="true"
+            android:persistent="true" />
+		
+		<CheckBoxPreference android:key="zipalign"
+			android:defaultValue="true" 
+			android:title="@string/pt_zipalign"
+			android:summary="@string/ps_zipalign" 
+			android:dependency="enable_init_d"
+			android:shouldDisableView="true" />
+		
+		<CheckBoxPreference android:key="fix_permissions"
+			android:defaultValue="false" 
+			android:title="@string/pt_fix_permissions"
+			android:summary="@string/ps_fix_permissions" 
+			android:dependency="enable_init_d"
+			android:shouldDisableView="true" />
+		
+		<CheckBoxPreference android:key="clear_cache"
+			android:defaultValue="false" 
+			android:title="@string/pt_clear_cache"
+			android:summary="@string/ps_clear_cache" 
+			android:dependency="enable_init_d"
+			android:shouldDisableView="true" />
+		
+		<CheckBoxPreference android:key="enable_sysctl"
+			android:defaultValue="true" 
+			android:title="@string/pt_enable_sysctl"
+			android:summary="@string/ps_enable_sysctl" 
+			android:dependency="enable_init_d"
+			android:shouldDisableView="true" />
+		
+		<CheckBoxPreference android:key="enable_cron"
+			android:defaultValue="true" 
+			android:title="@string/pt_enable_cron"
+			android:summary="@string/ps_enable_cron" 
+			android:dependency="enable_init_d"
+			android:shouldDisableView="true" />
 	
 	</PreferenceCategory>
     

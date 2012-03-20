@@ -198,7 +198,7 @@ public class PropModder extends PreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.propmodder);
+        addPreferencesFromResource(R.xml.propmodder_initd);
         prefSet = getPreferenceScreen();
 
         mRebootMsg = (PreferenceScreen) prefSet.findPreference(REBOOT_PREF);
