@@ -20,7 +20,7 @@
 		android:title="@string/mastur_mods_settings">
 		<intent
 			android:action="android.intent.action.MAIN"
-			android:targetClass="com.masturmods.settings.Main"
+			android:targetClass="com.masturmods.settings.TabContainer"
 			android:targetPackage="com.masturmods.settings" />
 	</header>
 

@@ -16,17 +16,11 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
+        
+        <PreferenceScreen android:key="reboot" />
 
     <PreferenceCategory android:key="general_category"
         android:title="@string/buildprop_title">
-
-        <PreferenceScreen
-            android:key="reboot"
-            android:title="@null"
-            android:summary="@null"
-            android:enabled="false"
-            android:shouldEnableView="true">
-        </PreferenceScreen>
 
         <PreferenceScreen
             android:key="showbuildprop"
@@ -37,8 +31,9 @@
 				android:action="android.intent.action.MAIN"
                 android:targetPackage="com.roman.romcontrol"
                 android:targetClass="com.roman.romcontrol.util.ShowBuildProp" />
-        
-	</PreferenceScreen>
+
+		</PreferenceScreen>
+               
 
         <ListPreference android:key="pref_wifi_scan_interval"
             android:dialogTitle="@string/pref_wifi_scan_interval_title"

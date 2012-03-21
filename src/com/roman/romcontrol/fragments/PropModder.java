@@ -444,11 +444,10 @@ public class PropModder extends PreferenceFragment implements
     }
 
     private void rebootRequired() {
-        prefSet.addPreference(mRebootMsg);
-        mRebootMsg.setTitle("Reboot required");
-        mRebootMsg.setSummary("values will take effect on next boot");
-    }
-
+		prefSet.addPreference(mRebootMsg);
+		mRebootMsg.setTitle("Reboot required");
+		mRebootMsg.setSummary("values will take effect on next boot");
+	}
 
     public boolean mount(String read_value) {
         Log.d(TAG, "Remounting /system " + read_value);
