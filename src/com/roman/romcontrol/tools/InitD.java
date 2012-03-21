@@ -223,7 +223,5 @@ public class InitD extends Activity {
                 return (value.equals("1"));
             }
         }
-
     }
-
 }
