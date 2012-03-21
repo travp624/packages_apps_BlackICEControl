@@ -25,7 +25,7 @@
             android:title="@null"
             android:summary="@null"
             android:enabled="false"
-            android:shouldDisableView="true">
+            android:shouldEnableView="true">
         </PreferenceScreen>
 
         <PreferenceScreen

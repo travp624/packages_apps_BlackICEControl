@@ -588,13 +588,6 @@ public class PropModder extends PreferenceFragment implements
         } else {
             mJitPref.setChecked(false);
         }
-        String sdb = Helpers.findBuildPropValueOf(SDCARD_BUFFER_PRESIST_PROP);
-        if (!sdb.equals(DISABLE)) {
-			mSdcardBufferPref.setValue(sdb);
-			mSdcardBufferPref.setSummary(String.format(getString.pref_sdcard_buffer_alt_summary), sdb));
-		} else {
-			mSdcardBufferPref.setValue(SDCARD_BUFFER_DEFAULT);
-		}
         String mod = Helpers.findBuildPropValueOf(MOD_VERSION_PROP);
         mModVersionPref.setSummary(String.format(getString(R.string.pref_mod_version_alt_summary), mod));
         String chk = Helpers.findBuildPropValueOf(CHECK_IN_PROP);
