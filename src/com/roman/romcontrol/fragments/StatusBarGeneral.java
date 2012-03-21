@@ -69,11 +69,11 @@ public class StatusBarGeneral extends SettingsPreferenceFragment implements
                 .getContentResolver(), Settings.System.STATUS_BAR_TRANSPARENCY,
                 100)));
 
-	mLayout = (ListPreference) findPreference(PREF_LAYOUT);
-	mLayout.setOnPreferenceChangeListener(this);
-	mLayout.setValue(Integer.toString(Settings.System.getInt(getActivity()
-		.getContentResolver(), Settings.System.STATUS_BAR_LAYOUT, 
-		0)));
+		mLayout = (ListPreference) findPreference(PREF_LAYOUT);
+		mLayout.setOnPreferenceChangeListener(this);
+		mLayout.setValue(Integer.toString(Settings.System.getInt(getActivity()
+				.getContentResolver(), Settings.System.STATUS_BAR_LAYOUT, 
+				0)));
 
 
         if (mTablet) {
@@ -81,8 +81,8 @@ public class StatusBarGeneral extends SettingsPreferenceFragment implements
             prefs.removePreference(mStatusBarBrightnessToggle);
             prefs.removePreference(mAutoHideToggles);
             prefs.removePreference(mDefaultSettingsButtonBehavior);
-	    prefs.removePreference(mTransparency);
-	    prefs.removePreference(mLayout);
+			prefs.removePreference(mTransparency);
+			prefs.removePreference(mLayout);
         }
     }
 
@@ -135,10 +135,10 @@ public class StatusBarGeneral extends SettingsPreferenceFragment implements
                     Settings.System.STATUS_BAR_TRANSPARENCY, val);
             restartSystemUI();
         } else if (preference == mLayout) {
-	    int val = Integer.parseInt((String) newValue);
-	    result = Settings.System.putInt(getActivity().getContentResolver(),
-		    Settings.System.STATUS_BAR_LAYOUT, val);
-	    restartSystemUI();
+			int val = Integer.parseInt((String) newValue);
+			result = Settings.System.putInt(getActivity().getContentResolver(),
+					Settings.System.STATUS_BAR_LAYOUT, val);
+			restartSystemUI();
 	}
         return result;
     }
