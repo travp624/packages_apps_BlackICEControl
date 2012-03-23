@@ -33,8 +33,7 @@
 	<string name="nav_bar">Navigation bar</string>
 	<string name="tools">Start Tools &amp; Performance</string>
 	<string name="weather">Weather</string>
-	<string name="signal">Signal</string>
-	<string name="wifi">Wifi</string>
+	<string name="signal">Signal &amp; Wifi Options</string>
 
 	<!-- Main summaries -->
 	<string name="header_summary_battery">Battery bar, 1% battery mod, etc</string>
@@ -48,8 +47,7 @@
 	<string name="header_summary_toggles">Customize toggles</string>
 	<string name="header_summary_clock">Clock location, AM/PM style, color</string>
 	<string name="header_summary_weather">Enable/disable, set custom location or network, and interval</string>
-	<string name="header_summary_signal">Signal dBm text</string>
-	<string name="header_summary_wifi">Wifi text setting</string>
+	<string name="header_summary_signal">Change network and wifi signal bars to text with color picker</string>
 	<string name="advanced_settings">Advanced settings</string>
 	<string name="misc_short">Misc</string>
     
@@ -232,15 +230,13 @@
 
 	<!-- Statusbar | Signal -->
 	<string name="signal_style">Signal Text Style</string>
+	<string name="signal_style_summary">Change the display of the network signal in the statusbar.</string>
 	<string name="signal_color_title">Signal color</string>
 	<string name="hide_signal_title">Hide signal bars</string>
 	<string name="hide_signal_summary">Will also hide data indicator for now. Will be able to separate later.</string>
-	
-	<!-- Statusbar | Wifi -->
-	<string name="wifi_style">Wifi Text Style</string>
-	<string name="wifi_color_title">Wifi text color</string>
-	<string name="hide_wifi_title">Hide Wifi icons</string>
-	<string name="hide_wifi_summary">Will also hide data indicator for now. Will be able to separate later.</string>
+	<string name="wifi_signal_style">Wifi signal style</string>
+	<string name="wifi_signal_style_summary">Change the display of the wifi signal in the statusbar.</string>
+	<string name="wifi_signal_color_title">Wifi text color</string>
 
   	<!-- Color Picker -->
   	<string name="dialog_color_picker">Color Picker</string>

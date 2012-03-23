@@ -18,7 +18,9 @@ public class StatusBarSignal extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
 
     ListPreference mDbmStyletyle;
+    ListPreference mWifiStyle;
     ColorPickerPreference mColorPicker;
+    ColorPickerPreference mWifiColorPicker;
 //    CheckBoxPreference mHideSignal;
 
     @Override
@@ -36,6 +38,15 @@ public class StatusBarSignal extends SettingsPreferenceFragment implements
 
         mColorPicker = (ColorPickerPreference) findPreference("signal_color");
         mColorPicker.setOnPreferenceChangeListener(this);
+        
+        mWifiStyle = (ListPreference) findPreference("wifi_signal_style");
+        mWifiStyle.setOnPreferenceChangeListener(this);
+        mWifiStyle.setValue(Integer.toString(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.STATUSBAR_WIFI_SIGNAL_TEXT,
+                0)));
+
+        mWifiColorPicker = (ColorPickerPreference) findPreference("wifi_signal_color");
+        mWifiColorPicker.setOnPreferenceChangeListener(this);
 
 //        mHideSignal = (CheckBoxPreference) findPreference("hide_signal");
 //        mHideSignal.setChecked(Settings.System.getInt(getActivity()
@@ -74,6 +85,22 @@ public class StatusBarSignal extends SettingsPreferenceFragment implements
             int intHex = ColorPickerPreference.convertToColorInt(hex);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_SIGNAL_TEXT_COLOR, intHex);
+
+            return true;
+        } else if (preference == mWifiStyle) {
+
+            int val = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_WIFI_SIGNAL_TEXT, val);
+            return true;
+        } else if (preference == mWifiColorPicker) {
+            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hex);
+
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_WIFI_SIGNAL_TEXT_COLOR, intHex);
 
             return true;
         }
