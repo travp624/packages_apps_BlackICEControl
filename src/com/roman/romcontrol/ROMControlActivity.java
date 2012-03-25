@@ -76,8 +76,8 @@ public class ROMControlActivity extends PreferenceActivity implements ButtonBarH
             setTitle(R.string.app_name);
         }
 
-        if (getIntent().getAction().equals("com.aokp.romcontrol.START_NEW_FRAGMENT")) {
-            String className = getIntent().getStringExtra("aokp_fragment_name").toString();
+        if (getIntent().getAction().equals("com.roman.romcontrol.START_NEW_FRAGMENT")) {
+            String className = getIntent().getStringExtra("roman_fragment_name").toString();
             Bundle b = new Bundle();
             b.putBoolean("started_from_shortcut", true);
             // startPreferencePanel(className, b, 0, null, null, 0);
