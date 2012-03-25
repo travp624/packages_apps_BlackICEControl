@@ -71,6 +71,11 @@ public class Lockscreens extends SettingsPreferenceFragment implements
     private static final String PREF_LOCKSCREEN_WEATHER = "lockscreen_weather";
     private static final String PREF_LOCKSCREEN_TEXT_COLOR = "lockscreen_text_color";
     
+    private static final String PREF_LOCKSCREEN_CALENDAR = "enable_calendar";
+    private static final String PREF_LOCKSCREEN_CALENDAR_FLIP = "lockscreen_calendar_flip";
+    private static final String PREF_LOCKSCREEN_CALENDAR_SOURCES = "lockscreen_calendar_sources";
+    private static final String PREF_LOCKSCREEN_CALENDAR_INTERVAL = "lockscreen_calendar_interval";
+    
     private static final String PREF_SHOW_LOCK_BEFORE_UNLOCK = "show_lock_before_unlock";
 
     public static final int REQUEST_PICK_WALLPAPER = 199;
@@ -90,6 +95,10 @@ public class Lockscreens extends SettingsPreferenceFragment implements
     CheckBoxPreference mLockscreenWeather;
     CheckBoxPreference mShowLockBeforeUnlock;
     ColorPickerPreference mLockscreenTextColor;
+    CheckBoxPreference mLockscreenCalendar;
+    CheckBoxPreference mLockscreenCalendarFlip;
+    Preference mCalendarSources;
+    ListPreference mCalendarInterval;
 
     Preference mLockscreenWallpaper;
 
@@ -147,6 +156,18 @@ public class Lockscreens extends SettingsPreferenceFragment implements
                 Settings.System.VOLUME_MUSIC_CONTROLS, 0) == 1);
 
         mLockscreenWallpaper = findPreference("wallpaper");
+        mLockscreenCalendar = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_CALENDAR);
+        mLockscreenCalendar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_CALENDAR, 0) == 1);
+        mLockscreenCalendarFlip = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_CALENDAR_FLIP);
+        mLockscreenCalendarFlip.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_CALENDAR_FLIP, 0) == 1);
+        mCalendarSources = findPreference(PREF_LOCKSCREEN_CALENDAR_SOURCES);
+
+        mCalendarInterval = (ListPreference) findPreference(PREF_LOCKSCREEN_CALENDAR_INTERVAL);
+		mCalendarInterval.setOnPreferenceChangeListener(this);
+        mCalendarInterval.setValue(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_CALENDAR_INTERVAL, 2500) + "");
 
 	if (mTablet) {
             PreferenceScreen prefs = getPreferenceScreen();
@@ -259,6 +280,73 @@ public class Lockscreens extends SettingsPreferenceFragment implements
             intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
 
             startActivityForResult(intent, REQUEST_PICK_WALLPAPER);
+            return true;
+            
+        } else if (preference == mLockscreenCalendar) {
+
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CALENDAR,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
+
+        } else if (preference == mLockscreenCalendarFlip) {
+
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CALENDAR_FLIP,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
+
+        } else if (preference == mCalendarSources) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+            
+            ArrayList<Integer> enabledCalendars = getCalendarSources(this.getActivity()
+                    .getApplicationContext());
+            
+            final ArrayList<CalendarBundle> availableCalendars = getAvailableCalendars(this.getActivity().getApplicationContext());
+            
+            boolean checkedCalendars[] = new boolean[availableCalendars.size()];
+            
+            for (int i = 0; i < checkedCalendars.length; i++) {
+                if (enabledCalendars.contains((int) availableCalendars.get(i).ID)) {
+                    checkedCalendars[i] = true;
+                }
+            }
+            
+            builder.setTitle("Choose which calendars to use");
+            builder.setCancelable(false);
+            builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            
+            final String[] availableCalendarStrings = new String[availableCalendars.size()];
+            
+            for (int i = 0; i < availableCalendars.size(); i++) {
+                availableCalendarStrings[i] = availableCalendars.get(i).name;
+            }
+            
+            builder.setMultiChoiceItems(availableCalendarStrings,
+                    checkedCalendars,
+                    new OnMultiChoiceClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                            int toggleKey = (int) availableCalendars.get(which).ID;
+
+                            if (isChecked)
+                                addCalendar(getActivity(), toggleKey);
+                            else
+                                removeCalendar(getActivity(), toggleKey);
+                        }
+                    });
+
+            AlertDialog d = builder.create();
+
+            d.show();
+
             return true;
 
         } else if (keys.contains(preference.getKey())) {
@@ -508,7 +596,14 @@ public class Lockscreens extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_LAYOUT, val);
             refreshSettings();
-            return true;
+			return true;
+
+	} else if (preference == mCalendarInterval) {
+		int val = Integer.parseInt((String) newValue);
+		Settings.System.putInt(getActivity().getContentResolver(),
+				Settings.System.LOCKSCREEN_CALENDAR_INTERVAL, val);
+        return true;
+		
 
 	} else if (preference == mLockscreenTextColor) {
 	    String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
@@ -609,5 +704,72 @@ public class Lockscreens extends SettingsPreferenceFragment implements
         in.close();
         out.close();
     }
+    
+    public static void setCalendarSources(Context c, ArrayList<Integer> calendars) {
+        String result = "";
+        if (calendars.size() > 0) {
+            for (int i : calendars)
+                result += String.valueOf(i) + ",";
+    
+            result = result.substring(0, result.length() - 1);
+        }
+        Settings.System.putString(c.getContentResolver(), Settings.System.LOCKSCREEN_CALENDAR_SOURCES,
+                result);
+    }
+    
+    public static ArrayList<Integer> getCalendarSources(Context c) {
+        String calString = Settings.System.getString(c.getContentResolver(),
+                Settings.System.LOCKSCREEN_CALENDAR_SOURCES);
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        
+        if (calString == null) {
+            calString = ""; 
+        }
+        if (!calString.isEmpty()) {
+            String[] calArray = calString.split(",");
+            for (String s : calArray) {
+                result.add(Integer.parseInt(s));
+            }
+        }
+        return result;
+    }
+    
+    public static ArrayList<CalendarBundle> getAvailableCalendars(Context c) {
+        ArrayList<CalendarBundle> result = new ArrayList<CalendarBundle>();
+        final String[] PROJECTION = new String[] { Calendars._ID, Calendars.CALENDAR_DISPLAY_NAME };
+        
+        Cursor cur = null;
+        ContentResolver cr = c.getContentResolver();
+        Uri uri = Calendars.CONTENT_URI;
+        
+        cur = cr.query(uri, PROJECTION, null, null, null);
+        
+        while (cur.moveToNext()) {
+            result.add(new CalendarBundle(cur.getLong(0), cur.getString(1)));
+        }
+        return result;
+    }
+    
+    public static void addCalendar(Context context, int key) {
+        ArrayList<Integer> enabledCalendars = getCalendarSources(context);
+        enabledCalendars.add(key);
+        setCalendarSources(context, enabledCalendars);
+    }
 
+    public static void removeCalendar(Context context, int key) {
+        ArrayList<Integer> enabledCalendars = getCalendarSources(context);
+        int keyLocation = enabledCalendars.indexOf(key);
+        enabledCalendars.remove(keyLocation);
+        setCalendarSources(context, enabledCalendars);
+    }
+    
+    private static class CalendarBundle {
+        public long ID;
+        public String name;
+        
+        public CalendarBundle(long id, String n) {
+            ID = id;
+            name = n;
+        }
+    }
 }

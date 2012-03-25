@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<PreferenceCategory android:title="Signal Text">
+	<PreferenceCategory android:title="network signal style">
 	
 		<ListPreference
 			android:entries="@array/signal_style_entries"
@@ -10,13 +10,18 @@
 			android:title="@string/signal_style"
 			android:summary="@string/signal_style_summary" />
 
+	</PreferenceCategory>
+	
+	<PreferenceCategory android:title="network signal text color">
+
 		<net.margaritov.preference.colorpicker.ColorPickerPreference
 			android:key="signal_color"
 			android:title="@string/signal_color_title"
 			android:defaultValue="@android:color/holo_blue_light" />
 
 	</PreferenceCategory>
-	<PreferenceCategory android:title="Wifi Signal">
+	
+	<PreferenceCategory android:title="wifi signal style">
 		
 		<ListPreference
 			android:key="wifi_signal_style"
@@ -25,12 +30,16 @@
 			android:title="@string/wifi_signal_style"
 			android:summary="@string/wifi_signal_style_summary" />
 
+	</PreferenceCategory>
+	
+	<PreferenceCategory android:title="wifi signal text color">
+
 		<net.margaritov.preference.colorpicker.ColorPickerPreference
 			android:key="wifi_signal_color"
 			android:title="@string/wifi_signal_color_title"
 			android:defaultValue="@android:color/holo_blue_light" />
 
-	</PreferenceCategory>
+	</PreferenceCategory>		
 
  	<!-- <CheckBoxPreference
  		android:key="hide_signal"

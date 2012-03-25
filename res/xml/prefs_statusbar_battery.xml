@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
 	xmlns:android="http://schemas.android.com/apk/res/android">
-	
-	<ListPreference
+
+	<PreferenceCategory android:title="battery icon style">
+
+		<ListPreference
 			android:key="battery_icon_list"
 			android:title="@string/battery_icon"
 			android:entries="@array/battery_icon_entries"
 			android:entryValues="@array/battery_icon_values" />
 
+	</PreferenceCategory>
+	
+	<PreferenceCategory android:title="battery text color">
+	
 		<net.margaritov.preference.colorpicker.ColorPickerPreference
 			android:key="battery_charge_text_color"
 			android:title="@string/battery_charge_text_color"
@@ -17,6 +23,8 @@
 			android:key="battery_text_color"
 			android:title="@string/battery_text_color"
 			android:defaultValue="#FF33B5E5" />
+
+	</PreferenceCategory>
 
 	<PreferenceCategory
 		android:key="battery_bar_cat"
@@ -39,17 +47,21 @@
 			android:title="@string/battery_bar_animate_title"
 			android:summary="@string/battery_bar_animate_summary" />
 
-		<net.margaritov.preference.colorpicker.ColorPickerPreference
-			android:key="battery_bar_color"
-			android:title="@string/battery_bar_color"
-			android:defaultValue="#FFFFFF" />
-
 		<ListPreference
 			android:key="battery_bar_thickness"
 			android:title="@string/battery_bar_thickness_title"
 			android:entries="@array/battery_bar_thickness_entries"
 			android:entryValues="@array/battery_bar_thickness_values" />
-	</PreferenceCategory>
 
+	</PreferenceCategory>
+	
+	<PreferenceCategory android:title="battery bar color">
+	
+		<net.margaritov.preference.colorpicker.ColorPickerPreference
+			android:key="battery_bar_color"
+			android:title="@string/battery_bar_color"
+			android:defaultValue="#FFFFFF" />
+
+	</PreferenceCategory>
 
 </PreferenceScreen>
