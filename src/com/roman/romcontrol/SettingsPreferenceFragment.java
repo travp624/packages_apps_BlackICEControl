@@ -41,7 +41,7 @@ import android.widget.Button;
 public class SettingsPreferenceFragment extends PreferenceFragment implements DialogCreatable {
 
     private static final String TAG = "SettingsPreferenceFragment";
-    protected Context mContext;
+    protected static Context mContext;
 
     private SettingsDialogFragment mDialogFragment;
     protected boolean mTablet;
