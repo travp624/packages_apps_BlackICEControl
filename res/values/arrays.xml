@@ -336,12 +336,14 @@
 		<item>6</item>
 		<item>8</item>
 		<item>0</item>
+		<item>1</item>
 	</string-array>
 
 	<string-array name="pref_lockscreen_options_entries">
 		<item>Stock</item>
 		<item>Quad</item>
 		<item>Octo</item>
+		<item>Honeycomb</item>
 		<item>AOSP</item>
 	</string-array>
 
