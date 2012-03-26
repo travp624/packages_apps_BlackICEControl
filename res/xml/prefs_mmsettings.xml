@@ -1,20 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:aokp="http://schemas.android.com/apk/res/com.roman.romcontrol">	
-    
-	<PreferenceCategory
-		android:key="mmsettings_launcher"
-		android:title="@string/launcher" >
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
-		<Preference
-			android:id="@+id/mmsettings"
-			android:title="@string/mmsettings"
-			android:summary="@string/launch_mmsettings" >
+    <PreferenceCategory
+        android:key="download"
+        android:title="MasturMods Settings">
+
+    	<Preference    
+    	    android:key="download_btn"
+			android:title="Install" 
+			android:summary="Install MasturMods Settings" />
+    	
+    	<Preference 
+    	    android:key="update"
+    	    android:title="Check for Updates"
+    	    android:summary="Is MasturMods Settings up to date?"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="stat"
+        android:title="Status Bar">
+
+        <Preference    
+    	    android:key="batm"
+			android:title="Battery Mods"
+			android:summary="Change your battery icon!" >
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetClass="com.masturmods.settings.TabContainer"
+				android:targetClass="com.masturmods.settings.activities.BatteryManager"
 				android:targetPackage="com.masturmods.settings" />
 		</Preference>
-	</PreferenceCategory>
+		
+        <Preference    
+    	    android:key="sigm"
+			android:title="Signal Cluster Mods"
+			android:summary="Change your signal cluster icons!" >
+			<intent
+				android:action="android.intent.action.MAIN"
+				android:targetClass="com.masturmods.settings.activities.SignalClusterManager"
+				android:targetPackage="com.masturmods.settings" />
+		</Preference>
+
+    </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:key="nav"
+        android:title="Navigation Bar" >
+        
+        <Preference    
+    	    android:key="navm"
+			android:title="Navigation Bar Mods"
+			android:summary="Change your navigation bar icons!" >
+			<intent
+				android:action="android.intent.action.MAIN"
+				android:targetClass="com.masturmods.settings.activities.NavigationBarManager"
+				android:targetPackage="com.masturmods.settings" />
+		</Preference>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
