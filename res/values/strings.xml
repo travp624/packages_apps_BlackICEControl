@@ -138,22 +138,28 @@
 	<string name="lockscreen_action_mms">SMS</string>
 	<string name="lockscreen_action_phone">Phone</string>
 	<string name="lockscreen_action_none">Empty</string>
-	<string name="lockscreen_landscape_title">Horizontal lockscreen</string>
-	<string name="lockscreen_landscape_summary">Whether horizontal lockscreen orientation will be enabled</string>
-	<string name="lockscreen_quick_unlock_control_title">Quick pin unlock</string>
-	<string name="lockscreen_quick_unlock_control_summary">Unlock password/pin lockscreen without pressing enter button</string>
-	<string name="enable_fast_torch_title">Enable fast torch</string>
-	<string name="enable_fast_torch_summary">While your screen is off, you can long-press the power key to turn the LED light on. Letting go of the power button will turn the torch off.</string>
-	<string name="lockscreen_wallpaper_title">Choose lockscreen wallpaper</string>
-	<string name="lockscreen_wallpaper_summary">You can remove the wallpaper from the menu in this window</string>
-	<string name="lockscreen_text_color_title">Lockscreen text color</string>
+    <string name="lockscreen_landscape_title">Horizontal lockscreen</string>
+    <string name="lockscreen_landscape_summary">Whether horizontal lockscreen orientation will be enabled</string>
+    <string name="lockscreen_quick_unlock_control_title">Quick pin unlock</string>
+    <string name="lockscreen_quick_unlock_control_summary">Unlock password/pin lockscreen without pressing enter button</string>
+    <string name="enable_fast_torch_title">Enable fast torch</string>
+    <string name="enable_fast_torch_summary">While your screen is off, you can long-press the power key to turn the LED light on. Letting go of the power button will turn the torch off.</string>
+    <string name="lockscreen_wallpaper_title">Choose lockscreen wallpaper</string>
+    <string name="lockscreen_wallpaper_summary">You can remove the wallpaper from the menu in this window</string>
+    <string name="lockscreen_text_color_title">Lockscreen text color</string>
     <string name="lockscreen_calendar">Lockscreen calendar</string>
     <string name="lockscreen_calendar_title">Enable</string>
-    <string name="lockscreen_calendar_summary">Show upcoming events from your calendar on the lockscreen.</string>
-    <string name="lockscreen_calendar_sources_title">Select calendars</string>
+    <string name="lockscreen_calendar_summary">Show upcoming event(s) from your calendar on the lockscreen.</string>
+    <string name="lockscreen_calendar_sources_title">Calendar sources</string>
     <string name="lockscreen_calendar_sources_summary">Select the calendars you want to see.</string>
+    <string name="lockscreen_calendar_range_title">Time-range</string>
+    <string name="lockscreen_calendar_range_summary">Select the time-range to be displayed.</string>
+    <string name="lockscreen_calendar_use_colors_title">Use colors</string>
+    <string name="lockscreen_calendar_use_colors_summary">If enabled, events will be colored like in your calendar.</string>
+    <string name="lockscreen_calendar_hide_ongoing_title">Hide ongoing events</string>
+    <string name="lockscreen_calendar_hide_ongoing_summary">If enabled, events which already started won\'t show up.</string>
     <string name="lockscreen_calendar_flip_title">Multiple events</string>
-    <string name="lockscreen_calendar_flip_summary">If enabled, the widget will flip between the upcoming events from the next 24 hours.</string>
+    <string name="lockscreen_calendar_flip_summary">If enabled, the widget will display multiple events by flipping between them.</string>
     <string name="lockscreen_calendar_interval_title">Flip interval</string>
     <string name="lockscreen_calendar_interval_summary">Choose the animation speed in seconds.</string>
     
@@ -520,6 +526,8 @@
 
 	<!-- Mastur mods Settings -->
 	<string name="themer">Theme control</string>
-	<string name="mastur_mods_settings">Mastur Mods Settings</string>
+	<string name="launcher">Application Launcher</string>
+	<string name="mmsettings">MasturMods Settings</string>
+	<string name="launch_mmsettings">Launch MasturMods Settings</string>
 	
 </resources>

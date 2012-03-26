@@ -13,16 +13,15 @@
 		android:title="@string/about_aokp"
 		android:summary="@string/about_aokp_summary" />
 
-	<header android:title="@string/themer" />	
+	<header 
+	    android:id="@+id/themer"
+	    android:title="@string/themer" />	
 	
 	<header 
+	    android:id="@+id/mmsettings"
+	    android:fragment="com.roman.romcontrol.fragments.MasturModsSettings"
 		android:icon="@drawable/ic_rom_control_masturmods" 
-		android:title="@string/mastur_mods_settings">
-		<intent
-			android:action="android.intent.action.MAIN"
-			android:targetClass="com.masturmods.settings.TabContainer"
-			android:targetPackage="com.masturmods.settings" />
-	</header>
+		android:title="@string/mmsettings" />
 
 	<header android:title="@string/user_interface" />
 
@@ -96,13 +95,6 @@
 		android:icon="@drawable/ic_rom_control_toggles"
 		android:summary="@string/header_summary_toggles" />
 
-	<!-- <header
-		android:id="@+id/notification_drawer"
-		android:fragment="com.roman.romcontrol.fragments.PowerWidget"
-		android:title="@string/power_widget_title"
-		android:icon="@drawable/ic_rom_control_toggles"
-		android:summary="@string/power_widget_title_summary" /> -->
-
 	<header
 		android:id="@+id/statusbar_clock"
 		android:title="@string/clock"
@@ -123,13 +115,6 @@
 		android:fragment="com.roman.romcontrol.fragments.StatusBarSignal"
 		android:icon="@drawable/ic_rom_control_signaltext"
 		android:summary="@string/header_summary_signal" />
-
-	<!-- <header
-		android:id="@+id/statusbar_battery"
-		android:title="@string/wifi"
-		android:fragment="com.roman.romcontrol.fragments.StatusBarWifi"
-		android:icon="@drawable/ic_rom_control_wifitext"
-		android:summary="@string/header_summary_wifi" /> -->
 	
 	<header android:title="@string/tools" />
 	

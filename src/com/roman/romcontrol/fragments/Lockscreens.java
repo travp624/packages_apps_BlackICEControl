@@ -38,10 +38,10 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Toast;
 
-import com.roman.romcontrol.R;
-import com.roman.romcontrol.SettingsPreferenceFragment;
+import com.roman.romcontrol.AOKPPreferenceFragment;
 import com.roman.romcontrol.util.ShortcutPickerHelper;
 import com.roman.romcontrol.widgets.LockscreenItemPreference;
+import com.roman.romcontrol.R;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
@@ -54,7 +54,7 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class Lockscreens extends SettingsPreferenceFragment implements
+public class Lockscreens extends AOKPPreferenceFragment implements
         ShortcutPickerHelper.OnPickListener, OnPreferenceChangeListener {
 
     private static final String TAG = "Lockscreens";
@@ -68,14 +68,18 @@ public class Lockscreens extends SettingsPreferenceFragment implements
     private static final String PREF_VOLUME_MUSIC = "volume_music_controls";
 
     private static final String PREF_LOCKSCREEN_BATTERY = "lockscreen_battery";
+    private static final String PREF_LOCKSCREEN_LOW_BATTERY = "lockscreen_low_battery";
     private static final String PREF_LOCKSCREEN_WEATHER = "lockscreen_weather";
     private static final String PREF_LOCKSCREEN_TEXT_COLOR = "lockscreen_text_color";
-    
+
     private static final String PREF_LOCKSCREEN_CALENDAR = "enable_calendar";
     private static final String PREF_LOCKSCREEN_CALENDAR_FLIP = "lockscreen_calendar_flip";
     private static final String PREF_LOCKSCREEN_CALENDAR_SOURCES = "lockscreen_calendar_sources";
+    private static final String PREF_LOCKSCREEN_CALENDAR_RANGE = "lockscreen_calendar_range";
+    private static final String PREF_LOCKSCREEN_CALENDAR_HIDE_ONGOING = "lockscreen_calendar_hide_ongoing";
+    private static final String PREF_LOCKSCREEN_CALENDAR_USE_COLORS = "lockscreen_calendar_use_colors";
     private static final String PREF_LOCKSCREEN_CALENDAR_INTERVAL = "lockscreen_calendar_interval";
-    
+
     private static final String PREF_SHOW_LOCK_BEFORE_UNLOCK = "show_lock_before_unlock";
 
     public static final int REQUEST_PICK_WALLPAPER = 199;
@@ -92,6 +96,7 @@ public class Lockscreens extends SettingsPreferenceFragment implements
     CheckBoxPreference mVolumeMusic;
     CheckBoxPreference mLockscreenLandscape;
     CheckBoxPreference mLockscreenBattery;
+    CheckBoxPreference mLockscreenLowBattery;
     CheckBoxPreference mLockscreenWeather;
     CheckBoxPreference mShowLockBeforeUnlock;
     ColorPickerPreference mLockscreenTextColor;
@@ -99,10 +104,13 @@ public class Lockscreens extends SettingsPreferenceFragment implements
     CheckBoxPreference mLockscreenCalendarFlip;
     Preference mCalendarSources;
     ListPreference mCalendarInterval;
+    ListPreference mCalendarRange;
+    CheckBoxPreference mLockscreenCalendarHideOngoing;
+    CheckBoxPreference mLockscreenCalendarUseColors;
 
     Preference mLockscreenWallpaper;
 
-	private int currentIconIndex;
+    private int currentIconIndex;
     private Preference mCurrentCustomActivityPreference;
     private String mCurrentCustomActivityString;
 
@@ -139,10 +147,14 @@ public class Lockscreens extends SettingsPreferenceFragment implements
         mLockscreenBattery.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_BATTERY, 0) == 1);
         
+        mLockscreenLowBattery = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_LOW_BATTERY);
+        mLockscreenLowBattery.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_LOW_BATTERY, 0) == 1);
+
         mLockscreenWeather = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_WEATHER);
         mLockscreenWeather.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_WEATHER, 0) == 1);
-        
+
         mShowLockBeforeUnlock = (CheckBoxPreference) findPreference(PREF_SHOW_LOCK_BEFORE_UNLOCK);
         mShowLockBeforeUnlock.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.SHOW_LOCK_BEFORE_UNLOCK, 0) == 1);
@@ -156,23 +168,34 @@ public class Lockscreens extends SettingsPreferenceFragment implements
                 Settings.System.VOLUME_MUSIC_CONTROLS, 0) == 1);
 
         mLockscreenWallpaper = findPreference("wallpaper");
+
         mLockscreenCalendar = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_CALENDAR);
         mLockscreenCalendar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_CALENDAR, 0) == 1);
+
         mLockscreenCalendarFlip = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_CALENDAR_FLIP);
-        mLockscreenCalendarFlip.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.LOCKSCREEN_CALENDAR_FLIP, 0) == 1);
+        mLockscreenCalendarFlip.setChecked(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.LOCKSCREEN_CALENDAR_FLIP, 0) == 1);
+        
+        mLockscreenCalendarHideOngoing = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_CALENDAR_HIDE_ONGOING);
+        mLockscreenCalendarHideOngoing.setChecked(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.LOCKSCREEN_CALENDAR_HIDE_ONGOING, 0) == 1);
+        
+        mLockscreenCalendarUseColors = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_CALENDAR_USE_COLORS);
+        mLockscreenCalendarUseColors.setChecked(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.LOCKSCREEN_CALENDAR_USE_COLORS, 0) == 1);
+
         mCalendarSources = findPreference(PREF_LOCKSCREEN_CALENDAR_SOURCES);
 
         mCalendarInterval = (ListPreference) findPreference(PREF_LOCKSCREEN_CALENDAR_INTERVAL);
-		mCalendarInterval.setOnPreferenceChangeListener(this);
+        mCalendarInterval.setOnPreferenceChangeListener(this);
         mCalendarInterval.setValue(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_CALENDAR_INTERVAL, 2500) + "");
-
-	if (mTablet) {
-            PreferenceScreen prefs = getPreferenceScreen();
-            prefs.removePreference(menuButtonLocation);
-	}
+        
+        mCalendarRange = (ListPreference) findPreference(PREF_LOCKSCREEN_CALENDAR_RANGE);
+        mCalendarRange.setOnPreferenceChangeListener(this);
+        mCalendarRange.setValue(Settings.System.getLong(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_CALENDAR_RANGE, 86400000) + "");
 
         mPicker = new ShortcutPickerHelper(this, this);
 
@@ -187,8 +210,8 @@ public class Lockscreens extends SettingsPreferenceFragment implements
         ((PreferenceGroup) findPreference("advanced_cat"))
                 .removePreference(findPreference(Settings.System.LOCKSCREEN_HIDE_NAV));
 
-	mLockscreenTextColor = (ColorPickerPreference) findPreference(PREF_LOCKSCREEN_TEXT_COLOR);
-	mLockscreenTextColor.setOnPreferenceChangeListener(this);
+        mLockscreenTextColor = (ColorPickerPreference) findPreference(PREF_LOCKSCREEN_TEXT_COLOR);
+        mLockscreenTextColor.setOnPreferenceChangeListener(this);
 
         refreshSettings();
         setHasOptionsMenu(true);
@@ -196,33 +219,33 @@ public class Lockscreens extends SettingsPreferenceFragment implements
 
     @Override
     public void onResume() {
-		super.onResume();
-		
-		Boolean isSDPresent = android.os.Environment.getExternalStorageState().equals(
-				android.os.Environment.MEDIA_MOUNTED);
-		if (!isSDPresent) {
-			mLockscreenWallpaper.setEnabled(false);
-			mLockscreenWallpaper
-					.setSummary("No external storage available (/sdcard) to use this feature. Please insert it or fix your ROM!");
+        super.onResume();
 
-		}
-		refreshSettings();
-	}
-	
-	@Override
+        Boolean isSDPresent = android.os.Environment.getExternalStorageState().equals(
+                android.os.Environment.MEDIA_MOUNTED);
+        if (!isSDPresent) {
+            mLockscreenWallpaper.setEnabled(false);
+            mLockscreenWallpaper
+                    .setSummary("No external storage available (/sdcard) to use this feature. Please insert it or fix your ROM!");
+
+        }
+        refreshSettings();
+    }
+
+    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == menuButtonLocation) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_ENABLE_MENU_KEY,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
-          
+
         } else if (preference == mLockScreenTimeoutUserOverride) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.LOCK_SCREEN_LOCK_USER_OVERRIDE,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
-            
+
         } else if (preference == mShowLockBeforeUnlock) {
 
             Settings.System.putInt(getActivity().getContentResolver(),
@@ -234,6 +257,13 @@ public class Lockscreens extends SettingsPreferenceFragment implements
 
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_BATTERY,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
+            
+        } else if (preference == mLockscreenLowBattery) {
+
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_LOW_BATTERY,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
 
@@ -281,7 +311,7 @@ public class Lockscreens extends SettingsPreferenceFragment implements
 
             startActivityForResult(intent, REQUEST_PICK_WALLPAPER);
             return true;
-            
+
         } else if (preference == mLockscreenCalendar) {
 
             Settings.System.putInt(getActivity().getContentResolver(),
@@ -295,23 +325,38 @@ public class Lockscreens extends SettingsPreferenceFragment implements
                     Settings.System.LOCKSCREEN_CALENDAR_FLIP,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
+            
+        } else if (preference == mLockscreenCalendarHideOngoing) {
+
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CALENDAR_HIDE_ONGOING,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
+
+        } else if (preference == mLockscreenCalendarUseColors) {
+
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CALENDAR_USE_COLORS,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
 
         } else if (preference == mCalendarSources) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
-            
+
             ArrayList<Integer> enabledCalendars = getCalendarSources(this.getActivity()
                     .getApplicationContext());
-            
-            final ArrayList<CalendarBundle> availableCalendars = getAvailableCalendars(this.getActivity().getApplicationContext());
-            
+
+            final ArrayList<CalendarBundle> availableCalendars = getAvailableCalendars(this
+                    .getActivity().getApplicationContext());
+
             boolean checkedCalendars[] = new boolean[availableCalendars.size()];
-            
+
             for (int i = 0; i < checkedCalendars.length; i++) {
                 if (enabledCalendars.contains((int) availableCalendars.get(i).ID)) {
                     checkedCalendars[i] = true;
                 }
             }
-            
+
             builder.setTitle("Choose which calendars to use");
             builder.setCancelable(false);
             builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
@@ -321,15 +366,14 @@ public class Lockscreens extends SettingsPreferenceFragment implements
                     dialog.dismiss();
                 }
             });
-            
+
             final String[] availableCalendarStrings = new String[availableCalendars.size()];
-            
+
             for (int i = 0; i < availableCalendars.size(); i++) {
                 availableCalendarStrings[i] = availableCalendars.get(i).name;
             }
-            
-            builder.setMultiChoiceItems(availableCalendarStrings,
-                    checkedCalendars,
+
+            builder.setMultiChoiceItems(availableCalendarStrings, checkedCalendars,
                     new OnMultiChoiceClickListener() {
 
                         @Override
@@ -384,22 +428,22 @@ public class Lockscreens extends SettingsPreferenceFragment implements
     }
 
     private Uri getLockscreenExternalUri() {
-		File dir = mContext.getExternalCacheDir();
+        File dir = mContext.getExternalCacheDir();
         if (dir == null)
-			dir = new File("/sdcard/Android/data/com.roman.romcontrol/cache/");
-		File wallpaper = new File(dir, WALLPAPER_NAME);
+            dir = new File("/sdcard/Anroid/data/com.aokp.romcontrol/cache/");
+        File wallpaper = new File(dir, WALLPAPER_NAME);
 
         return Uri.fromFile(wallpaper);
     }
-    
+
     private Uri getExternalIconUri() {
-		File dir = mContext.getExternalCacheDir();
-		if (dir == null)
-			dir = new File("/sdcard/Android/data/com.roman.romcontrol/cache/");
-		dir.mkdirs();
-		
-		return Uri.fromFile(new File(dir, "icon_" + currentIconIndex + ".png"));
-	}
+        File dir = mContext.getExternalCacheDir();
+        if (dir == null)
+            dir = new File("/sdcard/Anroid/data/com.aokp.romcontrol/cache/");
+        dir.mkdirs();
+
+        return Uri.fromFile(new File(dir, "icon_" + currentIconIndex + ".png"));
+    }
 
     public void refreshSettings() {
 
@@ -420,14 +464,13 @@ public class Lockscreens extends SettingsPreferenceFragment implements
             lockscreenTargets = 4;
         }
 
-		PackageManager pm = mContext.getPackageManager();
-		Resources res = mContext.getResources();
-		
+        PackageManager pm = mContext.getPackageManager();
+        Resources res = mContext.getResources();
+
         for (int i = 0; i < lockscreenTargets; i++) {
             LockscreenItemPreference p = new LockscreenItemPreference(getActivity());
             String dialogTitle = String.format(
                     getResources().getString(R.string.custom_app_n_dialog_title), i + 1);
-            ;
             p.setDialogTitle(dialogTitle);
             p.setEntries(R.array.lockscreen_choice_entries);
             p.setEntryValues(R.array.lockscreen_choice_values);
@@ -437,8 +480,8 @@ public class Lockscreens extends SettingsPreferenceFragment implements
             p.setSummary(getProperSummary(i));
             p.setOnPreferenceChangeListener(this);
             targetGroup.addPreference(p);
-			
-			final int index = i;
+
+            final int index = i;
             p.setImageListener(new View.OnClickListener() {
 
                 @Override
@@ -450,7 +493,7 @@ public class Lockscreens extends SettingsPreferenceFragment implements
                                 Toast.LENGTH_LONG).show();
                         return;
                     }
-                    
+
                     currentIconIndex = index;
 
                     int width = 100;
@@ -514,7 +557,7 @@ public class Lockscreens extends SettingsPreferenceFragment implements
         Bitmap bitmapOrig = Bitmap.createScaledBitmap(d, px, px, false);
         return new BitmapDrawable(mContext.getResources(), bitmapOrig);
     }
-
+    
     private Drawable getLockscreenIconImage(int index) {
         String uri = Settings.System.getString(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITIES[index]);
@@ -590,31 +633,36 @@ public class Lockscreens extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-		boolean handled = false;
+        boolean handled = false;
         if (preference == mLockscreenOption) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_LAYOUT, val);
             refreshSettings();
-			return true;
+            return true;
 
-	} else if (preference == mCalendarInterval) {
-		int val = Integer.parseInt((String) newValue);
-		Settings.System.putInt(getActivity().getContentResolver(),
-				Settings.System.LOCKSCREEN_CALENDAR_INTERVAL, val);
-        return true;
-		
+        } else if (preference == mCalendarInterval) {
+            int val = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CALENDAR_INTERVAL, val);
+            return true;
 
-	} else if (preference == mLockscreenTextColor) {
-	    String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
-				.valueOf(newValue)));
-	    preference.setSummary(hex);
-	    int intHex = ColorPickerPreference.convertToColorInt(hex);
-	    Settings.System.putInt(getActivity().getContentResolver(),
-		    Settings.System.LOCKSCREEN_TEXT_COLOR, intHex);
-	    if (DEBUG)
-			Log.d(TAG, String.format("new colorhex value: %d", intHex));
-	    return true;
+        } else if (preference == mCalendarRange) {
+            long val = Long.parseLong((String) newValue);
+            Settings.System.putLong(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CALENDAR_RANGE, val);
+            return true;
+
+        } else if (preference == mLockscreenTextColor) {
+            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CUSTOM_TEXT_COLOR, intHex);
+            if (DEBUG)
+                Log.d(TAG, String.format("new color hex value: %d", intHex));
+            return true;
 
         } else if (preference.getKey().startsWith("lockscreen_target")) {
             int index = Integer.parseInt(preference.getKey().substring(
@@ -628,7 +676,7 @@ public class Lockscreens extends SettingsPreferenceFragment implements
                 Settings.System.putString(getContentResolver(),
                         Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITIES[index], (String) newValue);
                 Settings.System.putString(getContentResolver(),
-						Settings.System.LOCKSCREEN_CUSTOM_APP_ICONS[index], "");
+                        Settings.System.LOCKSCREEN_CUSTOM_APP_ICONS[index], "");
                 refreshSettings();
             }
             return true;
@@ -686,6 +734,7 @@ public class Lockscreens extends SettingsPreferenceFragment implements
                 Toast.makeText(getActivity(), currentIconIndex + "'s icon set successfully!",
                         Toast.LENGTH_LONG).show();
                 refreshSettings();
+
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -704,26 +753,26 @@ public class Lockscreens extends SettingsPreferenceFragment implements
         in.close();
         out.close();
     }
-    
+
     public static void setCalendarSources(Context c, ArrayList<Integer> calendars) {
         String result = "";
         if (calendars.size() > 0) {
             for (int i : calendars)
                 result += String.valueOf(i) + ",";
-    
+
             result = result.substring(0, result.length() - 1);
         }
-        Settings.System.putString(c.getContentResolver(), Settings.System.LOCKSCREEN_CALENDAR_SOURCES,
-                result);
+        Settings.System.putString(c.getContentResolver(),
+                Settings.System.LOCKSCREEN_CALENDAR_SOURCES, result);
     }
-    
+
     public static ArrayList<Integer> getCalendarSources(Context c) {
         String calString = Settings.System.getString(c.getContentResolver(),
                 Settings.System.LOCKSCREEN_CALENDAR_SOURCES);
         ArrayList<Integer> result = new ArrayList<Integer>();
-        
+
         if (calString == null) {
-            calString = ""; 
+            calString = "";
         }
         if (!calString.isEmpty()) {
             String[] calArray = calString.split(",");
@@ -733,23 +782,25 @@ public class Lockscreens extends SettingsPreferenceFragment implements
         }
         return result;
     }
-    
+
     public static ArrayList<CalendarBundle> getAvailableCalendars(Context c) {
         ArrayList<CalendarBundle> result = new ArrayList<CalendarBundle>();
-        final String[] PROJECTION = new String[] { Calendars._ID, Calendars.CALENDAR_DISPLAY_NAME };
-        
+        final String[] PROJECTION = new String[] {
+                Calendars._ID, Calendars.CALENDAR_DISPLAY_NAME
+        };
+
         Cursor cur = null;
         ContentResolver cr = c.getContentResolver();
         Uri uri = Calendars.CONTENT_URI;
-        
+
         cur = cr.query(uri, PROJECTION, null, null, null);
-        
+
         while (cur.moveToNext()) {
             result.add(new CalendarBundle(cur.getLong(0), cur.getString(1)));
         }
         return result;
     }
-    
+
     public static void addCalendar(Context context, int key) {
         ArrayList<Integer> enabledCalendars = getCalendarSources(context);
         enabledCalendars.add(key);
@@ -762,11 +813,11 @@ public class Lockscreens extends SettingsPreferenceFragment implements
         enabledCalendars.remove(keyLocation);
         setCalendarSources(context, enabledCalendars);
     }
-    
+
     private static class CalendarBundle {
         public long ID;
         public String name;
-        
+
         public CalendarBundle(long id, String n) {
             ID = id;
             name = n;
