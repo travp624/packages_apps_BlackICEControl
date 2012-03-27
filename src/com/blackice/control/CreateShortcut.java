@@ -82,7 +82,7 @@ public class CreateShortcut extends LauncherActivity {
         else if (c.equals("Weather"))
             return R.drawable.ic_blackice_control_weather;
         else if (c.equals("InitD"))
-	    return R.drawable.ic_blackice_control_init_d;
+			return R.drawable.ic_blackice_control_init_d;
 	else
             return R.mipmap.ic_launcher;
     }
