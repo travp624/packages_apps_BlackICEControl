@@ -77,7 +77,7 @@ public class ControlActivity extends PreferenceActivity implements ButtonBarHand
         }
 
         if (getIntent().getAction().equals("com.blackice.control.START_NEW_FRAGMENT")) {
-            String className = getIntent().getStringExtra("roman_fragment_name").toString();
+            String className = getIntent().getStringExtra("blackice_fragment_name").toString();
             Bundle b = new Bundle();
             b.putBoolean("started_from_shortcut", true);
             // startPreferencePanel(className, b, 0, null, null, 0);
