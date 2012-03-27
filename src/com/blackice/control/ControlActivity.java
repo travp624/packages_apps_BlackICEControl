@@ -35,7 +35,7 @@ import android.widget.ListAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 
-public class ContolActivity extends PreferenceActivity implements ButtonBarHandler {
+public class ControlActivity extends PreferenceActivity implements ButtonBarHandler {
 
     private static final String TAG = "Control";
 

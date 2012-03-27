@@ -39,7 +39,7 @@ public class CreateShortcut extends LauncherActivity {
         String intentClass = shortcutIntent.getComponent().getClassName();
 
         shortcutIntent = new Intent();
-        shortcutIntent.setClass(getApplicationContext(), ContolActivity.class);
+        shortcutIntent.setClass(getApplicationContext(), ControlActivity.class);
         shortcutIntent.setAction("com.blackice.control.START_NEW_FRAGMENT");
         shortcutIntent.putExtra("blackice_fragment_name", intentClass);
         shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

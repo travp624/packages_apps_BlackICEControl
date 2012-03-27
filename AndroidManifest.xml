@@ -22,7 +22,7 @@
         android:theme="@android:style/Theme.Holo"
         android:uiOptions="none" >
         <activity
-            android:name="ContolActivity"
+            android:name="ControlActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
