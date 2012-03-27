@@ -20,7 +20,7 @@
 	<header 
 	    android:id="@+id/mmsettings"
 	    android:fragment="com.blackice.control.fragments.MasturModsSettings"
-		android:icon="@drawable/ic_rom_control_masturmods" 
+		android:icon="@drawable/ic_blackice_control_masturmods" 
 		android:title="@string/mmsettings" />
 
 	<header android:title="@string/user_interface" />
@@ -29,28 +29,28 @@
 		android:id="@+id/user_interface"
 		android:fragment="com.blackice.control.fragments.UserInterface"
 		android:title="@string/general_ui"
-		android:icon="@drawable/ic_rom_control_general_ui"
+		android:icon="@drawable/ic_blackice_control_general_ui"
 		android:summary="@string/header_summary_general_ui" />
 
 	<header
 		android:id="@+id/nav_bar"
 		android:fragment="com.blackice.control.fragments.Navbar"
 		android:title="@string/nav_bar"
-		android:icon="@drawable/ic_rom_control_navigation_bar"
+		android:icon="@drawable/ic_blackice_control_navigation_bar"
 		android:summary="@string/header_summary_navigation_bar" />
 
 	<header
 		android:id="@+id/lockscreens"
 		android:fragment="com.blackice.control.fragments.Lockscreens"
 		android:title="@string/lockscreen_options"
-		android:icon="@drawable/ic_rom_control_lockscreens"
+		android:icon="@drawable/ic_blackice_control_lockscreens"
 		android:summary="@string/header_summary_lockscreens" />
 
 	<header
 		android:id="@+id/power_menu"
 		android:fragment="com.blackice.control.fragments.PowerMenu"
 		android:title="@string/power_menu_optons"
-		android:icon="@drawable/ic_rom_control_power_menu"
+		android:icon="@drawable/ic_blackice_control_power_menu"
 		android:summary="@string/header_summary_power_menu" />
 
 	<header
@@ -58,7 +58,7 @@
 		android:fragment="com.blackice.control.fragments.Weather"
 		android:title="@string/weather"
 		android:summary="@string/header_summary_weather"
-		android:icon="@drawable/ic_rom_control_weather" />
+		android:icon="@drawable/ic_blackice_control_weather" />
 
 	<header
 		android:id="@+id/functionality"
@@ -68,7 +68,7 @@
 		android:id="@+id/power_saver"
 		android:fragment="com.blackice.control.fragments.PowerSaver"
 		android:title="@string/power_saver"
-		android:icon="@drawable/ic_rom_control_powersaver"
+		android:icon="@drawable/ic_blackice_control_powersaver"
 		android:summary="@string/header_summary_powersaver" />
 
 
@@ -76,7 +76,7 @@
 		android:id="@+id/led"
 		android:fragment="com.blackice.control.fragments.Led"
 		android:title="@string/led_options"
-		android:icon="@drawable/ic_rom_control_led"
+		android:icon="@drawable/ic_blackice_control_led"
 		android:summary="@string/header_summary_led" />
 
 	<header android:title="@string/statusbar" />
@@ -85,35 +85,35 @@
 		android:id="@+id/statusbar_general"
 		android:fragment="com.blackice.control.fragments.StatusBarGeneral"
 		android:title="@string/general"
-		android:icon="@drawable/ic_rom_control_general"
+		android:icon="@drawable/ic_blackice_control_general"
 		android:summary="@string/header_summary_general" />
 
 	<header
 		android:id="@+id/statusbar_toggles"
 		android:fragment="com.blackice.control.fragments.StatusBarToggles"
 		android:title="@string/toggles_layout"
-		android:icon="@drawable/ic_rom_control_toggles"
+		android:icon="@drawable/ic_blackice_control_toggles"
 		android:summary="@string/header_summary_toggles" />
 
 	<header
 		android:id="@+id/statusbar_clock"
 		android:title="@string/clock"
 		android:fragment="com.blackice.control.fragments.StatusBarClock"
-		android:icon="@drawable/ic_rom_control_clock"
+		android:icon="@drawable/ic_blackice_control_clock"
 		android:summary="@string/header_summary_clock" />
 
 	<header
 		android:id="@+id/statusbar_battery"
 		android:title="@string/battery"
 		android:fragment="com.blackice.control.fragments.StatusBarBattery"
-		android:icon="@drawable/ic_rom_control_battery"
+		android:icon="@drawable/ic_blackice_control_battery"
 		android:summary="@string/header_summary_battery" />
 
 	<header
 		android:id="@+id/statusbar_battery"
 		android:title="@string/signal"
 		android:fragment="com.blackice.control.fragments.StatusBarSignal"
-		android:icon="@drawable/ic_rom_control_signaltext"
+		android:icon="@drawable/ic_blackice_control_signaltext"
 		android:summary="@string/header_summary_signal" />
 	
 	<header android:title="@string/tools" />
@@ -123,13 +123,13 @@
 		android:title="@string/propmodder_title"
 		android:fragment="com.blackice.control.fragments.PropModder"
 		android:summary="@string/propmodder_title_summary"
-		android:icon="@drawable/ic_rom_control_propmodder" />
+		android:icon="@drawable/ic_blackice_control_propmodder" />
 
 	<header
 		android:id="@+id/performance"
 		android:title="@string/pt_performance"
 		android:summary="@string/ps_performance"
 		android:fragment="com.blackice.control.fragments.Performance"
-		android:icon="@drawable/ic_rom_control_performance" />
+		android:icon="@drawable/ic_blackice_control_performance" />
 
 </preference-headers>

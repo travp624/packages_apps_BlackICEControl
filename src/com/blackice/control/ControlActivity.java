@@ -35,9 +35,9 @@ import android.widget.ListAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 
-public class ROMControlActivity extends PreferenceActivity implements ButtonBarHandler {
+public class ContolActivity extends PreferenceActivity implements ButtonBarHandler {
 
-    private static final String TAG = "ROM_Control";
+    private static final String TAG = "Control";
 
     private static boolean hasNotificationLed;
     private static String KEY_USE_ENGLISH_LOCALE = "use_english_locale";

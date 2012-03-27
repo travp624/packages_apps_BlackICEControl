@@ -79,7 +79,7 @@ public class MasturModsSettings extends PreferenceFragment {
 		public void run() {
 
 			new AlertDialog.Builder(getActivity())
-			.setIcon(R.drawable.ic_rom_control_alert_masturmods)
+			.setIcon(R.drawable.ic_blackice_control_alert_masturmods)
 			.setTitle("Download MasturMods Settings")
 			.setMessage("\nMasturMods Settings is Available!\n")
 			.setPositiveButton("Download", new DialogInterface.OnClickListener() {
@@ -96,7 +96,7 @@ public class MasturModsSettings extends PreferenceFragment {
 		public void run() {
 			
 			new AlertDialog.Builder(getActivity())
-			.setIcon(R.drawable.ic_rom_control_alert_masturmods)
+			.setIcon(R.drawable.ic_blackice_control_alert_masturmods)
 			.setTitle("WARNING!")
 			.setMessage("To use this feature, please download and install MasturMods Settings\n\nDownload newest version now?")
 			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -152,7 +152,7 @@ public class MasturModsSettings extends PreferenceFragment {
 		public void run() {
 			
 			new AlertDialog.Builder(getActivity())
-			.setIcon(R.drawable.ic_rom_control_alert_masturmods)
+			.setIcon(R.drawable.ic_blackice_control_alert_masturmods)
 			.setTitle("Update Available")
 			.setMessage("An update for MasturMods Settings is available!\n\nDownload newest version now?")
 			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -174,7 +174,7 @@ public class MasturModsSettings extends PreferenceFragment {
 		public void run() {
 			
 			new AlertDialog.Builder(getActivity())
-			.setIcon(R.drawable.ic_rom_control_alert_masturmods)
+			.setIcon(R.drawable.ic_blackice_control_alert_masturmods)
 			.setTitle("WTF?!?!")
 			.setMessage("Hello time traveler!\n\nCare to send me the source I'm about to make?")
 			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -200,7 +200,7 @@ public class MasturModsSettings extends PreferenceFragment {
 		public void run() {
 			
 			new AlertDialog.Builder(getActivity())
-			.setIcon(R.drawable.ic_rom_control_alert_masturmods)
+			.setIcon(R.drawable.ic_blackice_control_alert_masturmods)
 			.setTitle("Update?? What Update??")
 			.setMessage("\nLooks like you're up to date!\n")
 			.setNegativeButton("OK", new DialogInterface.OnClickListener() {
