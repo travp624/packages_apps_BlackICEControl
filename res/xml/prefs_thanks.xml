@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:aokp="http://schemas.android.com/apk/res/com.roman.romcontrol">	
+	xmlns:aokp="http://schemas.android.com/apk/res/com.blackice.control">	
 
 	<PreferenceCategory
 		android:key="blackice"
@@ -21,12 +21,12 @@
 		android:key="devs"
 		android:title="@string/devs">
 		
-		<com.roman.romcontrol.widgets.DeveloperPreference
+		<com.blackice.control.widgets.DeveloperPreference
 			android:title="travp624"
 			aokp:twitterHandle="travp624"
 			aokp:donateLink="@string/donate_travis" />
 
-		<com.roman.romcontrol.widgets.DeveloperPreference
+		<com.blackice.control.widgets.DeveloperPreference
 			android:title="Mastur_Mynd"
 			aokp:twitterHandle="Mastur_Mynd"
 			aokp:donateLink="@string/donate_andrew" />

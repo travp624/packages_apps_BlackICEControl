@@ -12,8 +12,8 @@
 
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetClass="com.roman.romcontrol.activities.UserInterface"
-				android:targetPackage="com.roman.romcontrol" />
+				android:targetClass="com.blackice.control.activities.UserInterface"
+				android:targetPackage="com.blackice.control" />
 		</Preference>
 
 		<Preference
@@ -22,8 +22,8 @@
 
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetClass="com.roman.romcontrol.activities.Navbar"
-				android:targetPackage="com.roman.romcontrol" />
+				android:targetClass="com.blackice.control.activities.Navbar"
+				android:targetPackage="com.blackice.control" />
 		</Preference>
 
 		<Preference
@@ -32,8 +32,8 @@
 
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetClass="com.roman.romcontrol.activities.Lockscreens"
-				android:targetPackage="com.roman.romcontrol" />
+				android:targetClass="com.blackice.control.activities.Lockscreens"
+				android:targetPackage="com.blackice.control" />
 		</Preference>
 
 		<Preference
@@ -42,8 +42,8 @@
 
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetClass="com.roman.romcontrol.activities.PowerMenu"
-				android:targetPackage="com.roman.romcontrol" />
+				android:targetClass="com.blackice.control.activities.PowerMenu"
+				android:targetPackage="com.blackice.control" />
 		</Preference>
 	</PreferenceCategory>
 
@@ -57,8 +57,8 @@
 
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetClass="com.roman.romcontrol.activities.PowerSaver"
-				android:targetPackage="com.roman.romcontrol" />
+				android:targetClass="com.blackice.control.activities.PowerSaver"
+				android:targetPackage="com.blackice.control" />
 		</Preference>
 
 		<Preference
@@ -67,8 +67,8 @@
 
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetClass="com.roman.romcontrol.activities.LED"
-				android:targetPackage="com.roman.romcontrol" />
+				android:targetClass="com.blackice.control.activities.LED"
+				android:targetPackage="com.blackice.control" />
 		</Preference>
 
 
@@ -84,8 +84,8 @@
 
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetClass="com.roman.romcontrol.activities.StatusBarGeneral"
-				android:targetPackage="com.roman.romcontrol" />
+				android:targetClass="com.blackice.control.activities.StatusBarGeneral"
+				android:targetPackage="com.blackice.control" />
 		</Preference>
 
 		<Preference
@@ -94,8 +94,8 @@
 
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetClass="com.roman.romcontrol.activities.StatusBarToggles"
-				android:targetPackage="com.roman.romcontrol" />
+				android:targetClass="com.blackice.control.activities.StatusBarToggles"
+				android:targetPackage="com.blackice.control" />
 		</Preference>
 
 		<Preference
@@ -104,8 +104,8 @@
 
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetClass="com.roman.romcontrol.activities.StatusBarClock"
-				android:targetPackage="com.roman.romcontrol" />
+				android:targetClass="com.blackice.control.activities.StatusBarClock"
+				android:targetPackage="com.blackice.control" />
 		</Preference>
 
 		<Preference
@@ -114,8 +114,8 @@
 
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetClass="com.roman.romcontrol.activities.StatusBarBattery"
-				android:targetPackage="com.roman.romcontrol" />
+				android:targetClass="com.blackice.control.activities.StatusBarBattery"
+				android:targetPackage="com.blackice.control" />
 		</Preference>
 
 	</PreferenceCategory>
@@ -129,8 +129,8 @@
 			android:summary="@string/ps_performance">
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetPackage="com.roman.romcontrol"
-				android:targetClass="com.roman.romcontrol.tools.Performance" />
+				android:targetPackage="com.blackice.control"
+				android:targetClass="com.blackice.control.tools.Performance" />
 		</Preference>
 		<Preference
 			android:key="init_d"
@@ -138,8 +138,8 @@
 			android:summary="@string/ps_init_d">
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetPackage="com.roman.romcontrol"
-				android:targetClass="com.roman.romcontrol.tools.InitD" />
+				android:targetPackage="com.blackice.control"
+				android:targetClass="com.blackice.control.tools.InitD" />
 		</Preference>
 	</PreferenceCategory>
 
