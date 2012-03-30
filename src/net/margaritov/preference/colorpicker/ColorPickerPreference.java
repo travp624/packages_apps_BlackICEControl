@@ -28,7 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.roman.romcontrol.R;
+import com.blackice.control.R;
 
 /**
  * A preference type that allows a user to choose a time

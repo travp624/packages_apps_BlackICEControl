@@ -29,8 +29,8 @@
             
 			<intent 
 				android:action="android.intent.action.MAIN"
-                android:targetPackage="com.roman.romcontrol"
-                android:targetClass="com.roman.romcontrol.util.ShowBuildProp" />
+                android:targetPackage="com.blackice.control"
+                android:targetClass="com.blackice.control.util.ShowBuildProp" />
 
 		</PreferenceScreen>
                

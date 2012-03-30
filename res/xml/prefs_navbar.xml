@@ -40,7 +40,7 @@
 			android:title="@string/navigation_bar_tint_title"
 			android:defaultValue="#FFFFFF" />
 
-		<com.roman.romcontrol.widgets.SeekBarPreference
+		<com.blackice.control.widgets.SeekBarPreference
 			android:key="button_transparency"
 			android:title="@string/button_transparency_title" />
 
