@@ -16,9 +16,6 @@
 
 package com.blackice.control.util;
 
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -26,9 +23,11 @@ import android.content.Intent.ShortcutIconResource;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.blackice.control.R;
+
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 public class ShortcutPickerHelper {
 

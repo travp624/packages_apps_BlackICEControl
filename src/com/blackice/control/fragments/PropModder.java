@@ -53,7 +53,7 @@ import java.io.File;
 import java.io.FileWriter;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 import com.blackice.control.util.CMDProcessor;
 import com.blackice.control.util.Helpers;
 

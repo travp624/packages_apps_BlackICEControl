@@ -19,7 +19,7 @@ package com.blackice.control;
 import android.widget.Button;
 
 /**
- * Interface letting {@link SettingsPreferenceFragment} access to bottom bar inside
+ * Interface letting {@link BlackICEPreferenceFragment} access to bottom bar inside
  * {@link android.preference.PreferenceActivity}.
  */
 public interface ButtonBarHandler {

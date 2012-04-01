@@ -37,7 +37,7 @@ import android.widget.TextView;
 
 public class ControlActivity extends PreferenceActivity implements ButtonBarHandler {
 
-    private static final String TAG = "Control";
+    private static final String TAG = "ROM_Control";
 
     private static boolean hasNotificationLed;
     private static String KEY_USE_ENGLISH_LOCALE = "use_english_locale";

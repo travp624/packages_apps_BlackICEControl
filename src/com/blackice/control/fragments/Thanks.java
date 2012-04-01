@@ -8,9 +8,9 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 
-public class Thanks extends SettingsPreferenceFragment {
+public class Thanks extends BlackICEPreferenceFragment {
 
     public static final String TAG = "Thanks";
 

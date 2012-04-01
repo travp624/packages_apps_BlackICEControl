@@ -12,9 +12,9 @@ import android.provider.Settings;
 import android.util.Log;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 
-public class StatusBarSignal extends SettingsPreferenceFragment implements
+public class StatusBarSignal extends BlackICEPreferenceFragment implements
         OnPreferenceChangeListener {
 
     ListPreference mDbmStyletyle;

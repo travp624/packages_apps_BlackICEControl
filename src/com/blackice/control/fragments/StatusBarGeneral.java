@@ -14,9 +14,9 @@ import android.provider.Settings;
 import android.util.Log;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 
-public class StatusBarGeneral extends SettingsPreferenceFragment implements
+public class StatusBarGeneral extends BlackICEPreferenceFragment implements
         OnPreferenceChangeListener {
 
     private static final String PREF_SETTINGS_BUTTON_BEHAVIOR = "settings_behavior";

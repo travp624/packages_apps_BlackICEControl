@@ -38,7 +38,7 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Toast;
 
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 import com.blackice.control.util.ShortcutPickerHelper;
 import com.blackice.control.widgets.LockscreenItemPreference;
 import com.blackice.control.R;
@@ -54,7 +54,7 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class Lockscreens extends SettingsPreferenceFragment implements
+public class Lockscreens extends BlackICEPreferenceFragment implements
         ShortcutPickerHelper.OnPickListener, OnPreferenceChangeListener {
 
     private static final String TAG = "Lockscreens";
@@ -135,7 +135,7 @@ public class Lockscreens extends SettingsPreferenceFragment implements
 
         mLockscreen4tabSlider = (CheckBoxPreference) findPreference(PREF_SHOW_4TAB_SLIDER);
         mLockscreen4tabSlider.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-				Settings.System.LOCKSCREEN_4TAB, 0) == 1);
+                Settings.System.LOCKSCREEN_4TAB, 0) == 1);
 
         mLockscreenOption = (ListPreference) findPreference(PREF_LOCKSCREEN_LAYOUT);
         mLockscreenOption.setOnPreferenceChangeListener(this);

@@ -22,11 +22,11 @@ import android.text.Spannable;
 import android.widget.EditText;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 import com.blackice.control.util.CMDProcessor;
 import com.blackice.control.util.Helpers;
 
-public class UserInterface extends SettingsPreferenceFragment implements
+public class UserInterface extends BlackICEPreferenceFragment implements
         OnPreferenceChangeListener {
 
     public static final String TAG = "UserInterface";
@@ -78,9 +78,9 @@ public class UserInterface extends SettingsPreferenceFragment implements
         mShowImeSwitcher.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.SHOW_STATUSBAR_IME_SWITCHER, 1) == 1);
 
-		mEnableVolumeOptions = (CheckBoxPreference) findPreference(PREF_ENABLE_VOLUME_OPTIONS);
-		mEnableVolumeOptions.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-				Settings.System.ENABLE_VOLUME_OPTIONS, 0) == 1);
+        mEnableVolumeOptions = (CheckBoxPreference) findPreference(PREF_ENABLE_VOLUME_OPTIONS);
+        mEnableVolumeOptions.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.ENABLE_VOLUME_OPTIONS, 0) == 1);
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
@@ -166,13 +166,13 @@ public class UserInterface extends SettingsPreferenceFragment implements
                     Settings.System.SHOW_STATUSBAR_IME_SWITCHER, checked ? 1 : 0);
             return true;
 
-		} else if (preference == mEnableVolumeOptions) {
+        } else if (preference == mEnableVolumeOptions) {
 
-			boolean checked = ((CheckBoxPreference) preference).isChecked();
-			Settings.System.putInt(getActivity().getContentResolver(),
-					Settings.System.ENABLE_VOLUME_OPTIONS, checked ? 1 : 0);
-			return true;
-			
+            boolean checked = ((CheckBoxPreference) preference).isChecked();
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.ENABLE_VOLUME_OPTIONS, checked ? 1 : 0);
+            return true;
+
         } else if (preference == mCustomLabel) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 

@@ -9,9 +9,9 @@ import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 
-public class PowerMenu extends SettingsPreferenceFragment {
+public class PowerMenu extends BlackICEPreferenceFragment {
 
     private static final String PREF_POWER_SAVER = "show_power_saver";
     private static final String PREF_SCREENSHOT = "show_screenshot";
@@ -60,10 +60,10 @@ public class PowerMenu extends SettingsPreferenceFragment {
         mShowNavBarHide = (CheckBoxPreference) findPreference(PREF_NAVBAR_HIDE);
         mShowNavBarHide.setChecked(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.POWER_DIALOG_SHOW_NAVBAR_HIDE, 0) == 1);
-	if (mTablet) {
-	     getPreferenceScreen().removePreference(mShowNavBarHide);
-	     getPreferenceScreen().removePreference(mShowPowerSaver);
-	}
+        if (mTablet) {
+            getPreferenceScreen().removePreference(mShowNavBarHide);
+            getPreferenceScreen().removePreference(mShowPowerSaver);
+        }
     }
 
     @Override

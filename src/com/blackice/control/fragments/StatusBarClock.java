@@ -12,9 +12,9 @@ import android.provider.Settings;
 import android.util.Log;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 
-public class StatusBarClock extends SettingsPreferenceFragment implements
+public class StatusBarClock extends BlackICEPreferenceFragment implements
         OnPreferenceChangeListener {
 
     private static final String PREF_ENABLE = "clock_style";

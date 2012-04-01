@@ -30,12 +30,12 @@ import android.widget.EditText;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 import com.blackice.control.service.WeatherRefreshService;
 import com.blackice.control.service.WeatherService;
 import com.blackice.control.util.WeatherPrefs;
 
-public class Weather extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
+public class Weather extends BlackICEPreferenceFragment implements OnPreferenceChangeListener {
 
     public static final String TAG = "Weather";
 

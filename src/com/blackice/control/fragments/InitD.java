@@ -18,11 +18,11 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 import com.blackice.control.util.CMDProcessor;
 import com.blackice.control.util.Helpers;
 
-public class InitD extends SettingsPreferenceFragment implements
+public class InitD extends BlackICEPreferenceFragment implements
         OnSharedPreferenceChangeListener, OnPreferenceChangeListener{
 
 	File cfg;

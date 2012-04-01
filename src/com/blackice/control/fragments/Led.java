@@ -12,9 +12,9 @@ import android.provider.Settings;
 import android.util.Log;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 
-public class Led extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
+public class Led extends BlackICEPreferenceFragment implements OnPreferenceChangeListener {
 
     public static final String TAG = "LEDPreferences";
 

@@ -24,11 +24,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 import com.blackice.control.util.CMDProcessor;
 import com.blackice.control.util.Helpers;
 
-public class DensityChanger extends SettingsPreferenceFragment implements
+public class DensityChanger extends BlackICEPreferenceFragment implements
         OnPreferenceChangeListener {
 
     private static final String TAG = "DensityChanger";

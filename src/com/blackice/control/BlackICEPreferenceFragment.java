@@ -38,10 +38,10 @@ import android.widget.Button;
 /**
  * Base class for Settings fragments, with some helper functions and dialog management.
  */
-public class SettingsPreferenceFragment extends PreferenceFragment implements DialogCreatable {
+public class BlackICEPreferenceFragment extends PreferenceFragment implements DialogCreatable {
 
-    private static final String TAG = "SettingsPreferenceFragment";
-    protected static Context mContext;
+    private static final String TAG = "BlackICEPreferenceFragment";
+    protected Context mContext;
 
     private SettingsDialogFragment mDialogFragment;
     protected boolean mTablet;
@@ -185,10 +185,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
                                         + DialogCreatable.class.getName());
                     }
                 }
-                // This dialog fragment could be created from non-SettingsPreferenceFragment
-                if (mParentFragment instanceof SettingsPreferenceFragment) {
+                // This dialog fragment could be created from non-BlackICEPreferenceFragment
+                if (mParentFragment instanceof BlackICEPreferenceFragment) {
                     // restore mDialogFragment in mParentFragment
-                    ((SettingsPreferenceFragment) mParentFragment).mDialogFragment = this;
+                    ((BlackICEPreferenceFragment) mParentFragment).mDialogFragment = this;
                 }
             }
             return ((DialogCreatable) mParentFragment).onCreateDialog(mDialogId);
@@ -218,11 +218,11 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         public void onDetach() {
             super.onDetach();
 
-            // This dialog fragment could be created from non-SettingsPreferenceFragment
-            if (mParentFragment instanceof SettingsPreferenceFragment) {
+            // This dialog fragment could be created from non-BlackICEPreferenceFragment
+            if (mParentFragment instanceof BlackICEPreferenceFragment) {
                 // in case the dialog is not explicitly removed by removeDialog()
-                if (((SettingsPreferenceFragment) mParentFragment).mDialogFragment == this) {
-                    ((SettingsPreferenceFragment) mParentFragment).mDialogFragment = null;
+                if (((BlackICEPreferenceFragment) mParentFragment).mDialogFragment == this) {
+                    ((BlackICEPreferenceFragment) mParentFragment).mDialogFragment = null;
                 }
             }
         }

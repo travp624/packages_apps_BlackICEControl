@@ -16,12 +16,12 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
 import com.blackice.control.tools.VoltageControl;
 import com.blackice.control.util.CMDProcessor;
 import com.blackice.control.util.Helpers;
 
-public class Performance extends SettingsPreferenceFragment implements
+public class Performance extends BlackICEPreferenceFragment implements
         OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 
     public static final String TAG = "Performance";
