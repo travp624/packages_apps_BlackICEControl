@@ -80,6 +80,7 @@ public class Lockscreens extends SettingsPreferenceFragment implements
     private static final String PREF_LOCKSCREEN_CALENDAR_INTERVAL = "lockscreen_calendar_interval";
 
     private static final String PREF_SHOW_LOCK_BEFORE_UNLOCK = "show_lock_before_unlock";
+    private static final String PREF_SHOW_4TAB_SLIDER = "show_4tab_slider";
 
     public static final int REQUEST_PICK_WALLPAPER = 199;
     public static final int REQUEST_PICK_CUSTOM_ICON = 200;
@@ -105,6 +106,7 @@ public class Lockscreens extends SettingsPreferenceFragment implements
     ListPreference mCalendarRange;
     CheckBoxPreference mLockscreenCalendarHideOngoing;
     CheckBoxPreference mLockscreenCalendarUseColors;
+    CheckBoxPreference mLockscreen4tabSlider;
 
     Preference mLockscreenWallpaper;
 
@@ -131,6 +133,10 @@ public class Lockscreens extends SettingsPreferenceFragment implements
         menuButtonLocation = (CheckBoxPreference) findPreference(PREF_MENU);
         menuButtonLocation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_ENABLE_MENU_KEY, 1) == 1);
+
+        mLockscreen4tabSlider = (CheckBoxPreference) findPreference(PREF_SHOW_4TAB_SLIDER);
+        mLockscreen4tabSlider.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+				Settings.System.LOCKSCREEN_4TAB, 0) == 1);
 
         mLockScreenTimeoutUserOverride = (CheckBoxPreference) findPreference(PREF_USER_OVERRIDE);
         mLockScreenTimeoutUserOverride.setChecked(Settings.Secure.getInt(getActivity()
@@ -327,6 +333,12 @@ public class Lockscreens extends SettingsPreferenceFragment implements
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
 
+		} else if (preference == mLockscreen4tabSlider) {
+
+			Settings.System.putInt(getActivity().getContentResolver(),
+					Settings.System.LOCKSCREEN_4TAB,
+					((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+
         } else if (preference == mCalendarSources) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
 
@@ -417,7 +429,7 @@ public class Lockscreens extends SettingsPreferenceFragment implements
     private Uri getLockscreenExternalUri() {
         File dir = mContext.getExternalCacheDir();
         if (dir == null)
-            dir = new File("/sdcard/Anroid/data/com.aokp.romcontrol/cache/");
+            dir = new File("/sdcard/Anroid/data/com.blackice.control/cache/");
         File wallpaper = new File(dir, WALLPAPER_NAME);
 
         return Uri.fromFile(wallpaper);
@@ -426,7 +438,7 @@ public class Lockscreens extends SettingsPreferenceFragment implements
     private Uri getExternalIconUri() {
         File dir = mContext.getExternalCacheDir();
         if (dir == null)
-            dir = new File("/sdcard/Anroid/data/com.aokp.romcontrol/cache/");
+            dir = new File("/sdcard/Anroid/data/com.blackice.control/cache/");
         dir.mkdirs();
 
         return Uri.fromFile(new File(dir, "icon_" + currentIconIndex + ".png"));

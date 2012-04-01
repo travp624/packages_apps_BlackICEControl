@@ -138,6 +138,11 @@
 			android:title="@string/volume_music_controls_title"
 			android:summary="@string/volume_music_controls_summary" />
 
+		<CheckBoxPreference
+			android:key="show_4tab_slider"
+			android:title="@string/lockscreen_4tab_slider_title"
+			android:summary="@string/lockscreen_4tab_slider_summary" />
+
 	</PreferenceCategory>
 
 	<PreferenceCategory
