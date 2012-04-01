@@ -1,24 +1,21 @@
 
 package com.blackice.control.fragments;
 
-import java.util.ArrayList;
-
-import net.margaritov.preference.colorpicker.ColorPickerPreference;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.PowerManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -35,12 +32,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.blackice.control.R;
-import com.blackice.control.SettingsPreferenceFragment;
+import com.blackice.control.BlackICEPreferenceFragment;
+import com.blackice.control.util.ShortcutPickerHelper;
 import com.blackice.control.widgets.SeekBarPreference;
 import com.blackice.control.widgets.TouchInterceptor;
 
-public class Navbar extends SettingsPreferenceFragment implements
-        OnPreferenceChangeListener {
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
+
+import java.util.ArrayList;
+
+public class Navbar extends BlackICEPreferenceFragment implements
+        ShortcutPickerHelper.OnPickListener, OnPreferenceChangeListener {
 
     // move these later
     private static final String PREF_EANBLED_BUTTONS = "enabled_buttons";
@@ -63,6 +65,10 @@ public class Navbar extends SettingsPreferenceFragment implements
     ListPreference mNavigationBarHeight;
     ListPreference mNavigationBarWidth;
 
+    ShortcutPickerHelper mPicker;
+
+    String mCustomAppString;
+
     private final String[] buttons = {
             "HOME", "BACK", "TASKS", "SEARCH", "MENU_BIG"
     };
@@ -74,6 +80,8 @@ public class Navbar extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.prefs_navbar);
 
         PreferenceScreen prefs = getPreferenceScreen();
+
+        mPicker = new ShortcutPickerHelper(this, this);
 
         menuDisplayLocation = (ListPreference) findPreference(PREF_MENU_UNLOCK);
         menuDisplayLocation.setOnPreferenceChangeListener(this);
@@ -89,9 +97,10 @@ public class Navbar extends SettingsPreferenceFragment implements
 
         mHomeLongpress = (ListPreference) findPreference(PREF_HOME_LONGPRESS);
         mHomeLongpress.setOnPreferenceChangeListener(this);
-        mHomeLongpress.setValue(Settings.System.getInt(getActivity()
-                .getContentResolver(), Settings.System.NAVIGATION_BAR_HOME_LONGPRESS,
-                0) + "");
+        int lpv = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.NAVIGATION_BAR_HOME_LONGPRESS, 0);
+        mHomeLongpress.setValue(lpv + "");
+        mHomeLongpress.setSummary(getProperSummary(lpv))
 
         mNavigationBarColor = (ColorPickerPreference) findPreference(PREF_NAV_COLOR);
         mNavigationBarColor.setOnPreferenceChangeListener(this);
@@ -124,21 +133,9 @@ public class Navbar extends SettingsPreferenceFragment implements
         mNavigationBarHeight = (ListPreference) findPreference("navigation_bar_height");
         mNavigationBarHeight.setOnPreferenceChangeListener(this);
 
-	if (mTablet) {
-	    prefs.removePreference(mNavigationBarHeight);
-		// PreferenceCategory cat = ((PreferenceCategory))findPreference("navigation_bar_height");
-		// cat.findPreference("navigation_bar_height");
-	}	    
-
         mNavigationBarWidth = (ListPreference) findPreference("navigation_bar_width");
         mNavigationBarWidth.setOnPreferenceChangeListener(this);
-	
-	if (mTablet) {
-	    prefs.removePreference(mNavigationBarWidth);
-		// PreferenceCategory cat = ((PreferenceCategory))findPreference("navigation_bar_width");
-		// cat.findPreference("navigation_bar_width");
-	}
-	    		
+
         mLayout = findPreference("buttons");
 
         if (mTablet) {
@@ -147,7 +144,6 @@ public class Navbar extends SettingsPreferenceFragment implements
             prefs.removePreference(mNavBarEnabledButtons);
             prefs.removePreference(mHomeLongpress);
             prefs.removePreference(mNavBarMenuDisplay);
-	    prefs.removePreference(menuDisplayLocation);
         }
 
         setHasOptionsMenu(true);
@@ -169,9 +165,9 @@ public class Navbar extends SettingsPreferenceFragment implements
                 Settings.System.putFloat(getActivity().getContentResolver(),
                         Settings.System.NAVIGATION_BAR_BUTTON_ALPHA,
                         0.6f);
-		Settings.System.putInt(getActivity().getContentResolver(),
-			Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, mContext.getResources().getBoolean(
-				com.android.internal.R.bool.config_showNavigationBar) ? 1 : 0);
+                Settings.System.putInt(getActivity().getContentResolver(),
+                        Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, mContext.getResources().getBoolean(
+                                com.android.internal.R.bool.config_showNavigationBar) ? 1 : 0);
                 mButtonAlpha.setValue(60);
                 return true;
             default:
@@ -284,6 +280,13 @@ public class Navbar extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_HOME_LONGPRESS,
                     Integer.parseInt((String) newValue));
+            int nV = Integer.valueOf(String.valueOf(newValue));
+            if (nV == 3) {
+                mCustomAppString = Settings.System.NAVIGATION_BAR_HOME_LONGPRESS_CUSTOMAPP;
+                mPicker.pickShortcut();
+            } else {
+                preference.setSummary(getProperSummary(nV));
+            }
             return true;
         } else if (preference == mGlowTimes) {
             // format is (on|off) both in MS
@@ -543,4 +546,35 @@ public class Navbar extends SettingsPreferenceFragment implements
         return iloveyou;
     }
 
+    @Override
+    public void shortcutPicked(String uri, String friendlyName, boolean isApplication) {
+        if (Settings.System.putString(getActivity().getContentResolver(),
+                Settings.System.NAVIGATION_BAR_HOME_LONGPRESS_CUSTOMAPP, uri)) {
+                    mHomeLongpress.setSummary(friendlyName);
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == ShortcutPickerHelper.REQUEST_PICK_SHORTCUT
+                    || requestCode == ShortcutPickerHelper.REQUEST_PICK_APPLICATION
+                    || requestCode == ShortcutPickerHelper.REQUEST_CREATE_SHORTCUT) {
+                mPicker.onActivityResult(requestCode, resultCode, data);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    
+    private String getProperSummary(int i) {
+        if (i < 3) {
+            return getResources().getStringArray(R.array.long_press_home_entries)[i];
+        } else {
+            String uri = Settings.System.getString(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_HOME_LONGPRESS_CUSTOMAPP);
+            if (uri == null)
+                return "-";
+
+            return mPicker.getFriendlyNameForUri(uri);
+        }
+    }
 }
