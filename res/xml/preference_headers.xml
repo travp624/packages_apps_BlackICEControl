@@ -3,9 +3,9 @@
 
 	<header 
 		android:id="@+id/thanks"
-		android:fragment="com.blackice.control.fragments.Thanks"	
-		android:title="@string/blackice"	
-		android:summary="@string/blackice_summary" />	
+		android:fragment="com.blackice.control.fragments.Thanks"
+		android:title="@string/blackice"
+		android:summary="@string/blackice_summary" />
 
 	<header
 		android:id="@+id/about"
@@ -15,7 +15,7 @@
 
 	<header 
 	    android:id="@+id/themer"
-	    android:title="@string/themer" />	
+	    android:title="@string/themer" />
 	
 	<header 
 	    android:id="@+id/mmsettings"
