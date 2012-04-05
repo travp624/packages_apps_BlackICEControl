@@ -21,17 +21,19 @@
 			android:title="@string/title_pref_navigation_menu_display"
 			android:summary="@string/summary_pref_navigation_menu_display" />
 
-		<Preference
-			android:key="enabled_buttons"
-			android:title="@string/enabled_navbar_buttons_title"
-			android:summary="@string/enabled_navbar_buttons_summary" />
-	
-		<Preference
-			android:key="buttons"
-			android:title="@string/navbar_order_title"
-			android:summary="@string/navbar_order_summary" />
+        <ListPreference
+            android:entries="@array/navigation_bar_qty_entries"
+            android:entryValues="@array/navigation_bar_qty_values"
+            android:key="navbar_qty"
+            android:title="@string/navbar_qty_title"
+            android:summary="@string/navbar_qty_summary" />
+    </PreferenceCategory>
 
-	</PreferenceCategory>
+    <PreferenceCategory
+        android:key="navbar_buttons"
+        android:title="@string/navbar_button_cat">
+
+    </PreferenceCategory>
 
 	<PreferenceCategory android:title="navbar btns color &amp; transparency">
 	
