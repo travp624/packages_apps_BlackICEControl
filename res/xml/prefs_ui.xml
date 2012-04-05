@@ -59,6 +59,11 @@
 			android:title="@string/disable_bugmailer_title" />
 
 		<CheckBoxPreference
+			android:key="longpress_to_kill"
+			android:title="@string/longpress_to_kill_title"
+			android:summary="@string/longpress_to_kill_summary" />
+
+		<CheckBoxPreference
 			android:key="rotate_180"
 			android:title="@string/rotate_180_title"
 			android:summary="@string/rotate_180_summary" />

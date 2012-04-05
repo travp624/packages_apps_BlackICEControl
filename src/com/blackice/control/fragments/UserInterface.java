@@ -35,6 +35,7 @@ public class UserInterface extends BlackICEPreferenceFragment implements
     private static final String PREF_CRT_OFF = "crt_off";
     private static final String PREF_IME_SWITCHER = "ime_switcher";
     private static final String PREF_ENABLE_VOLUME_OPTIONS = "enable_volume_options";
+    private static final String PREF_LONGPRESS_TO_KILL = "longpress_to_kill";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final String PREF_ROTATION_ANIMATION = "rotation_animation_delay";
     private static final String PREF_180 = "rotate_180";
@@ -43,6 +44,7 @@ public class UserInterface extends BlackICEPreferenceFragment implements
     CheckBoxPreference mCrtOffAnimation;
     CheckBoxPreference mShowImeSwitcher;
     CheckBoxPreference mEnableVolumeOptions;
+    CheckBoxPreference mLongPressToKill;
     CheckBoxPreference mAllow180Rotation;
     CheckBoxPreference mHorizontalAppSwitcher;
     Preference mCustomLabel;
@@ -82,6 +84,10 @@ public class UserInterface extends BlackICEPreferenceFragment implements
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
+
+        mLongPressToKill = (CheckBoxPreference) findPreference(PREF_LONGPRESS_TO_KILL);
+        mLongPressToKill.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
+                Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) == 1);
 
         mAnimationRotationDelay = (ListPreference) findPreference(PREF_ROTATION_ANIMATION);
         mAnimationRotationDelay.setOnPreferenceChangeListener(this);
@@ -195,6 +201,12 @@ public class UserInterface extends BlackICEPreferenceFragment implements
             });
 
             alert.show();
+        } else if (preference == mLongPressToKill) {
+
+            boolean checked = ((CheckBoxPreference) preference).isChecked();
+            Settings.Secure.putInt(getActivity().getContentResolver(),
+                    Settings.Secure.KILL_APP_LONGPRESS_BACK, checked ? 1 : 0);
+            return true;
 
         } else if (preference == mAllow180Rotation) {
 
