@@ -230,13 +230,13 @@ public class UserInterface extends BlackICEPreferenceFragment implements
             if (checked) {
                 Helpers.getMount("rw");
                 new CMDProcessor().su
-                        .runWaitFor("mv /system/media/bootanimation.zip /system/media/bootanimation.unicorn");
+                        .runWaitFor("mv /system/media/bootanimation.zip /system/media/bootanimation.blackice");
                 Helpers.getMount("ro");
                 preference.setSummary(R.string.disable_bootanimation_summary);
             } else {
                 Helpers.getMount("rw");
                 new CMDProcessor().su
-                        .runWaitFor("mv /system/media/bootanimation.unicorn /system/media/bootanimation.zip");
+                        .runWaitFor("mv /system/media/bootanimation.blackice /system/media/bootanimation.zip");
                 Helpers.getMount("ro");
             }
             return true;
@@ -246,12 +246,12 @@ public class UserInterface extends BlackICEPreferenceFragment implements
             if (checked) {
                 Helpers.getMount("rw");
                 new CMDProcessor().su
-                        .runWaitFor("mv /system/bin/bugmailer.sh /system/bin/bugmailer.sh.unicorn");
+                        .runWaitFor("mv /system/bin/bugmailer.sh /system/bin/bugmailer.sh.blackice");
                 Helpers.getMount("ro");
             } else {
                 Helpers.getMount("rw");
                 new CMDProcessor().su
-                        .runWaitFor("mv /system/bin/bugmailer.sh.unicorn /system/bin/bugmailer.sh");
+                        .runWaitFor("mv /system/bin/bugmailer.sh.blackice /system/bin/bugmailer.sh");
                 Helpers.getMount("ro");
             }
             return true;

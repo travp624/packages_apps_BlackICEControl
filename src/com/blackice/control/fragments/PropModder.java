@@ -33,6 +33,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.text.InputFilter;
 import android.text.InputFilter.LengthFilter;
@@ -79,10 +80,10 @@ public class PropModder extends PreferenceFragment implements
     private static final String WIFI_SCAN_PROP = "wifi.supplicant_scan_interval";
     private static final String WIFI_SCAN_PERSIST_PROP = "persist.wifi_scan_interval";
     private static final String WIFI_SCAN_DEFAULT = System.getProperty(WIFI_SCAN_PROP);
-    // private static final String LCD_DENSITY_PREF = "pref_lcd_density";
-    // private static final String LCD_DENSITY_PROP = "ro.sf.lcd_density";
-    // private static final String LCD_DENSITY_PERSIST_PROP = "persist.lcd_density";
-    // private static final String LCD_DENSITY_DEFAULT = System.getProperty(LCD_DENSITY_PROP);
+    /* private static final String LCD_DENSITY_PREF = "pref_lcd_density";
+    private static final String LCD_DENSITY_PROP = "ro.sf.lcd_density";
+    private static final String LCD_DENSITY_PERSIST_PROP = "persist.lcd_density";
+    private static final String LCD_DENSITY_DEFAULT = System.getProperty(LCD_DENSITY_PROP); */
     private static final String MAX_EVENTS_PREF = "pref_max_events";
     private static final String MAX_EVENTS_PROP = "windowsmgr.max_events_per_sec";
     private static final String MAX_EVENTS_PERSIST_PROP = "persist.max_events";
@@ -208,8 +209,8 @@ public class PropModder extends PreferenceFragment implements
         mWifiScanPref = (ListPreference) prefSet.findPreference(WIFI_SCAN_PREF);
         mWifiScanPref.setOnPreferenceChangeListener(this);
 
-        // mLcdDensityPref = (ListPreference) prefSet.findPreference(LCD_DENSITY_PREF);
-        // mLcdDensityPref.setOnPreferenceChangeListener(this);
+        /* mLcdDensityPref = (ListPreference) prefSet.findPreference(LCD_DENSITY_PREF);
+        mLcdDensityPref.setOnPreferenceChangeListener(this); */
 
         mMaxEventsPref = (ListPreference) prefSet.findPreference(MAX_EVENTS_PREF);
         mMaxEventsPref.setOnPreferenceChangeListener(this);
@@ -234,6 +235,8 @@ public class PropModder extends PreferenceFragment implements
         mTcpStackPref = (CheckBoxPreference) prefSet.findPreference(TCP_STACK_PREF);
 
         mJitPref = (CheckBoxPreference) prefSet.findPreference(JIT_PREF);
+
+        ((PreferenceGroup) findPreference("general_category")).removePreference(mJitPref);
 
         mModVersionPref = (EditTextPreference) prefSet.findPreference(MOD_VERSION_PREF);
         String mod = Helpers.findBuildPropValueOf(MOD_VERSION_PROP);
