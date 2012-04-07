@@ -1,8 +1,6 @@
 
 package com.blackice.control.fragments;
 
-import java.io.IOException;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -15,6 +13,7 @@ import android.util.Log;
 
 import com.blackice.control.R;
 import com.blackice.control.BlackICEPreferenceFragment;
+import com.blackice.control.util.Helpers;
 
 public class StatusBarGeneral extends BlackICEPreferenceFragment implements
         OnPreferenceChangeListener {
@@ -69,11 +68,11 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
                 .getContentResolver(), Settings.System.STATUS_BAR_TRANSPARENCY,
                 100)));
 
-		mLayout = (ListPreference) findPreference(PREF_LAYOUT);
-		mLayout.setOnPreferenceChangeListener(this);
-		mLayout.setValue(Integer.toString(Settings.System.getInt(getActivity()
-				.getContentResolver(), Settings.System.STATUS_BAR_LAYOUT, 
-				0)));
+        mLayout = (ListPreference) findPreference(PREF_LAYOUT);
+        mLayout.setOnPreferenceChangeListener(this);
+        mLayout.setValue(Integer.toString(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.STATUS_BAR_LAYOUT, 
+                0)));
 
 
         if (mTablet) {
@@ -81,8 +80,8 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
             prefs.removePreference(mStatusBarBrightnessToggle);
             prefs.removePreference(mAutoHideToggles);
             prefs.removePreference(mDefaultSettingsButtonBehavior);
-			prefs.removePreference(mTransparency);
-			prefs.removePreference(mLayout);
+            prefs.removePreference(mTransparency);
+            prefs.removePreference(mLayout);
         }
     }
 
@@ -133,20 +132,13 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
             int val = Integer.parseInt((String) newValue);
             result = Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_TRANSPARENCY, val);
-            restartSystemUI();
+            Helpers.restartSystemUI();
         } else if (preference == mLayout) {
-			int val = Integer.parseInt((String) newValue);
-			result = Settings.System.putInt(getActivity().getContentResolver(),
-					Settings.System.STATUS_BAR_LAYOUT, val);
-			restartSystemUI();
-	}
-        return result;
+            int val = Integer.parseInt((String) newValue);
+            result = Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_LAYOUT, val);
+            Helpers.restartSystemUI();
     }
-    private void restartSystemUI() {
-        try {
-            Runtime.getRuntime().exec("pkill -TERM -f  com.android.systemui");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return result;
     }
 }
