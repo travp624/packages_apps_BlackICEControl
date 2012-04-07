@@ -171,11 +171,11 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         mLockscreenCalendarFlip = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_CALENDAR_FLIP);
         mLockscreenCalendarFlip.setChecked(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.LOCKSCREEN_CALENDAR_FLIP, 0) == 1);
-        
+
         mLockscreenCalendarHideOngoing = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_CALENDAR_HIDE_ONGOING);
         mLockscreenCalendarHideOngoing.setChecked(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.LOCKSCREEN_CALENDAR_HIDE_ONGOING, 0) == 1);
-        
+
         mLockscreenCalendarUseColors = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_CALENDAR_USE_COLORS);
         mLockscreenCalendarUseColors.setChecked(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.LOCKSCREEN_CALENDAR_USE_COLORS, 0) == 1);
@@ -186,7 +186,7 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         mCalendarInterval.setOnPreferenceChangeListener(this);
         mCalendarInterval.setValue(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_CALENDAR_INTERVAL, 2500) + "");
-        
+
         mCalendarRange = (ListPreference) findPreference(PREF_LOCKSCREEN_CALENDAR_RANGE);
         mCalendarRange.setOnPreferenceChangeListener(this);
         mCalendarRange.setValue(Settings.System.getLong(getActivity().getContentResolver(),
@@ -288,7 +288,7 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
             // intent.putExtra("return-data", false);
             intent.putExtra("spotlightX", spotlightX);
             intent.putExtra("spotlightY", spotlightY);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, getLockscreenExternalUri());
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile()));
             intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
 
             startActivityForResult(intent, REQUEST_PICK_WALLPAPER);
@@ -307,7 +307,7 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
                     Settings.System.LOCKSCREEN_CALENDAR_FLIP,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
-            
+
         } else if (preference == mLockscreenCalendarHideOngoing) {
 
             Settings.System.putInt(getActivity().getContentResolver(),
@@ -322,11 +322,12 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
 
-		} else if (preference == mLockscreen4tabSlider) {
+        } else if (preference == mLockscreen4tabSlider) {
 
-			Settings.System.putInt(getActivity().getContentResolver(),
-					Settings.System.LOCKSCREEN_4TAB,
-					((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_4TAB,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
 
         } else if (preference == mCalendarSources) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
@@ -415,22 +416,20 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         }
     }
 
-    private Uri getLockscreenExternalUri() {
-        File dir = mContext.getExternalCacheDir();
-        if (dir == null)
-            dir = new File("/sdcard/Anroid/data/com.blackice.control/cache/");
-        File wallpaper = new File(dir, WALLPAPER_NAME);
-
-        return Uri.fromFile(wallpaper);
+    private Uri getTempFileUri() {
+        return Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+                "blackice_tmp"));
     }
 
-    private Uri getExternalIconUri() {
-        File dir = mContext.getExternalCacheDir();
-        if (dir == null)
-            dir = new File("/sdcard/Anroid/data/com.blackice.control/cache/");
-        dir.mkdirs();
+    private File getTempFile() {
+        return new File(Environment.getExternalStorageDirectory(), ".aokp_temp");
+    }
 
-        return Uri.fromFile(new File(dir, "icon_" + currentIconIndex + ".png"));
+    private Uri getIconUri() {
+        File dir = mContext.getFilesDir();
+        File icon = new File(dir, "icon_" + currentIconIndex + ".png");
+
+        return Uri.fromFile(icon);
     }
 
     public void refreshSettings() {
@@ -496,10 +495,10 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
                     intent.putExtra("outputY", height);
                     intent.putExtra("scale", true);
                     // intent.putExtra("return-data", false);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, getExternalIconUri());
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, getTempFileUri());
                     intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
 
-                    Log.i(TAG, "started for result, should output to: " + getExternalIconUri());
+                    Log.i(TAG, "started for result, should output to: " + getTempFileUri());
 
                     startActivityForResult(intent, REQUEST_PICK_CUSTOM_ICON);
                 }
@@ -539,13 +538,14 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
 
     private Drawable resize(Drawable image) {
         int size = 50;
-        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, getResources().getDisplayMetrics());
+        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, getResources()
+                .getDisplayMetrics());
 
         Bitmap d = ((BitmapDrawable) image).getBitmap();
         Bitmap bitmapOrig = Bitmap.createScaledBitmap(d, px, px, false);
         return new BitmapDrawable(mContext.getResources(), bitmapOrig);
     }
-    
+
     private Drawable getLockscreenIconImage(int index) {
         String uri = Settings.System.getString(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITIES[index]);
@@ -677,19 +677,33 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_PICK_WALLPAPER) {
 
+                File galleryImage = getTempFile();
+                String message = "";
                 FileOutputStream wallpaperStream = null;
                 try {
-                    wallpaperStream = mContext.openFileOutput(WALLPAPER_NAME, Context.MODE_PRIVATE);
+                    wallpaperStream = mContext.openFileOutput(WALLPAPER_NAME,
+                            Context.MODE_WORLD_READABLE);
                 } catch (FileNotFoundException e) {
                     return; // NOOOOO
                 }
 
-                // should use intent.getData() here but it keeps returning null
-                Uri selectedImageUri = getLockscreenExternalUri();
-                Log.e(TAG, "Selected image uri: " + selectedImageUri);
-                Bitmap bitmap = BitmapFactory.decodeFile(selectedImageUri.getPath());
+                Bitmap bitmap = BitmapFactory.decodeFile(galleryImage.getAbsolutePath());
 
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, wallpaperStream);
+                if (bitmap == null) {
+                    message = "Wallpaper did not set (is your SD mounted?)";
+                } else if (bitmap != null
+                        && bitmap.compress(Bitmap.CompressFormat.JPEG, 100, wallpaperStream)) {
+                    message = "Wallpaper set successfully";
+                } else {
+                    // shouldn't get here, but let's leave it just in case
+                    message = "Wallpaepr did not set (!!!)";
+                }
+                Toast.makeText(getActivity(), message,
+                        Toast.LENGTH_SHORT).show();
+
+                // go ahead and clean up if it was successful or not
+                if (galleryImage.exists())
+                    galleryImage.delete();
 
             } else if (requestCode == ShortcutPickerHelper.REQUEST_PICK_SHORTCUT
                     || requestCode == ShortcutPickerHelper.REQUEST_PICK_APPLICATION
@@ -698,30 +712,35 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
 
             } else if (requestCode == REQUEST_PICK_CUSTOM_ICON) {
 
+                String iconName = "icon_" + currentIconIndex + ".png";
                 FileOutputStream iconStream = null;
                 try {
-                    iconStream = mContext.openFileOutput("icon_" + currentIconIndex + ".png",
-                            Context.MODE_WORLD_READABLE);
+                    iconStream = mContext.openFileOutput(iconName, Context.MODE_WORLD_WRITEABLE);
                 } catch (FileNotFoundException e) {
-                    e.printStackTrace();
                     return; // NOOOOO
                 }
 
-                Uri selectedImageUri = getExternalIconUri();
-                Log.e(TAG, "Selected icon uri: " + selectedImageUri.getPath());
+                Uri selectedImageUri = getTempFileUri();
+                Log.e(TAG, "Selected image path: " + selectedImageUri.getPath());
                 Bitmap bitmap = BitmapFactory.decodeFile(selectedImageUri.getPath());
+                if (bitmap.compress(Bitmap.CompressFormat.PNG, 100, iconStream)) {
 
-                if (bitmap == null) {
-                    Log.e(TAG, "bitmap was null");
-                } else
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, iconStream);
+                    Settings.System.putString(getContentResolver(),
+                            Settings.System.LOCKSCREEN_CUSTOM_APP_ICONS[currentIconIndex],
+                            Uri.fromFile(
+                                    new File(mContext.getFilesDir(), iconName)).getPath());
 
-                Settings.System.putString(getContentResolver(),
-                        Settings.System.LOCKSCREEN_CUSTOM_APP_ICONS[currentIconIndex],
-                        getExternalIconUri().toString());
-                Toast.makeText(getActivity(), currentIconIndex + "'s icon set successfully!",
-                        Toast.LENGTH_LONG).show();
-                refreshSettings();
+                    File f = new File(selectedImageUri.getPath());
+                    if (f.exists())
+                        f.delete();
+
+                    Toast.makeText(getActivity(), currentIconIndex + "'s icon set successfully!",
+                            Toast.LENGTH_SHORT).show();
+                    refreshSettings();
+                } else {
+                    Toast.makeText(getActivity(), "Setting icon failed! Is your SD mounted?",
+                            Toast.LENGTH_SHORT).show();
+                }
 
             }
         }
