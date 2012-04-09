@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.IPackageDataObserver;
-import android.os.AysncTask;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -99,7 +99,7 @@ public class DensityChanger extends BlackICEPreferenceFragment implements
 
         } else if (preference == mClearMarketData) {
 
-            new ClearMarketDataTask().excute("");
+            new ClearMarketDataTask().execute("");
             return true;
 
         } else if (preference == mOpenMarket) {
