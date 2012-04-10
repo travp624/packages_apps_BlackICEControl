@@ -2,6 +2,27 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <PreferenceCategory android:title="status bar tweaks">
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="status_bar_color" 
+            android:title="Statusbar Color" 
+            android:defaultValue="#000000" />
+
+        <ListPreference
+            android:key="top_carrier"
+            android:entries="@array/top_carrier_entries"
+            android:entryValues="@array/top_carrier_values"
+            android:title="@string/top_carrier_title"
+            android:summary="@string/top_carrier_summary" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="top_carrier_color" 
+            android:title="@string/top_carrier_color" 
+            android:defaultValue="#33B5E5" />
+
+    </PreferenceCategory>
+
 	<PreferenceCategory android:title="status bar expanded settings">
 	
 		<CheckBoxPreference

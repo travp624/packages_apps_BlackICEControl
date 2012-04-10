@@ -1,19 +1,27 @@
 
 package com.blackice.control.fragments;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.util.Log;
+import android.text.Spannable;
+import android.widget.EditText;
 
 import com.blackice.control.R;
 import com.blackice.control.BlackICEPreferenceFragment;
 import com.blackice.control.util.Helpers;
+
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class StatusBarGeneral extends BlackICEPreferenceFragment implements
         OnPreferenceChangeListener {
@@ -24,6 +32,8 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     private static final String PREF_ADB_ICON = "adb_icon";
     private static final String PREF_TRANSPARENCY = "status_bar_transparency";
     private static final String PREF_LAYOUT = "status_bar_layout";
+    private static final String TOP_CARRIER = "top_carrier";
+    private static final String TOP_CARRIER_COLOR = "top_carrier_color";
 
     CheckBoxPreference mDefaultSettingsButtonBehavior;
     CheckBoxPreference mAutoHideToggles;
@@ -31,6 +41,8 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     CheckBoxPreference mAdbIcon;
     ListPreference mTransparency;
     ListPreference mLayout;
+    ListPreference mTopCarrier;
+    ColorPickerPreference mTopCarrierColor;
 
     Context mContext;
 
@@ -42,6 +54,14 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.prefs_statusbar_general);
+
+        mTopCarrierColor = (ColorPickerPreference) findPreference(TOP_CARRIER_COLOR);
+        mTopCarrierColor.setOnPreferenceChangeListener(this);
+
+        mTopCarrier = (ListPreference) findPreference(TOP_CARRIER);
+        mTopCarrier.setOnPreferenceChangeListener(this);
+        mTopCarrier.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.TOP_CARRIER_LABEL,
+                0) + "");
 
         mDefaultSettingsButtonBehavior = (CheckBoxPreference) findPreference(PREF_SETTINGS_BUTTON_BEHAVIOR);
         mDefaultSettingsButtonBehavior.setChecked(Settings.System.getInt(mContext
@@ -138,6 +158,20 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
             result = Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_LAYOUT, val);
             Helpers.restartSystemUI();
+
+        } else if (preference == mTopCarrier) {
+            Settings.System.putInt(getActivity().getContentResolver(), 
+                    Settings.System.TOP_CARRIER_LABEL, Integer.parseInt((String) newValue));
+            return true;
+
+        } else if (preference == mTopCarrierColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.TOP_CARRIER_LABEL_COLOR, color);
+            return true;
     }
         return result;
     }
