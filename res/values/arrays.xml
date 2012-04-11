@@ -206,22 +206,6 @@
 		<item>3</item>
 	</string-array>
 
-	<string-array name="statusbar_transparency_entries">
-		<item>No transparency</item>
-		<item>25%</item>
-		<item>50%</item>
-		<item>75%</item>
-		<item>Full transparency</item>
-	</string-array>
-
-	<string-array name="statusbar_transparency_values" translatable="false">
-		<item>100</item>
-		<item>75</item>
-		<item>50</item>
-		<item>25</item>
-		<item>0</item>
-	</string-array>
-
 	<string-array name="statusbar_layout_entries">
 		<item>Regular layout</item>
 		<item>Reversed</item>
@@ -624,12 +608,14 @@
 
 	<string-array name="weather_statusbar_location_entries">
 		<item>Above carrier text</item>
+        <item>Statusbar weather</item>
 		<item>Weather panel</item>
 		<item>Disabled</item>
 	</string-array>
 
 	<string-array name="weather_statusbar_location_values" translatable="false">
 		<item>0</item>
+        <item>3</item>
 		<item>1</item>
 		<item>2</item>
 	</string-array>

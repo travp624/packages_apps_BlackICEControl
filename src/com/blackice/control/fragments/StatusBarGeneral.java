@@ -1,6 +1,10 @@
 
 package com.blackice.control.fragments;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -31,7 +35,6 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     private static final String PREF_AUTO_HIDE_TOGGLES = "auto_hide_toggles";
     private static final String PREF_BRIGHTNESS_TOGGLE = "status_bar_brightness_toggle";
     private static final String PREF_ADB_ICON = "adb_icon";
-    private static final String PREF_TRANSPARENCY = "status_bar_transparency";
     private static final String PREF_LAYOUT = "status_bar_layout";
     private static final String DATE_OPENS_CALENDAR = "date_opens_calendar";
     private static final String STATUS_BAR_COLOR = "status_bar_color";
@@ -41,13 +44,13 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     private static final String STOCK_CARRIER_COLOR = "stock_carrier_color";
     private static final String NOTIFICATION_ALPHA = "notification_alpha";
     private static final String NOTIFICATION_COLOR = "notification_color";
+    private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
 
     CheckBoxPreference mDefaultSettingsButtonBehavior;
     CheckBoxPreference mAutoHideToggles;
     CheckBoxPreference mStatusBarBrightnessToggle;
     CheckBoxPreference mDateCalendar;
     CheckBoxPreference mAdbIcon;
-    ListPreference mTransparency;
     ListPreference mLayout;
     ListPreference mTopCarrier;
     ListPreference mStockCarrier;
@@ -55,12 +58,12 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     ColorPickerPreference mStockCarrierColor;
     ColorPickerPreference mNotificationColor;
     ColorPickerPreference mStatusColor;
-    Preference mCarrier;
+    Preference mCustomLabel;
     SeekBarPreference mNotificationAlpha;
 
     Context mContext;
-
-    String mCarrierText = null;
+    
+    String mCustomLabelText = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,9 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
         mStockCarrier.setOnPreferenceChangeListener(this);
         mStockCarrier.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.USE_CUSTOM_CARRIER,
                 0) + "");
+
+        mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
+        updateCustomLabelTextSummary();
 
         mNotificationColor = (ColorPickerPreference) findPreference(NOTIFICATION_COLOR);
         mNotificationColor.setOnPreferenceChangeListener(this);
@@ -122,12 +128,6 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
         mAdbIcon = (CheckBoxPreference) findPreference(PREF_ADB_ICON);
         mAdbIcon.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.ADB_ICON, 1) == 1);
-        
-        mTransparency = (ListPreference) findPreference(PREF_TRANSPARENCY);
-        mTransparency.setOnPreferenceChangeListener(this);
-        mTransparency.setValue(Integer.toString(Settings.System.getInt(getActivity()
-                .getContentResolver(), Settings.System.STATUS_BAR_TRANSPARENCY,
-                100)));
 
         mLayout = (ListPreference) findPreference(PREF_LAYOUT);
         mLayout.setOnPreferenceChangeListener(this);
@@ -135,90 +135,96 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
                 .getContentResolver(), Settings.System.STATUS_BAR_LAYOUT, 
                 0)));
 
-
         if (mTablet) {
             PreferenceScreen prefs = getPreferenceScreen();
             prefs.removePreference(mStatusBarBrightnessToggle);
             prefs.removePreference(mAutoHideToggles);
             prefs.removePreference(mDefaultSettingsButtonBehavior);
-            prefs.removePreference(mTransparency);
             prefs.removePreference(mLayout);
         }
     }
 
-    private void updateCarrierText() {
-        mCarrierText = Settings.System.getString(getContentResolver(),
+    private void updateCustomLabelTextSummary() {
+        mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
                 Settings.System.CUSTOM_CARRIER_LABEL);
-        if (mCarrierText == null) {
-            mCarrier.setSummary("Sets the Text for both MIUI and pulldown custom text.");
+        if (mCustomLabelText == null) {
+            mCustomLabel.setSummary("Custom label not set. Once Set text for both MIUI and pulldown custom text will work. There is no going back.");
         } else {
-            mCarrier.setSummary(mCarrierText);
+            mCustomLabel.setSummary(mCustomLabelText);
         }
+
     }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         boolean value;
+
         if (preference == mDefaultSettingsButtonBehavior) {
             Log.e("LOL", "b");
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.STATUSBAR_SETTINGS_BEHAVIOR,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
+
         } else if (preference == mAutoHideToggles) {
             Log.e("LOL", "m");
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.STATUSBAR_QUICKTOGGLES_AUTOHIDE,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
+
         } else if (preference == mStatusBarBrightnessToggle) {
             Log.e("LOL", "m");
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.STATUS_BAR_BRIGHTNESS_TOGGLE,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
+
         } else if (preference == mAdbIcon) {
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.ADB_ICON, checked ? 1 : 0);
             return true;
+
         } else if (preference == mDateCalendar) {
             value = mDateCalendar.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.DATE_OPENS_CALENDAR, value ? 1 : 0);
             return true;
-        } else if (preference == mCarrier) {
-            AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
-            ad.setTitle("Custom Carrier Text");
-            ad.setMessage("Enter new carrier text here");
-            final EditText text = new EditText(getActivity());
-            text.setText(mCarrierText != null ? mCarrierText : "");
-            ad.setView(text);
-            ad.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+        } else if (preference == mCustomLabel) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+            alert.setTitle("Custom Carrier Label");
+            alert.setMessage("Please enter a new one!");
+
+            // Set an EditText view to get user input
+            final EditText input = new EditText(getActivity());
+            input.setText(mCustomLabelText != null ? mCustomLabelText : "");
+            alert.setView(input);
+
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    String value = ((Spannable) text.getText()).toString();
+                    String value = ((Spannable) input.getText()).toString();
                     Settings.System.putString(getActivity().getContentResolver(),
                             Settings.System.CUSTOM_CARRIER_LABEL, value);
-                    updateCarrierText();
+                    updateCustomLabelTextSummary();
                 }
             });
-            ad.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
+                    // Canceled.
                 }
             });
-            ad.show();
+            alert.show();
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean result = false;
-        if (preference == mTransparency) {
-            int val = Integer.parseInt((String) newValue);
-            result = Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.STATUS_BAR_TRANSPARENCY, val);
-            Helpers.restartSystemUI();
-        } else if (preference == mLayout) {
+        if (preference == mLayout) {
             int val = Integer.parseInt((String) newValue);
             result = Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_LAYOUT, val);

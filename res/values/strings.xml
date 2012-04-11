@@ -39,7 +39,7 @@
 	<string name="header_summary_battery">Battery bar, 1% battery mod, etc</string>
 	<string name="header_summary_general_ui">Boot animation, bug mailer, rotation, IME switcher, etc</string>
 	<string name="header_summary_navigation_bar">Buttons to display, nav bar color, order</string>
-	<string name="header_summary_lockscreens">Custom apps to launch, layout</string>
+	<string name="header_summary_lockscreens">Custom lockscreen layouts and more</string>
 	<string name="header_summary_power_menu">What to display in your power menu</string>
 	<string name="header_summary_powersaver">Automatically disable data to save battery</string>
 	<string name="header_summary_led">Change default settings for Android to use</string>
@@ -133,7 +133,7 @@
   	<string name="lockscreen_battery_title">Lockscreen Battery Percentage</string>
   	<string name="lockscreen_battery_summary">Always show battery percentage on the lockscreen</string>
   	<string name="lockscreen_weather_title">Lockscreen Weather</string>
-  	<string name="lockscreen_weather_summary">Show Weather Information on Lockscreen. You need to enable ROMControl\'s Weather service to use this</string>
+  	<string name="lockscreen_weather_summary">Show Weather Information on Lockscreen. You need to enable BlackICE Control\'s Weather service to use this</string>
   	<string name="volume_wake_title">Volume wake</string>
   	<string name="volume_wake_summary">Tapping the volume keys while your phone is off will turn the screen on.</string>
   	<string name="volume_music_controls_title">Volume music controls</string>
@@ -216,8 +216,6 @@
 	<string name="summary_status_bar_brightness_toggle">Slide finger slowly across statusbar to adjust brightness setting</string>
 	<string name="adb_icon_title">Enable USB debugging icon</string>
 	<string name="adb_icon_summary">Wutang</string>
-	<string name="statusbar_transparency">Transparency</string>
-	<string name="statusbar_transparency_summary">Turning this on might affect performance and battery life. (requires UI restart)</string>
 	<string name="statusbar_layout">Notification drawer layout</string>
 	<string name="statusbar_layout_summary">Change the notification drawer layout (requires UI restart)</string>
     <string name="date_opens_calendar">Date opens Calendar</string>
