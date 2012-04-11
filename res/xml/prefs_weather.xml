@@ -47,10 +47,10 @@
 			android:title="@string/weather_refresh_interval" />
 
 		<ListPreference
+			android:key="statusbar_location"
 			android:entries="@array/weather_statusbar_location_entries"
 			android:entryValues="@array/weather_statusbar_location_values"
 			android:dependency="enable_weather"
-			android:key="statusbar_location"
 			android:title="@string/weather_statusbar_style" />
 
 	</PreferenceCategory>

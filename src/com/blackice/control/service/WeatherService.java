@@ -33,8 +33,8 @@ public class WeatherService extends IntentService {
 
     public static final String TAG = "WeatherService";
 
-    public static final String INTENT_REQUEST_WEATHER = "com.aokp.romcontrol.INTENT_WEATHER_REQUEST";
-    public static final String INTENT_UPDATE_WEATHER = "com.aokp.romcontrol.INTENT_WEATHER_UPDATE";
+    public static final String INTENT_REQUEST_WEATHER = "com.blackice.control.INTENT_WEATHER_REQUEST";
+    public static final String INTENT_UPDATE_WEATHER = "com.blackice.control.INTENT_WEATHER_UPDATE";
 
     public static final String EXTRA_CITY = "city";
     public static final String EXTRA_FORECAST_DATE = "forecast_date";

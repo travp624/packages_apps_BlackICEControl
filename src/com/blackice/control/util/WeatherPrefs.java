@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 
 public class WeatherPrefs {
 
-    public static final String PREF_NAME = "aokp_weather";
+    public static final String PREF_NAME = "blackice_weather";
 
     public static final String KEY_USE_CELCIUS = "use_celcius";
     public static final String KEY_REFRESH = "refresh_interval";
