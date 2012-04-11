@@ -36,7 +36,6 @@ public class UserInterface extends BlackICEPreferenceFragment implements
     private static final String PREF_IME_SWITCHER = "ime_switcher";
     private static final String PREF_ENABLE_VOLUME_OPTIONS = "enable_volume_options";
     private static final String PREF_LONGPRESS_TO_KILL = "longpress_to_kill";
-    private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final String PREF_ROTATION_ANIMATION = "rotation_animation_delay";
     private static final String PREF_180 = "rotate_180";
 
@@ -47,13 +46,11 @@ public class UserInterface extends BlackICEPreferenceFragment implements
     CheckBoxPreference mLongPressToKill;
     CheckBoxPreference mAllow180Rotation;
     CheckBoxPreference mHorizontalAppSwitcher;
-    Preference mCustomLabel;
     ListPreference mAnimationRotationDelay;
     Preference mLcdDensity;
     CheckBoxPreference mDisableBootAnimation;
     CheckBoxPreference mDisableBugMailer;
 
-    String mCustomLabelText = null;
     int newDensityValue;
 
     DensityChanger densityFragment;
@@ -81,9 +78,6 @@ public class UserInterface extends BlackICEPreferenceFragment implements
         mEnableVolumeOptions = (CheckBoxPreference) findPreference(PREF_ENABLE_VOLUME_OPTIONS);
         mEnableVolumeOptions.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.ENABLE_VOLUME_OPTIONS, 0) == 1);
-
-        mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
-        updateCustomLabelTextSummary();
 
         mLongPressToKill = (CheckBoxPreference) findPreference(PREF_LONGPRESS_TO_KILL);
         mLongPressToKill.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
@@ -131,18 +125,6 @@ public class UserInterface extends BlackICEPreferenceFragment implements
         }
     }
 
-    private void updateCustomLabelTextSummary() {
-        mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
-                Settings.System.CUSTOM_CARRIER_LABEL);
-        if (mCustomLabelText == null) {
-            mCustomLabel
-                    .setSummary("Custom label currently not set. Once you specify a custom one, there's no way back without doing a data wipe.");
-        } else {
-            mCustomLabel.setSummary(mCustomLabelText);
-        }
-
-    }
-
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             Preference preference) {
@@ -174,33 +156,6 @@ public class UserInterface extends BlackICEPreferenceFragment implements
                     Settings.System.ENABLE_VOLUME_OPTIONS, checked ? 1 : 0);
             return true;
 
-        } else if (preference == mCustomLabel) {
-            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-
-            alert.setTitle("Custom Carrier Label");
-            alert.setMessage("Please enter a new one!");
-
-            // Set an EditText view to get user input
-            final EditText input = new EditText(getActivity());
-            input.setText(mCustomLabelText != null ? mCustomLabelText : "");
-            alert.setView(input);
-
-            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    String value = ((Spannable) input.getText()).toString();
-                    Settings.System.putString(getActivity().getContentResolver(),
-                            Settings.System.CUSTOM_CARRIER_LABEL, value);
-                    updateCustomLabelTextSummary();
-                }
-            });
-
-            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    // Canceled.
-                }
-            });
-
-            alert.show();
         } else if (preference == mLongPressToKill) {
 
             boolean checked = ((CheckBoxPreference) preference).isChecked();
