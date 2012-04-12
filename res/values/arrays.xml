@@ -206,6 +206,16 @@
 		<item>3</item>
 	</string-array>
 
+    <string-array name="statusbar_transparency_entries">
+        <item>Transparency off</item>
+        <item>Transparency on</item>
+    </string-array>
+
+    <string-array name="statusbar_transparency_values" translatable="false">
+        <item>100</item>
+        <item>99</item>
+    </string-array>
+
 	<string-array name="statusbar_layout_entries">
 		<item>Regular layout</item>
 		<item>Reversed</item>

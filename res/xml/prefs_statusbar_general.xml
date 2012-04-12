@@ -39,16 +39,24 @@
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="status_bar_color" 
             android:title="Statusbar Color" 
-            android:defaultValue="#000000" />
+            android:defaultValue="#000000"
+            alphaSlider="true" />
 
-        <com.blackice.control.widgets.SeekBarPreference
-            android:key="notification_alpha"
-            android:title="@string/notification_alpha_title" />
+        <ListPreference
+            android:key="status_bar_transparency"
+            android:title="@string/statusbar_transparency"
+            android:summary="@string/statusbar_transparency_summary"
+            android:entries="@array/statusbar_transparency_entries"
+            android:entryValues="@array/statusbar_transparency_values" />
 
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="notification_color" 
             android:title="@string/notification_color_title" 
             android:defaultValue="#FFFFFF" />
+
+        <com.blackice.control.widgets.SeekBarPreference
+            android:key="notification_alpha"
+            android:title="@string/notification_alpha_title" />
 
     </PreferenceCategory>
 

@@ -35,6 +35,7 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     private static final String PREF_AUTO_HIDE_TOGGLES = "auto_hide_toggles";
     private static final String PREF_BRIGHTNESS_TOGGLE = "status_bar_brightness_toggle";
     private static final String PREF_ADB_ICON = "adb_icon";
+    private static final String PREF_TRANSPARENCY = "status_bar_transparency";
     private static final String PREF_LAYOUT = "status_bar_layout";
     private static final String DATE_OPENS_CALENDAR = "date_opens_calendar";
     private static final String STATUS_BAR_COLOR = "status_bar_color";
@@ -54,6 +55,7 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     ListPreference mLayout;
     ListPreference mTopCarrier;
     ListPreference mStockCarrier;
+    ListPreference mTransparency;
     ColorPickerPreference mTopCarrierColor;
     ColorPickerPreference mStockCarrierColor;
     ColorPickerPreference mNotificationColor;
@@ -129,6 +131,12 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
         mAdbIcon.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.ADB_ICON, 1) == 1);
 
+        mTransparency = (ListPreference) findPreference(PREF_TRANSPARENCY);
+        mTransparency.setOnPreferenceChangeListener(this);
+        mTransparency.setValue(Integer.toString(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.STATUS_BAR_TRANSPARENCY,
+                100)));
+
         mLayout = (ListPreference) findPreference(PREF_LAYOUT);
         mLayout.setOnPreferenceChangeListener(this);
         mLayout.setValue(Integer.toString(Settings.System.getInt(getActivity()
@@ -140,6 +148,7 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
             prefs.removePreference(mStatusBarBrightnessToggle);
             prefs.removePreference(mAutoHideToggles);
             prefs.removePreference(mDefaultSettingsButtonBehavior);
+            prefs.removePreference(mTransparency);
             prefs.removePreference(mLayout);
         }
     }
@@ -224,7 +233,12 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean result = false;
-        if (preference == mLayout) {
+        if (preference == mTransparency) {
+            int val = Integer.parseInt((String) newValue);
+            result = Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_TRANSPARENCY, val);
+            Helpers.restartSystemUI();
+        } else if (preference == mLayout) {
             int val = Integer.parseInt((String) newValue);
             result = Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_LAYOUT, val);
@@ -284,6 +298,6 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
                     Settings.System.STATUSBAR_BACKGROUND_COLOR, color);
             return true;
         }
-        return false;
+        return result;
     }
 }

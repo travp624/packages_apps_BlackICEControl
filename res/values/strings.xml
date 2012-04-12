@@ -218,6 +218,8 @@
 	<string name="adb_icon_summary">Wutang</string>
 	<string name="statusbar_layout">Notification drawer layout</string>
 	<string name="statusbar_layout_summary">Change the notification drawer layout (requires UI restart)</string>
+    <string name="statusbar_transparency">Statusbar transparency</string>
+    <string name="statusbar_transparency_summary">Turning this on might affect performance and battery life. Once on alphaSlider in Statusbar color works! (requires UI restart)</string>
     <string name="date_opens_calendar">Date opens Calendar</string>
     <string name="top_carrier_title">MIUI Style Carrier Text</string>
     <string name="top_carrier_summary">Enable the carrier text in the statusbar in a style like MIUI **MUST REBOOT BETWEEN CARRIER AND CUSTOM**</string>
