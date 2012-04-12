@@ -19,10 +19,6 @@
             android:key="top_carrier_color" 
             android:title="@string/top_carrier_color" 
             android:defaultValue="#33B5E5" />
-            
-        <CheckBoxPreference
-            android:key="date_opens_calendar"
-            android:title="@string/date_opens_calendar" />
 
         <ListPreference
             android:key="stock_carrier"
@@ -76,6 +72,10 @@
         <CheckBoxPreference 
             android:key="adb_icon" 
             android:title="@string/adb_icon_title" />
+            
+        <CheckBoxPreference
+            android:key="date_opens_calendar"
+            android:title="@string/date_opens_calendar" />
 
         <ListPreference
             android:key="status_bar_layout"
