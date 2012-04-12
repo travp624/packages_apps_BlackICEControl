@@ -130,9 +130,17 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.prefs_lockscreens);
 
+        PreferenceScreen prefs = getPreferenceScreen();
+
+        boolean hasNavBarByDefault = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_showNavigationBar);
         menuButtonLocation = (CheckBoxPreference) findPreference(PREF_MENU);
         menuButtonLocation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_ENABLE_MENU_KEY, 1) == 1);
+
+        if (hasNavBarByDefault = true) {
+            ((PreferenceGroup) findPreference("advanced_cat")).removePreference(menuButtonLocation);
+        }
 
         mLockscreen4tabSlider = (CheckBoxPreference) findPreference(PREF_SHOW_4TAB_SLIDER);
         mLockscreen4tabSlider.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
