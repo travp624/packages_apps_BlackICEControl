@@ -11,7 +11,9 @@
 
 	</PreferenceCategory>
 
-	<PreferenceCategory android:title="homescreen rotation delay">
+	<PreferenceCategory 
+        android:key="rotation_delay"
+        android:title="homescreen rotation delay">
 
 		<ListPreference
 			android:entries="@array/rotation_animation_delay_entries"
