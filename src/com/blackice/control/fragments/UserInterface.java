@@ -88,7 +88,7 @@ public class UserInterface extends BlackICEPreferenceFragment implements
         mAnimationRotationDelay.setValue(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.ACCELEROMETER_ROTATION_SETTLE_TIME,
                 200) + "");
-        ((PreferenceGroup) findPreference("rotation_delay")).removePreference(mAnimationRotationDelay);
+        /* ((PreferenceGroup) findPreference("rotation_delay")).removePreference(mAnimationRotationDelay); */
 
         mAllow180Rotation = (CheckBoxPreference) findPreference(PREF_180);
         mAllow180Rotation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
