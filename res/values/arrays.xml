@@ -235,8 +235,6 @@
         <item>14dp</item>
         <item>16dp(Default)</item>
         <item>18dp</item>
-        <item>20dp</item>
-        <item>24dp</item>
     </string-array>
 
     <string-array name="statusbar_fontsize_values">
@@ -246,8 +244,6 @@
         <item>14</item>
         <item>16</item>
         <item>18</item>
-        <item>20</item>
-        <item>24</item>
     </string-array>
 
 	<!-- clock stuff -->
