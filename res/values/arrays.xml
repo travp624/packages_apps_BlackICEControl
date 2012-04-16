@@ -228,6 +228,22 @@
 		<item>2</item> 
 	</string-array>
 
+    <string-array name="statusbar_fontsize_entries">
+        <item>12dp</item>
+        <item>14dp</item>
+        <item>16dp(Default)</item>
+        <item>18dp</item>
+        <item>20dp</item>
+    </string-array>
+
+    <string-array name="statusbar_fontsize_values">
+        <item>12</item>
+        <item>14</item>
+        <item>16</item>
+        <item>18</item>
+        <item>20</item>
+    </string-array>
+
 	<!-- clock stuff -->
 	<string-array name="clock_style_entries">
 		<item>Right clock</item>
@@ -477,6 +493,9 @@
 		<item>SILENT</item>
 		<item>TORCH</item>
 		<item>SYNC</item>
+        <item>MEDIA_NEXT</item>
+        <item>MEDIA_PLAY</item>
+        <item>MEDIA_PREVIOUS</item>
 	</string-array>
 
 	<string-array name="available_toggles_values" translatable="false">
@@ -489,6 +508,9 @@
 		<item>Silent</item>
 		<item>Torch</item>
 		<item>Sync</item>
+        <item>Media Next</item>
+        <item>Media Play</item>
+        <item>Media Previous</item>
 	</string-array>
 
 	<string-array name="lockscreen_choice_entries">

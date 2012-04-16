@@ -230,6 +230,11 @@
     <string name="stock_carrier_color">Pull Down Carrier Text Color</string>
     <string name="notification_alpha_title">Notification Transparency</string>
     <string name="notification_color_title">Notification Color</string>
+    <string name="notification_color_summary">Sets notification icons color and aplha</string>
+    <string name="statusbar_color_title">Statusbar bg color</string>
+    <string name="statusbar_color_summary">Sets statusbar bg color and aplha. Alpha changes restarts systemui.</string>
+    <string name="statusbar_fontsize">Statusbar Font Size</string>
+    <string name="statusbar_fontsize_summary">Change the size of text elements on statusbar</string>
 
   	<!-- Statusbar | Battery -->
   	<string name="battery_icon">Battery icon style</string>
@@ -308,6 +313,11 @@
 	<string name="weather_use_celcius">Metric units</string>
 	<string name="weather_use_celcius_summary">Enabling this will display weather temperature in Celsius rather than Fahrenheit and windspeed in km/h rather than mph.</string>
 	<string name="weather_statusbar_style">StatusBar weather style</string>
+    <string name="weather_start_custom_app">Start custom app</string>
+    <string name="weather_start_custom_app_summary">Start a custom app when clicking on the weather image.</string>
+    <string name="weather_custom_app_title">Custom app</string>
+    <string name="weather_custom_app_dialog_title">Choose your app</string>
+    <string name="weather_custom_app_dialog_message">Package name for now.</string>
 
 	<!-- Dialog Titles -->
 	<string name="dt_free_memory">Minfree Taskkiller</string>
