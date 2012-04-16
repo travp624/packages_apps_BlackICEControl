@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<CheckBoxPreference
-		android:key="enable_nav_bar"
-		android:title="Enable bar" />
+    <CheckBoxPreference
+        android:key="enable_nav_bar"
+        android:title="Enable bar" />
 
-	<PreferenceCategory android:title="navbar style entries">
-	
-		<ListPreference
-			android:entries="@array/pref_navigation_menu_entries"
-			android:entryValues="@array/pref_navigation_menu_values"
-			android:key="pref_menu_display"
-			android:title="@string/title_pref_menu_display"
-			android:summary="@string/summary_pref_menu_display" />
-	
-		<ListPreference
-			android:entries="@array/pref_navigation_menu_display_entries"
-			android:entryValues="@array/pref_navigation_menu_display_values"
-			android:key="navbar_menu_display"
-			android:title="@string/title_pref_navigation_menu_display"
-			android:summary="@string/summary_pref_navigation_menu_display" />
+    <PreferenceCategory android:title="navbar style entries">
+
+        <ListPreference
+            android:entries="@array/pref_navigation_menu_entries"
+            android:entryValues="@array/pref_navigation_menu_values"
+            android:key="pref_menu_display"
+            android:title="@string/title_pref_menu_display"
+            android:summary="@string/summary_pref_menu_display" />
+
+        <ListPreference
+            android:entries="@array/pref_navigation_menu_display_entries"
+            android:entryValues="@array/pref_navigation_menu_display_values"
+            android:key="navbar_menu_display"
+            android:title="@string/title_pref_navigation_menu_display"
+            android:summary="@string/summary_pref_navigation_menu_display" />
 
         <ListPreference
             android:entries="@array/navigation_bar_qty_entries"
@@ -35,53 +35,59 @@
 
     </PreferenceCategory>
 
-	<PreferenceCategory android:title="navbar btns color &amp; transparency">
-	
-		<net.margaritov.preference.colorpicker.ColorPickerPreference
-			android:key="nav_button_color"
-			android:title="@string/navigation_bar_tint_title"
-			android:defaultValue="#FFFFFF" />
+    <PreferenceCategory android:title="navbar btns color &amp; transparency">
 
-		<com.blackice.control.widgets.SeekBarPreference
-			android:key="button_transparency"
-			android:title="@string/button_transparency_title" />
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="nav_button_color"
+            android:title="@string/navigation_bar_tint_title"
+            android:defaultValue="#FFFFFF" />
 
-	</PreferenceCategory>
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="nav_button_glow_color"
+            android:title="@string/navigation_bar_glow_tint_title"
+            android:summary="@string/navigation_bar_glow_tint_summary"
+            android:defaultValue="#FFFFFF" />
 
-	<PreferenceCategory
-		android:key="advanced_cat"
-		android:title="@string/advanced_settings">
+        <com.blackice.control.widgets.SeekBarPreference
+            android:key="button_transparency"
+            android:title="@string/button_transparency_title" />
 
-		<ListPreference
-			android:entries="@array/glow_times_entries"
-			android:entryValues="@array/glow_times_values"
-			android:key="glow_times"
-			android:title="@string/glow_times_title"
-			android:summary="@string/glow_times_summary" />
+    </PreferenceCategory>
 
-		<ListPreference
-			android:entries="@array/long_press_home_entries"
-			android:entryValues="@array/long_press_home_values"
-			android:key="long_press_home"
-			android:title="@string/long_press_home_title"
-			android:summary="@string/long_press_home_summary" />
+    <PreferenceCategory
+        android:key="advanced_cat"
+        android:title="@string/advanced_settings">
 
-	</PreferenceCategory>
+        <ListPreference
+            android:entries="@array/glow_times_entries"
+            android:entryValues="@array/glow_times_values"
+            android:key="glow_times"
+            android:title="@string/glow_times_title"
+            android:summary="@string/glow_times_summary" />
 
-	<PreferenceCategory android:title="navbar width landscape/portrait">
-	
-		<ListPreference
-			android:entries="@array/navigation_bar_width_entries"
-			android:entryValues="@array/navigation_bar_width"
-			android:key="navigation_bar_width"
-			android:title="Navigation bar width" />
+        <ListPreference
+            android:entries="@array/long_press_home_entries"
+            android:entryValues="@array/long_press_home_values"
+            android:key="long_press_home"
+            android:title="@string/long_press_home_title"
+            android:summary="@string/long_press_home_summary" />
 
-		<ListPreference
-			android:entries="@array/navigation_bar_height_entries"
-			android:entryValues="@array/navigation_bar_height"
-			android:key="navigation_bar_height"
-			android:title="Navigation bar height" />
+    </PreferenceCategory>
 
-	</PreferenceCategory>
-	
+    <PreferenceCategory android:title="navbar width landscape/portrait">
+
+        <ListPreference
+            android:entries="@array/navigation_bar_width_entries"
+            android:entryValues="@array/navigation_bar_width"
+            android:key="navigation_bar_width"
+            android:title="Navigation bar width" />
+
+        <ListPreference
+            android:entries="@array/navigation_bar_height_entries"
+            android:entryValues="@array/navigation_bar_height"
+            android:key="navigation_bar_height"
+            android:title="Navigation bar height" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
