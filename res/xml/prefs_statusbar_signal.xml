@@ -41,13 +41,13 @@
 
     </PreferenceCategory>
 
-    <PreferenceCatergory android:title="misc">
+    <PreferenceCategory android:title="misc">
 
         <CheckBoxPreference
             android:key="hide_signal"
             android:title="@string/hide_signal_title"
             android:summary="@string/hide_signal_summary" />     
 
-    </PreferenceCatergory>
+    </PreferenceCategory>
 
 </PreferenceScreen>
