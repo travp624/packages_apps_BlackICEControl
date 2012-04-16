@@ -110,7 +110,7 @@ public class StatusBarClock extends BlackICEPreferenceFragment implements
             int intHex = ColorPickerPreference.convertToColorInt(hex);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_CLOCK_COLOR, intHex);
-            Log.e("ROMAN", intHex + "");
+            Log.e("BlackICE", intHex + "");
         
 	} else if (preference == mClockWeekday) {
             int val = Integer.parseInt((String) newValue);

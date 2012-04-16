@@ -110,7 +110,7 @@ public class Led extends BlackICEPreferenceFragment implements OnPreferenceChang
             int intHex = ColorPickerPreference.convertToColorInt(hex);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NOTIFICATION_LIGHT_COLOR, intHex);
-            Log.e("ROMAN", intHex + "");
+            Log.e("BlackICE", intHex + "");
         }
 
         return result;
