@@ -1,49 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<PreferenceCategory android:title="network signal style">
-	
-		<ListPreference
-			android:entries="@array/signal_style_entries"
-			android:entryValues="@array/signal_style_values"
-			android:key="signal_style"
-			android:title="@string/signal_style"
-			android:summary="@string/signal_style_summary" />
+    <PreferenceCategory android:title="network signal style">
 
-	</PreferenceCategory>
-	
-	<PreferenceCategory android:title="network signal text color">
+        <ListPreference
+            android:entries="@array/signal_style_entries"
+            android:entryValues="@array/signal_style_values"
+            android:key="signal_style"
+            android:title="@string/signal_style"
+            android:summary="@string/signal_style_summary" />
 
-		<net.margaritov.preference.colorpicker.ColorPickerPreference
-			android:key="signal_color"
-			android:title="@string/signal_color_title"
-			android:defaultValue="@android:color/holo_blue_light" />
+    </PreferenceCategory>
 
-	</PreferenceCategory>
-	
-	<PreferenceCategory android:title="wifi signal style">
-		
-		<ListPreference
-			android:key="wifi_signal_style"
-			android:entries="@array/wifi_signal_style_entries"
-			android:entryValues="@array/wifi_signal_style_values"
-			android:title="@string/wifi_signal_style"
-			android:summary="@string/wifi_signal_style_summary" />
+    <PreferenceCategory android:title="network signal text color">
 
-	</PreferenceCategory>
-	
-	<PreferenceCategory android:title="wifi signal text color">
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="signal_color"
+            android:title="@string/signal_color_title"
+            android:defaultValue="@android:color/holo_blue_light" />
 
-		<net.margaritov.preference.colorpicker.ColorPickerPreference
-			android:key="wifi_signal_color"
-			android:title="@string/wifi_signal_color_title"
-			android:defaultValue="@android:color/holo_blue_light" />
+    </PreferenceCategory>
 
-	</PreferenceCategory>		
+    <PreferenceCategory android:title="wifi signal style">
 
- 	<!-- <CheckBoxPreference
- 		android:key="hide_signal"
- 		android:title="@string/hide_signal_title"
- 		android:summary="@string/hide_signal_summary" /> -->
+        <ListPreference
+            android:key="wifi_signal_style"
+            android:entries="@array/wifi_signal_style_entries"
+            android:entryValues="@array/wifi_signal_style_values"
+            android:title="@string/wifi_signal_style"
+            android:summary="@string/wifi_signal_style_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="wifi signal text color">
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="wifi_signal_color"
+            android:title="@string/wifi_signal_color_title"
+            android:defaultValue="@android:color/holo_blue_light" />
+
+    </PreferenceCategory>
+
+    <PreferenceCatergory android:title="misc">
+
+        <CheckBoxPreference
+            android:key="hide_signal"
+            android:title="@string/hide_signal_title"
+            android:summary="@string/hide_signal_summary" />     
+
+    </PreferenceCatergory>
 
 </PreferenceScreen>
