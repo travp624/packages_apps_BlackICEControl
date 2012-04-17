@@ -34,7 +34,7 @@ import com.blackice.control.R;
 public class ColorTuningPreference extends DialogPreference {
 
     private static final String TAG = "COLOR...";
-    private static final int DEFAULT_COLOR_MULT = 1002159035;
+    private static final int DEFAULT_COLOR_MULT = 501079518;
 
     enum Colors {
         RED, GREEN, BLUE

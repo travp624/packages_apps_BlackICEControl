@@ -65,6 +65,9 @@ public class Navbar extends BlackICEPreferenceFragment implements
     private static final String PREF_NAV_GLOW_COLOR = "nav_button_glow_color";
     private static final String PREF_MENU_UNLOCK = "pref_menu_display";
     private static final String PREF_NAVBAR_QTY = "navbar_qty";
+    private static final String PREF_NAV_BACKGROUND_COLOR = "nav_button_background_color";
+
+    private static final int DEFAULT_BACKGROUND_COLOR = 0XFF000000;
 
     public static final int REQUEST_PICK_CUSTOM_ICON = 200;
     public static final int REQUEST_PICK_LANDSCAPE_ICON = 201;
@@ -72,6 +75,7 @@ public class Navbar extends BlackICEPreferenceFragment implements
     // move these later
     ColorPickerPreference mNavigationBarColor;
     ColorPickerPreference mNavigationBarGlowColor;
+    ColorPickerPreference mNavigationBarBackgroundColor;
     ListPreference menuDisplayLocation;
     ListPreference mNavBarMenuDisplay;
     ListPreference mGlowTimes;
@@ -129,6 +133,9 @@ public class Navbar extends BlackICEPreferenceFragment implements
 
         mNavigationBarGlowColor = (ColorPickerPreference) findPreference(PREF_NAV_GLOW_COLOR);
         mNavigationBarGlowColor.setOnPreferenceChangeListener(this);
+
+        mNavigationBarBackgroundColor = (ColorPickerPreference) findPreference(PREF_NAV_BACKGROUND_COLOR);
+        mNavigationBarBackgroundColor.setOnPreferenceChangeListener(this);
 
         mGlowTimes = (ListPreference) findPreference("glow_times");
         mGlowTimes.setOnPreferenceChangeListener(this);
@@ -189,6 +196,9 @@ public class Navbar extends BlackICEPreferenceFragment implements
                                 .getBoolean(
                                         com.android.internal.R.bool.config_showNavigationBar) ? 1
                                 : 0);
+                Settings.System.putInt(getActivity().getContentResolver(),
+                        Settings.System.NAVIGATION_BAR_BACKGROUND_COLOR, DEFAULT_BACKGROUND_COLOR);
+
                 mButtonAlpha.setValue(60);
 
                 Settings.System.putInt(getActivity().getContentResolver(),
@@ -271,6 +281,15 @@ public class Navbar extends BlackICEPreferenceFragment implements
             int intHex = ColorPickerPreference.convertToColorInt(hex);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_TINT, intHex);
+            return true;
+
+        } else if (preference == mNavigationBarBackgroundColor) {
+            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_BACKGROUND_COLOR, intHex);
             return true;
 
         } else if (preference == mNavigationBarGlowColor) {
