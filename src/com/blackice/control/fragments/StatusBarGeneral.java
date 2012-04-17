@@ -294,7 +294,7 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
                 Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_TRANSPARENCY, 100);
                 Helpers.restartSystemUI();
-            } else {
+            } else if (!hexColor.contains("#ff")) {
                 Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_TRANSPARENCY, 99);
                 Helpers.restartSystemUI();
