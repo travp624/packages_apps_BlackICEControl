@@ -25,6 +25,8 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.blackice.control.SHORTCUT" />
             </intent-filter>
         </activity>
         <activity
