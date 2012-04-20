@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.blackice.control.R;
 import com.blackice.control.tools.Voltage;
 import com.blackice.control.tools.VoltageControl;
 import com.blackice.control.util.CMDProcessor;
@@ -33,7 +36,7 @@ public class BootService extends Service {
     private final BootService service = this;
     public static SharedPreferences preferences;
     private Thread bootThread;
-    
+
     private static final String[] colorFILE_PATH = new String[] {
         "/sys/class/misc/samoled_color/red_multiplier",
         "/sys/class/misc/samoled_color/green_multiplier",
@@ -41,14 +44,14 @@ public class BootService extends Service {
     };
     // Align MAX_VALUE with Voodoo Control settings
     private static final int colorMAX_VALUE = Integer.MAX_VALUE - 2;
-    
+
     private static final String[] gammaFILE_PATH = new String[] {
         "/sys/class/misc/samoled_color/red_v1_offset",
         "/sys/class/misc/samoled_color/green_v1_offset",
         "/sys/class/misc/samoled_color/blue_v1_offset"
     };
     private static final int gammaMAX_VALUE = 80;
-    
+
     public void onStart(Intent intent, int startId) {
         preferences = PreferenceManager.getDefaultSharedPreferences(service);
         super.onStart(intent, startId);
@@ -100,38 +103,58 @@ public class BootService extends Service {
                 }
             }
         };
-        
-        //  Let's set fast_charge from preference
-        boolean FChargeOn = preferences.getBoolean(KEY_FASTCHARGE, false); 
-        Log.d("FChargeBoot","Setting at Boot:" + FChargeOn);
-        try{
-    		File fastcharge = new File(FAST_CHARGE_DIR,FAST_CHARGE_FILE);
-    		FileWriter fwriter = new FileWriter(fastcharge);
-    		BufferedWriter bwriter = new BufferedWriter(fwriter);
-    		bwriter.write(FChargeOn ? "1" : "0");
-    		bwriter.close();
-    		Intent i = new Intent();
-    		i.setAction("com.blackice.control.FCHARGE_CHANGED");
-    		getApplicationContext().sendBroadcast(i);
-    	} catch (IOException e) {
-    		Log.e("FChargeBoot","Couldn't write fast_charge file");
-    	}	
-        
+
+        // Let's set fast_charge from preference
+        boolean FChargeOn = preferences.getBoolean(KEY_FASTCHARGE, false);
+        Log.d("FChargeBoot", "Setting at Boot:" + FChargeOn);
+        try {
+            File fastcharge = new File(FAST_CHARGE_DIR, FAST_CHARGE_FILE);
+            FileWriter fwriter = new FileWriter(fastcharge);
+            BufferedWriter bwriter = new BufferedWriter(fwriter);
+            bwriter.write(FChargeOn ? "1" : "0");
+            bwriter.close();
+            Intent i = new Intent();
+            i.setAction("com.roman.romcontrol.FCHARGE_CHANGED");
+            getApplicationContext().sendBroadcast(i);
+        } catch (IOException e) {
+            Log.e("FChargeBoot", "Couldn't write fast_charge file");
+        }
+
+        // add notification to warn user they can only charge
+        if (FChargeOn) {
+            CharSequence contentTitle = getApplicationContext().getText(
+                    R.string.fast_charge_notification_title);
+            CharSequence contentText = getApplicationContext().getText(
+                    R.string.fast_charge_notification_message);
+
+            Notification n = new Notification.Builder(getApplicationContext())
+                    .setAutoCancel(true)
+                    .setContentTitle(contentTitle)
+                    .setContentText(contentText)
+                    .setSmallIcon(R.drawable.ic_blackice_control_general)
+                    .setWhen(System.currentTimeMillis())
+                    .getNotification();
+
+            NotificationManager nm = (NotificationManager) getApplicationContext()
+                    .getSystemService(Context.NOTIFICATION_SERVICE);
+            nm.notify(1337, n);
+        }
+
         // Let's restore color & gamma settings
         restoreColor();
         restoreGamma();
-        
+
         if (Settings.System.getInt(getContentResolver(), Settings.System.USE_WEATHER, 0) != 0) {
             Intent startRefresh = new Intent(getApplicationContext(),
                     WeatherRefreshService.class);
             getApplicationContext().startService(startRefresh);
         }
-        
+
         bootThread.start();
         // Stop the service
         stopSelf();
     }
-    
+
     public static void restoreColor() {
         int iValue, iValue2;
         if (!isSupported(colorFILE_PATH)) {
@@ -156,7 +179,7 @@ public class BootService extends Service {
             KernelUtils.writeColor(filePath, (int) iValue);
         }
     }
-    
+
     public static void restoreGamma() {
         if (!isSupported(gammaFILE_PATH)) {
             return;
@@ -183,7 +206,6 @@ public class BootService extends Service {
 
         return supported;
     }
-
 
     @Override
     public IBinder onBind(final Intent intent) {

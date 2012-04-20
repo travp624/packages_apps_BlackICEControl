@@ -34,7 +34,7 @@ public class WeatherReceiver extends BroadcastReceiver {
                             Intent appintent = null;
                             try {
                                 appintent = Intent.parseUri(WeatherPrefs.getCustomApp(
-                                context.getApplicationContext()),0);
+                                        context.getApplicationContext()),0);
                             } catch (URISyntaxException e) {
                                 e.printStackTrace();
                             }
@@ -48,10 +48,11 @@ public class WeatherReceiver extends BroadcastReceiver {
                     }
                 }
             }
+
             // SystemUI sends the broadcast to update weather upon booting up,
             // make sure we want to refresh it.
             if (updateweather 
-                    && Setting.System.getInt(context.getContentResolver(),
+                    && Settings.System.getInt(context.getContentResolver(),
                             Settings.System.USE_WEATHER, 0) != 0) {
                 Toast.makeText(context, context.getText(R.string.weather_refreshing),
                         Toast.LENGTH_SHORT).show();

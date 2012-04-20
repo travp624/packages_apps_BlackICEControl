@@ -35,6 +35,10 @@
 	<string name="weather">Weather</string>
 	<string name="signal">Signal &amp; Wifi Options</string>
 
+    <!-- General Strings -->
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+
 	<!-- Main summaries -->
 	<string name="header_summary_battery">Battery bar, 1% battery mod, etc</string>
 	<string name="header_summary_general_ui">Boot animation, bug mailer, rotation, IME switcher, etc</string>
@@ -524,6 +528,9 @@
 	<!--  Kernel Tweaks -->
 	<string name="pt_fast_charge_boot">Fast Charge</string>
 	<string name="ps_fast_charge_boot">Enable fast charge at boot</string>
+    <string name="fast_charge_warning">YOU WILL NOT BE ABLE TO CONNECT TO YOUR PC AFTER EACH REBOOT!\n\nThis setting will set fast charge ON after each reboot. While fast charge is on, you can *only* charge your phone!</string>
+    <string name="fast_charge_notification_title">Fast Charge is ON!</string>
+    <string name="fast_charge_notification_message">Phone is in charge-only mode!</string>
     <string name="kernel">Kernel Tweaks</string>
     <string name="category_screen_title">WM8994 Settings ( voodoo )</string>
     <string name="color_tuning_title_head">Color Multipliers Tuning</string>
