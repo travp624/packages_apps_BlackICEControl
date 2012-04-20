@@ -16,6 +16,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.blackice.control.util.CMDProcessor.CommandResult;
+
 public class Helpers {
 
     private static final String TAG = "Helpers";
@@ -203,7 +205,25 @@ public class Helpers {
         }       
         return true;
     }
-    
+
+    public static void setSystemProp(String prop, String val) {
+        new CMDProcessor().su.run("setprop " + prop + " " + val);
+    }
+
+    public static String getSystemProp(String prop, String def) {
+        String result = getSystemProp(prop);
+        return result == null ? def : result;
+    }
+
+    private static String getSystemProp(String prop) {
+        CommandResult cr = new CMDProcessor().sh.runWaitFor("getprop " + prop);
+        if (cr.success()) {
+            return cr.stdout;
+        } else {
+            return null;
+        }
+    }
+
     public static void restartSystemUI() {
         new CMDProcessor().su.run("pkill -TERM -f com.android.systemui");
     }
