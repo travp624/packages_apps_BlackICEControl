@@ -1,25 +1,25 @@
 
 package com.blackice.control.service;
 
+import java.net.URISyntaxException;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.os.ServiceManager;
 import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.provider.Settings;
 import android.widget.Toast;
 
 import com.android.internal.statusbar.IStatusBarService;
-
 import com.blackice.control.util.WeatherPrefs;
-
-import java.net.URISyntaxException;
+import com.blackice.control.R;
 
 public class WeatherReceiver extends BroadcastReceiver {
 
     @Override
-    public void onReceive (Context context, Intent intent) {
+    public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (action.equals(WeatherService.INTENT_REQUEST_WEATHER)) {
 
@@ -48,9 +48,13 @@ public class WeatherReceiver extends BroadcastReceiver {
                     }
                 }
             }
-            if (updateweather) {
-                // TODO create a resource string
-                Toast.makeText(context, "Requesting weather update!", Toast.LENGTH_LONG).show();
+            // SystemUI sends the broadcast to update weather upon booting up,
+            // make sure we want to refresh it.
+            if (updateweather 
+                    && Setting.System.getInt(context.getContentResolver(),
+                            Settings.System.USE_WEATHER, 0) != 0) {
+                Toast.makeText(context, context.getText(R.string.weather_refreshing),
+                        Toast.LENGTH_SHORT).show();
                 Intent getWeatherNow = new Intent(context, WeatherService.class);
                 getWeatherNow.setAction(action);
                 context.startService(getWeatherNow);
