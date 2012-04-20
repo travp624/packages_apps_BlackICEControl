@@ -91,6 +91,7 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
     private static final String WALLPAPER_NAME = "lockscreen_wallpaper.jpg";
 
     CheckBoxPreference menuButtonLocation;
+    CheckBoxPreference mLockScreenTimeoutUserOverride;
     ListPreference mLockscreenOption;
     CheckBoxPreference mVolumeWake;
     CheckBoxPreference mVolumeMusic;
@@ -137,6 +138,10 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         mLockscreen4tabSlider = (CheckBoxPreference) findPreference(PREF_SHOW_4TAB_SLIDER);
         mLockscreen4tabSlider.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_4TAB, 0) == 1);
+
+        mLockScreenTimeoutUserOverride = (CheckBoxPreference) findPreference(PREF_USER_OVERRIDE);
+        mLockScreenTimeoutUserOverride.setChecked(Settings.Secure.getInt(getActivity()
+                .getContentResolver(), Settings.Secure.LOCK_SCREEN_LOCK_USER_OVERRIDE, 0) == 1);
 
         mLockscreenOption = (ListPreference) findPreference(PREF_LOCKSCREEN_LAYOUT);
         mLockscreenOption.setOnPreferenceChangeListener(this);
@@ -247,6 +252,12 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
 
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_BATTERY,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
+
+        } else if (preference == mLockScreenTimeoutUserOverride) {
+            Settings.Secure.putInt(getActivity().getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_LOCK_USER_OVERRIDE,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
 
