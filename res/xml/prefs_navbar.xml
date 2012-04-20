@@ -40,11 +40,13 @@
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="nav_button_background_color"
             android:title="@string/nav_button_background_color_title"
+            android:summary="@string/nav_button_background_color_summary"
             android:defaultValue="#FF000000" />
 
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="nav_button_color"
             android:title="@string/navigation_bar_tint_title"
+            android:summary="@string/navigation_bar_tint_summary"
             android:defaultValue="#FFFFFF" />
 
         <net.margaritov.preference.colorpicker.ColorPickerPreference

@@ -35,7 +35,7 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     private static final String PREF_AUTO_HIDE_TOGGLES = "auto_hide_toggles";
     private static final String PREF_BRIGHTNESS_TOGGLE = "status_bar_brightness_toggle";
     private static final String PREF_ADB_ICON = "adb_icon";
-    // private static final String PREF_TRANSPARENCY = "status_bar_transparency";
+    private static final String PREF_TRANSPARENCY = "status_bar_transparency";
     private static final String PREF_LAYOUT = "status_bar_layout";
     private static final String DATE_OPENS_CALENDAR = "date_opens_calendar";
     private static final String STATUS_BAR_COLOR = "status_bar_color";
@@ -56,14 +56,14 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     ListPreference mLayout;
     ListPreference mTopCarrier;
     ListPreference mStockCarrier;
-    // ListPreference mTransparency;
+    ListPreference mTransparency;
     ListPreference mFontsize;
     ColorPickerPreference mTopCarrierColor;
     ColorPickerPreference mStockCarrierColor;
     ColorPickerPreference mNotificationColor;
     ColorPickerPreference mStatusColor;
     Preference mCustomLabel;
-    // SeekBarPreference mNotificationAlpha;
+    SeekBarPreference mNotificationAlpha;
 
     Context mContext;
     
@@ -103,9 +103,9 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
         float defaultAlpha = Settings.System.getFloat(getActivity()
                 .getContentResolver(), Settings.System.STATUSBAR_NOTIFICATION_ALPHA,
                 0.55f);
-        /* mNotificationAlpha = (SeekBarPreference) findPreference(NOTIFICATION_ALPHA);
+        mNotificationAlpha = (SeekBarPreference) findPreference(NOTIFICATION_ALPHA);
         mNotificationAlpha.setInitValue((int) (defaultAlpha * 100));
-        mNotificationAlpha.setOnPreferenceChangeListener(this); */
+        mNotificationAlpha.setOnPreferenceChangeListener(this);
 
         mDateCalendar = (CheckBoxPreference) findPreference(DATE_OPENS_CALENDAR);
         mDateCalendar.setChecked(Settings.System.getInt(getContentResolver(),
@@ -133,11 +133,11 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
         mAdbIcon.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.ADB_ICON, 1) == 1);
 
-        /* mTransparency = (ListPreference) findPreference(PREF_TRANSPARENCY);
+        mTransparency = (ListPreference) findPreference(PREF_TRANSPARENCY);
         mTransparency.setOnPreferenceChangeListener(this);
         mTransparency.setValue(Integer.toString(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.STATUS_BAR_TRANSPARENCY,
-                100))); */
+                100)));
 
         mFontsize = (ListPreference) findPreference(PREF_FONTSIZE);
         mFontsize.setOnPreferenceChangeListener(this);
@@ -153,10 +153,15 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
 
         if (mTablet) {
             PreferenceScreen prefs = getPreferenceScreen();
+            prefs.removePreference(mStatusColor);
+            prefs.removePreference(mTopCarrier);
+            prefs.removePreference(mTopCarrierColor);
+            prefs.removePreference(mStockCarrier);
+            prefs.removePreference(mStockCarrierColor);
             prefs.removePreference(mStatusBarBrightnessToggle);
             prefs.removePreference(mAutoHideToggles);
             prefs.removePreference(mDefaultSettingsButtonBehavior);
-            // prefs.removePreference(mTransparency);
+            prefs.removePreference(mTransparency);
             prefs.removePreference(mLayout);
         }
     }
@@ -241,12 +246,12 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean result = false;
-        /* if (preference == mTransparency) {
+        if (preference == mTransparency) {
             int val = Integer.parseInt((String) newValue);                
             result = Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_TRANSPARENCY, val);
-            Helpers.restartSystemUI(); */
-        if (preference == mLayout) {
+            Helpers.restartSystemUI();
+        } else if (preference == mLayout) {
             int val = Integer.parseInt((String) newValue);
             result = Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_LAYOUT, val);
@@ -290,22 +295,13 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.STATUSBAR_BACKGROUND_COLOR, color);
-            if (hexColor.contains("#ff")) {
-                Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.STATUS_BAR_TRANSPARENCY, 100);
-                Helpers.restartSystemUI();
-            } else if (!hexColor.contains("#ff")) {
-                Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.STATUS_BAR_TRANSPARENCY, 99);
-                Helpers.restartSystemUI();
-            }
             return true;
-        /* } else if (preference == mNotificationAlpha) {
+        } else if (preference == mNotificationAlpha) {
             float val = Float.parseFloat((String) newValue);
             Settings.System.putFloat(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_NOTIFICATION_ALPHA,
                     val / 100);
-            return true; */
+            return true;
         } else if (preference == mFontsize) {
             int val = Integer.parseInt((String) newValue);
             result = Settings.System.putInt(getActivity().getContentResolver(),

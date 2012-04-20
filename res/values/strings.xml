@@ -55,8 +55,10 @@
 	<string name="title_pref_menu_display">Menu location</string>
 	<string name="summary_pref_menu_display">Remember to remove your menu buttons if you\'re using the big menu button!</string>
 	<string name="navigation_bar">Navigation bar</string>
-	<string name="navigation_bar_tint_title">Navigation bar color</string>
+	<string name="navigation_bar_tint_title">Navigation button color</string>
+    <string name="navigation_bar_tint_summary">Sets the color of the navbar buttons including custom images too.</string>
     <string name="nav_button_background_color_title">Navbar background color</string>
+    <string name="nav_button_background_color_summary">Sets the color of navbar background.</string>
     <string name="navigation_bar_glow_tint_title">Navigation btn pressed glow color</string>
     <string name="navigation_bar_glow_tint_summary">When you press on a button, there is a glow. Use this to change the color of the glow.</string>
 	<string name="title_pref_navigation_menu_display">Menu visibility</string>
@@ -222,7 +224,7 @@
 	<string name="statusbar_layout">Notification drawer layout</string>
 	<string name="statusbar_layout_summary">Change the notification drawer layout (requires UI restart)</string>
     <string name="statusbar_transparency">Statusbar transparency</string>
-    <string name="statusbar_transparency_summary">Turning this on might affect performance and battery life. Once on alphaSlider in Statusbar color works! (requires UI restart)</string>
+    <string name="statusbar_transparency_summary">Turning this on might affect performance and battery life. **Once on use alphaSlider in Statusbar bg color** ***if going back to no alpha please reset Transparency to off or statusbar starts looking goofy*** (requires UI restart)</string>
     <string name="date_opens_calendar">Date opens Calendar</string>
     <string name="top_carrier_title">MIUI Style Carrier Text</string>
     <string name="top_carrier_summary">Enable the carrier text in the statusbar in a style like MIUI **MUST REBOOT BETWEEN CARRIER AND CUSTOM**</string>
@@ -235,7 +237,7 @@
     <string name="notification_color_title">Notification Color</string>
     <string name="notification_color_summary">Sets notification icons color and aplha</string>
     <string name="statusbar_color_title">Statusbar bg color</string>
-    <string name="statusbar_color_summary">Sets statusbar bg color and aplha. Alpha changes restarts systemui.</string>
+    <string name="statusbar_color_summary">Sets statusbar bg color. **Alpha changes require statusbar transparency to be set on***</string>
     <string name="statusbar_fontsize">Statusbar Font Size</string>
     <string name="statusbar_fontsize_summary">Change the size of text elements on statusbar</string>
 
@@ -321,6 +323,7 @@
     <string name="weather_custom_app_title">Custom app</string>
     <string name="weather_custom_app_dialog_title">Choose your app</string>
     <string name="weather_custom_app_dialog_message">Package name for now.</string>
+    <string name="weather_refreshing">Requesting weather update!</string>
 
 	<!-- Dialog Titles -->
 	<string name="dt_free_memory">Minfree Taskkiller</string>
