@@ -170,7 +170,7 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
         mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
                 Settings.System.CUSTOM_CARRIER_LABEL);
         if (mCustomLabelText == null) {
-            mCustomLabel.setSummary("Custom label not set. Once Set text for both MIUI and pulldown custom text will work. There is no going back.");
+            mCustomLabel.setSummary(R.string.custom_carrier_label_warning);
         } else {
             mCustomLabel.setSummary(mCustomLabelText);
         }
@@ -217,8 +217,8 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
         } else if (preference == mCustomLabel) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
-            alert.setTitle("Custom Carrier Label");
-            alert.setMessage("Please enter a new one!");
+            alert.setTitle(R.string.custom_carrier_label_title);
+            alert.setMessage(R.string.custom_carrier_label_empty);
 
             // Set an EditText view to get user input
             final EditText input = new EditText(getActivity());

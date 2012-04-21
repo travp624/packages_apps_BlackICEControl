@@ -89,7 +89,8 @@
 	<string name="long_press_home_summary">What to do when long pressing the home softkey. Reboot required to reflect changes.</string>
 	<string name="glow_times_title">Button glow animation</string>
 	<string name="glow_times_summary">Adjust how fast your buttons animate after you touch them. Lowering the speed can improve performance.</string>
-    
+    <string name="navigation_bar_height_title">Navigation bar height</string>
+    <string name="navigation_bar_width_title">Navigation bar width</string>
 	<!-- UI -->
 	<string name="rotation_animation_delay_title">Rotation delay</string>
 	<string name="rotation_animation_delay_summary">The number of milliseconds for which the device posture must be stable before an orientation change occurs. 200 ms default.	</string>
@@ -246,6 +247,8 @@
     <string name="statusbar_color_summary">Sets statusbar bg color. **Alpha changes require statusbar transparency to be set on***</string>
     <string name="statusbar_fontsize">Statusbar Font Size</string>
     <string name="statusbar_fontsize_summary">Change the size of text elements on statusbar</string>
+    <string name="custom_carrier_label_empty">Please enter a new one!</string>
+    <string name="custom_carrier_label_warning">Custom label not set. Once Set text for both MIUI and pulldown custom text will work. There is no going back.</string>
 
   	<!-- Statusbar | Battery -->
   	<string name="battery_icon">Battery icon style</string>
@@ -282,6 +285,8 @@
   	<string name="toggles_order_title">Toggle order</string>
   	<string name="toggles_order_summary">Choose the order which your toggles are displayed</string>
   	<string name="brightness_location_title">Brightness location</string>
+    <string name="toggles_display_dialog">Choose which toggles to use</string>
+    <string name="toggles_display_close">Close</string>
 
 	<!-- Statusbar | Signal -->
 	<string name="signal_style">Signal Text Style</string>

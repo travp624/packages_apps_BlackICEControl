@@ -66,16 +66,16 @@
         android:title="@string/advanced_settings">
 
         <ListPreference
+            android:key="glow_times"
             android:entries="@array/glow_times_entries"
             android:entryValues="@array/glow_times_values"
-            android:key="glow_times"
             android:title="@string/glow_times_title"
             android:summary="@string/glow_times_summary" />
 
         <ListPreference
+            android:key="long_press_home"
             android:entries="@array/long_press_home_entries"
             android:entryValues="@array/long_press_home_values"
-            android:key="long_press_home"
             android:title="@string/long_press_home_title"
             android:summary="@string/long_press_home_summary" />
 
@@ -84,16 +84,16 @@
     <PreferenceCategory android:title="navbar width landscape/portrait">
 
         <ListPreference
+            android:key="navigation_bar_width"
             android:entries="@array/navigation_bar_width_entries"
             android:entryValues="@array/navigation_bar_width"
-            android:key="navigation_bar_width"
-            android:title="Navigation bar width" />
+            android:title="@string/navigation_bar_width_title" />
 
         <ListPreference
+            android:key="navigation_bar_height"
             android:entries="@array/navigation_bar_height_entries"
             android:entryValues="@array/navigation_bar_height"
-            android:key="navigation_bar_height"
-            android:title="Navigation bar height" />
+            android:title="@string/navigation_bar_height_title" />
 
     </PreferenceCategory>
 
