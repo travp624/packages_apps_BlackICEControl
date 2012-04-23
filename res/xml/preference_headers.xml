@@ -60,25 +60,6 @@
 		android:summary="@string/header_summary_weather"
 		android:icon="@drawable/ic_blackice_control_weather" />
 
-	<header
-		android:id="@+id/functionality"
-		android:title="@string/functionality" />
-
-	<header
-		android:id="@+id/power_saver"
-		android:fragment="com.blackice.control.fragments.PowerSaver"
-		android:title="@string/power_saver"
-		android:icon="@drawable/ic_blackice_control_powersaver"
-		android:summary="@string/header_summary_powersaver" />
-
-
-	<header
-		android:id="@+id/led"
-		android:fragment="com.blackice.control.fragments.Led"
-		android:title="@string/led_options"
-		android:icon="@drawable/ic_blackice_control_led"
-		android:summary="@string/header_summary_led" />
-
 	<header android:title="@string/statusbar" />
 
 	<header

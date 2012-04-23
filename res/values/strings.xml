@@ -195,29 +195,7 @@
 	<string name="title_show_torch_toggle">Show torch toggle</string>
 	<string name="title_show_airplane_toggle">Show airplane toggle</string>
 	<string name="title_show_navbar_hide">Show navigation bar toggle</string>
-    
-	<!-- Power Saving -->
-	<string name="title_pref_powersaving_pref_mode">Enable power saver</string>
-	<string name="summary_pref_powersaving_pref_mode">@null</string>
-	<string name="title_pref_powersaving_data_screen_off">Screen off data action</string>
-	<string name="summary_pref_powersaving_data_screen_off">What to do with the data when the screen turns off</string>
-	<string name="title_pref_powersaving_data_screen_off_delay">Data action delay</string>
-	<string name="summary_pref_powersaving_data_screen_off_delay">How long to wait before applying data action?</string>
-	<string name="title_pref_powersaving_sync_screen_off">Sync action</string>
-	<string name="summary_pref_powersaving_sync_screen_off">What to do with your syncage?!</string>
-	<string name="title_pref_powersaving_sync_screen_off_delay">Sync time interval</string>
-	<string name="summary_pref_powersaving_sync_screen_off_delay">How long to wait between each forced sync</string>
-	<string name="powersaver_data_cat">Data</string>
-	<string name="powersaver_sync_cat">Sync</string>
-
-	<!--  LED -->
-	<string name="title_led_on">LED pulse ON duration</string>
-	<string name="summary_led_on">@null</string>
-	<string name="title_led_off">LED pulse OFF duration</string>
-	<string name="summary_led_off">@null</string>
-	<string name="led_color_title">LED color</string>
-	<string name="title_led_screen_on">LED flash while screen ON</string>
-	<string name="summary_led_screen_on">@null</string>
+    <string name="title_show_profile_chooser">Show profile chooser</string>
 
 	<!--  Statusbar | General -->
 	<string name="title_settings_behavior">Use default settings behavior</string>
@@ -242,7 +220,7 @@
     <string name="stock_carrier_color">Pull Down Carrier Text Color</string>
     <string name="notification_alpha_title">Notification Transparency</string>
     <string name="notification_color_title">Notification Color</string>
-    <string name="notification_color_summary">Sets notification icons color and aplha</string>
+    <string name="notification_color_summary">Sets notification icons color</string>
     <string name="statusbar_color_title">Statusbar bg color</string>
     <string name="statusbar_color_summary">Sets statusbar bg color. **Alpha changes require statusbar transparency to be set on***</string>
     <string name="statusbar_fontsize">Statusbar Font Size</string>
