@@ -246,23 +246,10 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean result = false;
-        if (preference == mTransparency) {
-            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
-                    .valueOf(newValue)));
-            int color = ColorPickerPreference.convertToColorInt(hexColor);
-            if (Settings.System.putInt(getContentResolver(), Settings.System.
-                        STATUSBAR_BACKGROUND_COLOR, color) == hexColor.contains("#ff")) {
-                Settings.System.putInt(getActivity().getContentResolver(),
-                        Settings.System.STATUS_BAR_TRANSPARENCY, 100);
-            } else if (Settings.System.putInt(getContentResolver(), Settings.System
-                        .STATUSBAR_BACKGROUND_COLOR, color) != hexColor.contains("#ff")) {
-                Settings.System.putInt(getActivity().getContentResolver(),
-                        Settings.System.STATUS_BAR_TRANSPARENCY, 99);
-            } else {
-                int val = Integer.parseInt((String) newValue);                
-                result = Settings.System.putInt(getActivity().getContentResolver(),
-                        Settings.System.STATUS_BAR_TRANSPARENCY, val);
-            }
+        if (preference == mTransparency) {;
+            int val = Integer.parseInt((String) newValue);                
+            result = Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_TRANSPARENCY, val);
             Helpers.restartSystemUI();
         } else if (preference == mLayout) {
             int val = Integer.parseInt((String) newValue);
