@@ -10,10 +10,12 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
@@ -54,6 +56,8 @@ public class Performance extends BlackICEPreferenceFragment implements
     private ListPreference mScrollingCachePref;
     private SharedPreferences preferences;
     private boolean doneLoading = false;
+
+    CheckBoxPreference mFastCharge;
 
     /** Called when the activity is first created. */
     @Override
@@ -119,6 +123,20 @@ public class Performance extends BlackICEPreferenceFragment implements
         if (!new File(VoltageControl.MV_TABLE0).exists()) {
             ((PreferenceCategory) getPreferenceScreen().findPreference("cpu"))
                     .removePreference(ps);
+        }
+
+        mFastCharge = (CheckBoxPreference) findPreference(KEY_FASTCHARGE);
+        if (!hasFastCharge) {
+            ((PreferenceGroup) findPreference("kernel")).removePreference(mFastCharge);
+        }
+
+        com.blackice.control.fragments.ColorTuningPreference ct = (com.blackice.control.fragments.ColorTuningPreference) findPreference("color_tuning");
+        com.blackice.control.fragments.GammaTuningPreference gt = (com.blackice.control.fragments.GammaTuningPreference) findPreference("gamma_tuning");
+        if (!hasColorTuning) {
+            ((PreferenceCategory) getPreferenceScreen().findPreference("kernel"))
+                    .removePreference(ct);
+            ((PreferenceCategory) getPreferenceScreen().findPreference("kernel"))
+                    .removePreference(gt);
         }
 
         doneLoading = true;

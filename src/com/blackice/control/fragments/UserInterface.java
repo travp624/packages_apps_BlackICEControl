@@ -19,6 +19,7 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.Spannable;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.blackice.control.R;
@@ -31,6 +32,7 @@ public class UserInterface extends BlackICEPreferenceFragment implements
 
     public static final String TAG = "UserInterface";
 
+    private static final String PREF_LED_SCREEN_ON = "led_screen_on";
     private static final String PREF_CRT_ON = "crt_on";
     private static final String PREF_CRT_OFF = "crt_off";
     private static final String PREF_IME_SWITCHER = "ime_switcher";
@@ -50,6 +52,7 @@ public class UserInterface extends BlackICEPreferenceFragment implements
     Preference mLcdDensity;
     CheckBoxPreference mDisableBootAnimation;
     CheckBoxPreference mDisableBugMailer;
+    CheckBoxPreference mLedScreenOn;
 
     int newDensityValue;
 
@@ -98,6 +101,10 @@ public class UserInterface extends BlackICEPreferenceFragment implements
                 .getContentResolver(),
                 Settings.System.HORIZONTAL_RECENTS_TASK_PANEL, 0) == 1);
 
+        mLedScreenOn = (CheckBoxPreference) findPreference(PREF_LED_SCREEN_ON);
+        mLedScreenOn.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
+                Settings.Secure.LED_SCREEN_ON, 0) == 1);
+
         mLcdDensity = findPreference("lcd_density_setup");
         String currentProperty = SystemProperties.get("ro.sf.lcd_density");
         try {
@@ -122,6 +129,15 @@ public class UserInterface extends BlackICEPreferenceFragment implements
             // can't get this working in ICS just yet
             ((PreferenceGroup) findPreference("crt")).removePreference(mCrtOnAnimation);
         }
+
+        if (!hasHardwareButtons) {
+            ((PreferenceGroup) findPreference("misc")).removePreference(mLongPressToKill);
+        }
+
+        if (!hasNotificationLed) {
+            ((PreferenceGroup) findPreference("misc")).removePreference(mLedScreenOn);
+        }
+
     }
 
     @Override
@@ -213,8 +229,13 @@ public class UserInterface extends BlackICEPreferenceFragment implements
             ((PreferenceActivity) getActivity())
                     .startPreferenceFragment(new DensityChanger(), true);
             return true;
+        } else if (preference == mLedScreenOn) {
+            boolean checked = ((CheckBoxPreference) preference).isChecked();
+                    Settings.Secure.putInt(getActivity().getContentResolver(),
+                        Settings.Secure.LED_SCREEN_ON, checked ? 1 : 0);
+           Log.i(TAG, "LED flash when screen ON is set to: " + checked);
+           return true;
         }
-
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 

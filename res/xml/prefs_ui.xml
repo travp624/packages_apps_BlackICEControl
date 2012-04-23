@@ -75,6 +75,11 @@
 			android:title="@string/horizontal_recents_task_panel_title"
 			android:summary="@string/horizontal_recents_task_panel_summary" />
 
+		<CheckBoxPreference
+			android:key="led_screen_on"
+			android:title="@string/title_led_screen_on"
+			android:summary="@string/summary_led_screen_on" />
+
 	</PreferenceCategory>
 
 </PreferenceScreen>
