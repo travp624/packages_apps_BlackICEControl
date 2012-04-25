@@ -138,7 +138,7 @@ public class ColorPickerView extends View {
 		public void onColorChanged(int color);
 	}
 
-	public ColorPickerView(Context context){
+	public ColorPickerView(Context context) {
 		this(context, null);
 	}
 
@@ -151,7 +151,8 @@ public class ColorPickerView extends View {
 		init();
 	}
 
-	private void init(){
+	private void init() {
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 		mDensity = getContext().getResources().getDisplayMetrics().density;
 		PALETTE_CIRCLE_TRACKER_RADIUS *= mDensity;
 		RECTANGLE_TRACKER_OFFSET *= mDensity;
@@ -168,7 +169,7 @@ public class ColorPickerView extends View {
 		setFocusableInTouchMode(true);
 	}
 
-	private void initPaintTools(){
+	private void initPaintTools() {
 
 		mSatValPaint = new Paint();
 		mSatValTrackerPaint = new Paint();
@@ -197,19 +198,19 @@ public class ColorPickerView extends View {
 
 	}
 
-	private float calculateRequiredOffset(){
+	private float calculateRequiredOffset() {
 		float offset = Math.max(PALETTE_CIRCLE_TRACKER_RADIUS, RECTANGLE_TRACKER_OFFSET);
 		offset = Math.max(offset, BORDER_WIDTH_PX * mDensity);
 
 		return offset * 1.5f;
 	}
 
-	private int[] buildHueColorArray(){
+	private int[] buildHueColorArray() {
 
 		int[] hue = new int[361];
 
 		int count = 0;
-		for(int i = hue.length -1; i >= 0; i--, count++){
+		for(int i = hue.length -1; i >= 0; i--, count++) {
 			hue[count] = Color.HSVToColor(new float[]{i, 1f, 1f});
 		}
 
@@ -228,11 +229,11 @@ public class ColorPickerView extends View {
 
 	}
 
-	private void drawSatValPanel(Canvas canvas){
+	private void drawSatValPanel(Canvas canvas) {
 
 		final RectF	rect = mSatValRect;
 
-		if(BORDER_WIDTH_PX > 0){
+		if(BORDER_WIDTH_PX > 0) {
 			mBorderPaint.setColor(mBorderColor);
 			canvas.drawRect(mDrawingRect.left, mDrawingRect.top, rect.right + BORDER_WIDTH_PX, rect.bottom + BORDER_WIDTH_PX, mBorderPaint);
 		}
@@ -261,11 +262,11 @@ public class ColorPickerView extends View {
 
 	}
 
-	private void drawHuePanel(Canvas canvas){
+	private void drawHuePanel(Canvas canvas) {
 
 		final RectF rect = mHueRect;
 
-		if(BORDER_WIDTH_PX > 0){
+		if(BORDER_WIDTH_PX > 0) {
 			mBorderPaint.setColor(mBorderColor);
 			canvas.drawRect(rect.left - BORDER_WIDTH_PX,
 					rect.top - BORDER_WIDTH_PX,
@@ -296,13 +297,13 @@ public class ColorPickerView extends View {
 
 	}
 
-	private void drawAlphaPanel(Canvas canvas){
+	private void drawAlphaPanel(Canvas canvas) {
 
 		if(!mShowAlphaPanel || mAlphaRect == null || mAlphaPattern == null) return;
 
 		final RectF rect = mAlphaRect;
 
-		if(BORDER_WIDTH_PX > 0){
+		if(BORDER_WIDTH_PX > 0) {
 			mBorderPaint.setColor(mBorderColor);
 			canvas.drawRect(rect.left - BORDER_WIDTH_PX,
 					rect.top - BORDER_WIDTH_PX,
@@ -326,7 +327,7 @@ public class ColorPickerView extends View {
 
 		canvas.drawRect(rect, mAlphaPaint);
 
-		if(mAlphaSliderText != null && mAlphaSliderText!= ""){
+		if(mAlphaSliderText != null && mAlphaSliderText!= "") {
 			canvas.drawText(mAlphaSliderText, rect.centerX(), rect.centerY() + 4 * mDensity, mAlphaTextPaint);
 		}
 
@@ -345,7 +346,7 @@ public class ColorPickerView extends View {
 	}
 
 
-	private Point hueToPoint(float hue){
+	private Point hueToPoint(float hue) {
 
 		final RectF rect = mHueRect;
 		final float height = rect.height();
@@ -358,7 +359,7 @@ public class ColorPickerView extends View {
 		return p;
 	}
 
-	private Point satValToPoint(float sat, float val){
+	private Point satValToPoint(float sat, float val) {
 
 		final RectF rect = mSatValRect;
 		final float height = rect.height();
@@ -372,7 +373,7 @@ public class ColorPickerView extends View {
 		return p;
 	}
 
-	private Point alphaToPoint(int alpha){
+	private Point alphaToPoint(int alpha) {
 
 		final RectF rect = mAlphaRect;
 		final float width = rect.width();
@@ -386,7 +387,7 @@ public class ColorPickerView extends View {
 
 	}
 
-	private float[] pointToSatVal(float x, float y){
+	private float[] pointToSatVal(float x, float y) {
 
 		final RectF rect = mSatValRect;
 		float[] result = new float[2];
@@ -394,20 +395,20 @@ public class ColorPickerView extends View {
 		float width = rect.width();
 		float height = rect.height();
 
-		if (x < rect.left){
+		if (x < rect.left) {
 			x = 0f;
 		}
-		else if(x > rect.right){
+		else if(x > rect.right) {
 			x = width;
 		}
 		else{
 			x = x - rect.left;
 		}
 
-		if (y < rect.top){
+		if (y < rect.top) {
 			y = 0f;
 		}
-		else if(y > rect.bottom){
+		else if(y > rect.bottom) {
 			y = height;
 		}
 		else{
@@ -421,16 +422,16 @@ public class ColorPickerView extends View {
 		return result;
 	}
 
-	private float pointToHue(float y){
+	private float pointToHue(float y) {
 
 		final RectF rect = mHueRect;
 
 		float height = rect.height();
 
-		if (y < rect.top){
+		if (y < rect.top) {
 			y = 0f;
 		}
-		else if(y > rect.bottom){
+		else if(y > rect.bottom) {
 			y = height;
 		}
 		else{
@@ -440,18 +441,18 @@ public class ColorPickerView extends View {
 		return 360f - (y * 360f / height);
 	}
 
-	private int pointToAlpha(int x){
+	private int pointToAlpha(int x) {
 
 		final RectF rect = mAlphaRect;
 		final int width = (int) rect.width();
 
-		if(x < rect.left){
+		if(x < rect.left) {
 			x = 0;
 		}
-		else if(x > rect.right){
+		else if(x > rect.right) {
 			x = width;
 		}
-		else{
+		else {
 			x = x - (int)rect.left;
 		}
 
@@ -469,79 +470,74 @@ public class ColorPickerView extends View {
 		boolean update = false;
 
 
-		if(event.getAction() == MotionEvent.ACTION_MOVE){
+		if(event.getAction() == MotionEvent.ACTION_MOVE) {
 
-			switch(mLastTouchedPanel){
+			switch(mLastTouchedPanel) {
 
-			case PANEL_SAT_VAL:
+                case PANEL_SAT_VAL:
 
-				float sat, val;
+                    float sat, val;
 
-				sat = mSat + x/50f;
-				val = mVal - y/50f;
+                    sat = mSat + x/50f;
+                    val = mVal - y/50f;
 
-				if(sat < 0f){
-					sat = 0f;
-				}
-				else if(sat > 1f){
-					sat = 1f;
-				}
+                    if(sat < 0f) {
+                        sat = 0f;
+                    } else if (sat > 1f) {
+                        sat = 1f;
+                    }
 
-				if(val < 0f){
-					val = 0f;
-				}
-				else if(val > 1f){
-					val = 1f;
-				}
+                    if(val < 0f) {
+                        val = 0f;
+                    } else if (val > 1f) {
+                        val = 1f;
+                    }
 
-				mSat = sat;
-				mVal = val;
+                    mSat = sat;
+                    mVal = val;
 
-				update = true;
+                    update = true;
 
-				break;
+                    break;
 
-			case PANEL_HUE:
+                case PANEL_HUE:
 
-				float hue = mHue - y * 10f;
+                    float hue = mHue - y * 10f;
 
-				if(hue < 0f){
-					hue = 0f;
-				}
-				else if(hue > 360f){
-					hue = 360f;
-				}
+                    if(hue < 0f) {
+                        hue = 0f;
+                    } else if (hue > 360f) {
+                        hue = 360f;
+                    }
 
-				mHue = hue;
+                    mHue = hue;
 
-				update = true;
+                    update = true;
 
-				break;
+                    break;
 
-			case PANEL_ALPHA:
+                case PANEL_ALPHA:
 
-				if(!mShowAlphaPanel || mAlphaRect == null){
-					update = false;
-				}
-				else{
+                    if(!mShowAlphaPanel || mAlphaRect == null) {
+                        update = false;
+                    } else {
 
-					int alpha = (int) (mAlpha - x*10);
+                        int alpha = (int) (mAlpha - x*10);
 
-					if(alpha < 0){
-						alpha = 0;
-					}
-					else if(alpha > 0xff){
-						alpha = 0xff;
-					}
+                        if(alpha < 0){
+                            alpha = 0;
+                        } else if (alpha > 0xff) {
+                            alpha = 0xff;
+                        }
 
-					mAlpha = alpha;
+                        mAlpha = alpha;
 
 
-					update = true;
-				}
+                        update = true;
+                    }
 
-				break;
-			}
+                    break;
+            }
 
 
 		}
