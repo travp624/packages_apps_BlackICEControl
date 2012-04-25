@@ -42,6 +42,13 @@
 		android:key="misc"
 		android:title="@string/misc_short">
 
+        <ListPreference
+            android:key="long_press_home"
+            android:entries="@array/long_press_home_entries"
+            android:entryValues="@array/long_press_home_values"
+            android:title="@string/long_press_home_title"
+            android:summary="@string/long_press_home_summary" />
+
 		<CheckBoxPreference
 			android:key="ime_switcher"
 			android:title="@string/ime_switcher_title"

@@ -334,27 +334,35 @@
 
 	<!-- long press home -->
 	<string-array name="long_press_home_entries">
+        <item>Phone default</item>
 		<item>Do nothing</item>
+        <item>Pre-ICS recents</item>
 		<item>Show recents</item>
 	</string-array>
 
 	<string-array name="long_press_home_values" translatable="false">
+        <item>-1</item>
 		<item>0</item>
 		<item>1</item>
+        <item>2</item>
 	</string-array>
 
     <string-array name="pref_lockscreen_options_values" translatable="false">
 		<item>2</item>
+        <item>4</item>
 		<item>6</item>
 		<item>8</item>
+        <item>5</item>
 		<item>0</item>
 		<item>1</item>
 	</string-array>
 
 	<string-array name="pref_lockscreen_options_entries">
 		<item>Stock</item>
+        <item>Rings</item>
 		<item>Quad</item>
 		<item>Octo</item>
+        <item>Sense</item>
 		<item>Honeycomb</item>
 		<item>AOSP</item>
 	</string-array>
@@ -513,6 +521,25 @@
         <item>Media Next</item>
         <item>Media Play</item>
         <item>Media Previous</item>
+	</string-array>
+
+    <!--arrays for choosing music widget type -->
+    <string-array name="lockscreen_music_widget_entries">
+        <item>Ice Cream Sandwich</item>
+        <item>Gingerbread</item>
+    </string-array>
+
+    <string-array name="lockscreen_music_widget_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="lockscreen_sense_ring_choice_entries">
+		<item>Custom app</item>
+	</string-array>
+
+	<string-array name="lockscreen_sense_ring_choice_values" translatable="false">
+		<item>**app**</item>
 	</string-array>
 
 	<string-array name="lockscreen_choice_entries">

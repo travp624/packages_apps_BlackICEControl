@@ -2,7 +2,6 @@
 package com.blackice.control.fragments;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.AlertDialog;
@@ -40,6 +39,7 @@ public class UserInterface extends BlackICEPreferenceFragment implements
     private static final String PREF_LONGPRESS_TO_KILL = "longpress_to_kill";
     private static final String PREF_ROTATION_ANIMATION = "rotation_animation_delay";
     private static final String PREF_180 = "rotate_180";
+    private static final String PREF_HOME_LONGPRESS = "long_press_home";
 
     CheckBoxPreference mCrtOnAnimation;
     CheckBoxPreference mCrtOffAnimation;
@@ -49,6 +49,7 @@ public class UserInterface extends BlackICEPreferenceFragment implements
     CheckBoxPreference mAllow180Rotation;
     CheckBoxPreference mHorizontalAppSwitcher;
     ListPreference mAnimationRotationDelay;
+    ListPreference mHomeLongpress;
     Preference mLcdDensity;
     CheckBoxPreference mDisableBootAnimation;
     CheckBoxPreference mDisableBugMailer;
@@ -123,6 +124,12 @@ public class UserInterface extends BlackICEPreferenceFragment implements
         mDisableBugMailer = (CheckBoxPreference) findPreference("disable_bugmailer");
         mDisableBugMailer.setChecked(!new File("/system/bin/bugmailer.sh").exists());
 
+        mHomeLongpress = (ListPreference) findPreference(PREF_HOME_LONGPRESS);
+        mHomeLongpress.setOnPreferenceChangeListener(this);
+        mHomeLongpress.setValue(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.NAVIGATION_BAR_HOME_LONGPRESS,
+                0) + "");
+
         if (!getResources().getBoolean(com.android.internal.R.bool.config_enableCrtAnimations)) {
             prefs.removePreference((PreferenceGroup) findPreference("crt"));
         } else {
@@ -132,8 +139,12 @@ public class UserInterface extends BlackICEPreferenceFragment implements
 
         if (!hasHardwareButtons) {
             ((PreferenceGroup) findPreference("misc")).removePreference(mLongPressToKill);
+            ((PreferenceGroup) findPreference("misc")).removePreference(mHomeLongpress);
         }
 
+        if (mTablet) {
+            ((PreferenceGroup) findPreference("misc")).removePreference(mHomeLongpress);
+        }
         if (!hasNotificationLed) {
             ((PreferenceGroup) findPreference("misc")).removePreference(mLedScreenOn);
         }
@@ -252,6 +263,11 @@ public class UserInterface extends BlackICEPreferenceFragment implements
                     Settings.System.ACCELEROMETER_ROTATION_SETTLE_TIME,
                     Integer.parseInt((String) newValue));
 
+            return true;
+        } else if (preference == mHomeLongpress) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_HOME_LONGPRESS,
+                    Integer.parseInt((String) newValue));
             return true;
         }
         return false;

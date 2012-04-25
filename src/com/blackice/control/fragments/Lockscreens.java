@@ -67,10 +67,12 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
 
     private static final String PREF_VOLUME_WAKE = "volume_wake";
     private static final String PREF_VOLUME_MUSIC = "volume_music_controls";
+    private static final String LOCKSCREEN_MUSIC_WIDGET = "lockscreen_music_widget";
 
     private static final String PREF_LOCKSCREEN_BATTERY = "lockscreen_battery";
     private static final String PREF_LOCKSCREEN_WEATHER = "lockscreen_weather";
     private static final String PREF_LOCKSCREEN_TEXT_COLOR = "lockscreen_text_color";
+    private static final String PREF_LOCKSCREEN_EXTRA = "lockscreen_extra";
 
     private static final String PREF_LOCKSCREEN_CALENDAR = "enable_calendar";
     private static final String PREF_LOCKSCREEN_CALENDAR_FLIP = "lockscreen_calendar_flip";
@@ -108,6 +110,8 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
     CheckBoxPreference mLockscreenCalendarHideOngoing;
     CheckBoxPreference mLockscreenCalendarUseColors;
     CheckBoxPreference mLockscreen4tabSlider;
+    CheckBoxPreference mLockExtra;
+    ListPreference mMusicStyle;
 
     Preference mLockscreenWallpaper;
 
@@ -139,6 +143,10 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         mLockscreen4tabSlider.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_4TAB, 0) == 1);
 
+        mLockExtra = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_EXTRA);
+        mLockExtra.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.LOCKSCREEN_EXTRA_ICONS, 0) == 1);
+
         mLockScreenTimeoutUserOverride = (CheckBoxPreference) findPreference(PREF_USER_OVERRIDE);
         mLockScreenTimeoutUserOverride.setChecked(Settings.Secure.getInt(getActivity()
                 .getContentResolver(), Settings.Secure.LOCK_SCREEN_LOCK_USER_OVERRIDE, 0) == 1);
@@ -167,6 +175,11 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         mVolumeMusic = (CheckBoxPreference) findPreference(PREF_VOLUME_MUSIC);
         mVolumeMusic.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.VOLUME_MUSIC_CONTROLS, 0) == 1);
+
+        mMusicStyle = (ListPreference) findPreference(LOCKSCREEN_MUSIC_WIDGET);
+        mMusicStyle.setOnPreferenceChangeListener(this);
+        mMusicStyle.setValue(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.MUSIC_WIDGET_TYPE, 0) + "");
 
         mLockscreenWallpaper = findPreference("wallpaper");
 
@@ -346,6 +359,13 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
 
+        } else if (preference == mLockExtra) {
+
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_EXTRA_ICONS,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
+
         } else if (preference == mCalendarSources) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
 
@@ -464,6 +484,14 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
                     Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITIES[5], "**null**");
             lockscreenTargets = 4;
         }
+        try {
+            if (Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_LAYOUT) == 5) {
+                Settings.System.putString(getContentResolver(),
+                        Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITIES[4], "**null**");
+                lockscreenTargets = 4;
+            }
+        } catch (SettingNotFoundException e) {
+        }
 
         PackageManager pm = mContext.getPackageManager();
         Resources res = mContext.getResources();
@@ -474,7 +502,21 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
                     getResources().getString(R.string.custom_app_n_dialog_title), i + 1);
             p.setDialogTitle(dialogTitle);
             p.setEntries(R.array.lockscreen_choice_entries);
+            try {
+                if ((Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_LAYOUT) == 5) ||
+                        (Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_LAYOUT) == 4)) {
+                    p.setEntries(R.array.lockscreen_sense_ring_choice_entries);
+                }
+            } catch (SettingNotFoundException e) {
+            }
             p.setEntryValues(R.array.lockscreen_choice_values);
+            try {
+                if ((Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_LAYOUT) == 5) ||
+                        (Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_LAYOUT) == 4)) {
+                    p.setEntryValues(R.array.lockscreen_sense_ring_choice_values);
+                }
+            } catch (SettingNotFoundException e) {
+            }
             String title = String.format(getResources().getString(R.string.custom_app_n), i + 1);
             p.setTitle(title);
             p.setKey("lockscreen_target_" + i);
@@ -672,6 +714,11 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
                     Settings.System.LOCKSCREEN_CALENDAR_RANGE, val);
             return true;
 
+        } else if (preference == mMusicStyle) {
+           	Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.MUSIC_WIDGET_TYPE, Integer.parseInt((String) newValue));
+            return true;
+
         } else if (preference == mLockscreenTextColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
                     .valueOf(newValue)));
@@ -696,6 +743,8 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
                         Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITIES[index], (String) newValue);
                 Settings.System.putString(getContentResolver(),
                         Settings.System.LOCKSCREEN_CUSTOM_APP_ICONS[index], "");
+                Settings.System.putString(getContentResolver(),
+                        Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITY, (String) newValue);
                 refreshSettings();
             }
             return true;
