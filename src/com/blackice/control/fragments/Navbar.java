@@ -169,10 +169,6 @@ public class Navbar extends BlackICEPreferenceFragment implements
             prefs.removePreference(mNavBarMenuDisplay);
         }
 
-        if (!hasHardwareButtons) {
-            ((PreferenceGroup) findPreference("advanced_cat")).removePreference(mHomeLongpress);
-        }
-
         refreshSettings();
         setHasOptionsMenu(true);
     }
