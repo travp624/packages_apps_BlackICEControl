@@ -65,7 +65,6 @@ public class Navbar extends BlackICEPreferenceFragment implements
     private static final String PREF_NAV_GLOW_COLOR = "nav_button_glow_color";
     private static final String PREF_MENU_UNLOCK = "pref_menu_display";
     private static final String PREF_NAVBAR_QTY = "navbar_qty";
-    private static final String PREF_HOME_LONGPRESS = "long_press_home";
     private static final String PREF_NAV_BACKGROUND_COLOR = "nav_button_background_color";
 
     private static final int DEFAULT_BACKGROUND_COLOR = 0XFF000000;
@@ -79,7 +78,6 @@ public class Navbar extends BlackICEPreferenceFragment implements
     ColorPickerPreference mNavigationBarBackgroundColor;
     ListPreference menuDisplayLocation;
     ListPreference mNavBarMenuDisplay;
-    ListPreference mHomeLongpress;
     ListPreference mGlowTimes;
     ListPreference mNavBarButtonQty;
     SeekBarPreference mButtonAlpha;
@@ -143,12 +141,6 @@ public class Navbar extends BlackICEPreferenceFragment implements
         mGlowTimes.setOnPreferenceChangeListener(this);
         // mGlowTimes.setValue(Settings.System.getInt(getActivity()
 
-        mHomeLongpress = (ListPreference) findPreference(PREF_HOME_LONGPRESS);
-        mHomeLongpress.setOnPreferenceChangeListener(this);
-        mHomeLongpress.setValue(Settings.System.getInt(getActivity()
-                .getContentResolver(), Settings.System.NAVIGATION_BAR_HOME_LONGPRESS,
-                0) + "");
-
         float defaultAlpha = Settings.System.getFloat(getActivity()
                 .getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTON_ALPHA,
                 0.6f);
@@ -175,7 +167,6 @@ public class Navbar extends BlackICEPreferenceFragment implements
         if (mTablet) {
             Log.e("NavBar", "is tablet");
             prefs.removePreference(mNavBarMenuDisplay);
-            prefs.removePreference(mHomeLongpress);
         }
 
         if (!hasHardwareButtons) {
@@ -294,7 +285,6 @@ public class Navbar extends BlackICEPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_TINT, intHex);
             return true;
-
         } else if (preference == mNavigationBarBackgroundColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
                     .valueOf(newValue)));
@@ -303,13 +293,6 @@ public class Navbar extends BlackICEPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_BACKGROUND_COLOR, intHex);
             return true;
-
-        } else if (preference == mHomeLongpress) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_HOME_LONGPRESS,
-                    Integer.parseInt((String) newValue));
-            return true;
-
         } else if (preference == mNavigationBarGlowColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
                     .valueOf(newValue)));
@@ -319,14 +302,12 @@ public class Navbar extends BlackICEPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_GLOW_TINT, intHex);
             return true;
-
         } else if (preference == mNavBarButtonQty) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_BUTTONS_QTY, val);
             refreshSettings();
             return true;
-
         } else if (preference == mGlowTimes) {
             // format is (on|off) both in MS
             int breakIndex = ((String) newValue).indexOf("|");
