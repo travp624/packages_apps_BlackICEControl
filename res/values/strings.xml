@@ -90,7 +90,9 @@
 	<string name="glow_times_title">Button glow animation</string>
 	<string name="glow_times_summary">Adjust how fast your buttons animate after you touch them. Lowering the speed can improve performance.</string>
     <string name="navigation_bar_height_title">Navigation bar height</string>
+    <string name="navigation_bar_height_summary">Sets the width of navbar in portrait</string>
     <string name="navigation_bar_width_title">Navigation bar width</string>
+    <string name="navigation_bar_width_title">Sets the width of navbar in landscape</string>
 
 	<!-- UI -->
 	<string name="rotation_animation_delay_title">Rotation delay</string>
@@ -191,7 +193,7 @@
     <string name="lockscreen_calendar_interval_summary">Choose the animation speed in seconds.</string>
     <string name="lockscreen_4tab_slider_title">Enable 4 tab slider</string>
     <string name="lockscreen_4tab_slider_summary">Enabling this gives you the 4tab slider with one custom app launcher</string>
-    <string name="lockscreen_extra_title">Enable custom apps for ring lock</string>
+    <string name="lockscreen_extra_title">Enable apps for ring lock</string>
     <string name="lockscreen_extra_summary">Checking this gives you custom apps on ring lock ***only custom apps***</string>
     <string name="lockscreen_music_widget_title">Music Widget Type</string>
     <string name="lockscreen_music_widget_summary">Pick the lockscreen music widget you want to use</string>
@@ -212,12 +214,13 @@
 	<string name="title_status_bar_brightness_toggle">Enable brightness control</string>
 	<string name="summary_status_bar_brightness_toggle">Slide finger slowly across statusbar to adjust brightness setting</string>
 	<string name="adb_icon_title">Enable USB debugging icon</string>
-	<string name="adb_icon_summary">Wutang</string>
+	<string name="adb_icon_summary">Turns off adb icon in statusbar when connected</string>
 	<string name="statusbar_layout">Notification drawer layout</string>
 	<string name="statusbar_layout_summary">Change the notification drawer layout (requires UI restart)</string>
     <string name="statusbar_transparency">Statusbar transparency</string>
     <string name="statusbar_transparency_summary">Turning this on might affect performance and battery life. **Once on use alphaSlider in Statusbar bg color** ***if going back to no alpha please reset Transparency to off or statusbar starts looking goofy*** (requires UI restart)</string>
-    <string name="date_opens_calendar">Date opens Calendar</string>
+    <string name="date_opens_calendar_title">Date opens Calendar</string>
+    <string name="date_opens_calendar_summary">When set date in pulldown touch takes you to calendar</string>
     <string name="top_carrier_title">MIUI Style Carrier Text</string>
     <string name="top_carrier_summary">Enable the carrier text in the statusbar in a style like MIUI **MUST REBOOT BETWEEN CARRIER AND CUSTOM**</string>
     <string name="top_carrier_color">MIUI Carrier Text Color</string>

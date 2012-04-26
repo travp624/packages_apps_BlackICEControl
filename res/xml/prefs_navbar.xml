@@ -76,13 +76,15 @@
             android:key="navigation_bar_width"
             android:entries="@array/navigation_bar_width_entries"
             android:entryValues="@array/navigation_bar_width"
-            android:title="@string/navigation_bar_width_title" />
+            android:title="@string/navigation_bar_width_title"
+            android:summary="@string/navigation_bar_width_summary" />
 
         <ListPreference
             android:key="navigation_bar_height"
             android:entries="@array/navigation_bar_height_entries"
             android:entryValues="@array/navigation_bar_height"
-            android:title="@string/navigation_bar_height_title" />
+            android:title="@string/navigation_bar_height_title"
+            android:summary="@string/navigation_bar_height_summary" />
 
     </PreferenceCategory>
 
