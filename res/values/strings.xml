@@ -92,7 +92,7 @@
     <string name="navigation_bar_height_title">Navigation bar height</string>
     <string name="navigation_bar_height_summary">Sets the width of navbar in portrait</string>
     <string name="navigation_bar_width_title">Navigation bar width</string>
-    <string name="navigation_bar_width_title">Sets the width of navbar in landscape</string>
+    <string name="navigation_bar_width_summary">Sets the width of navbar in landscape</string>
 
 	<!-- UI -->
 	<string name="rotation_animation_delay_title">Rotation delay</string>
