@@ -349,9 +349,9 @@
 
     <string-array name="pref_lockscreen_options_values" translatable="false">
 		<item>2</item>
-        <item>4</item>
 		<item>6</item>
 		<item>8</item>
+        <item>4</item>
         <item>5</item>
 		<item>0</item>
 		<item>1</item>
@@ -359,12 +359,12 @@
 
 	<string-array name="pref_lockscreen_options_entries">
 		<item>Stock</item>
-        <item>Rings</item>
 		<item>Quad</item>
 		<item>Octo</item>
+        <item>Rings</item>
         <item>Sense</item>
 		<item>Honeycomb</item>
-		<item>AOSP</item>
+		<item>Sliding Tab</item>
 	</string-array>
 
 	<string-array name="pref_lockscreen_calendar_interval_values">
