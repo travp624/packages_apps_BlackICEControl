@@ -118,7 +118,7 @@ public class BootService extends Service {
                     .setAutoCancel(true)
                     .setContentTitle(contentTitle)
                     .setContentText(contentText)
-                    .setSmallIcon(R.drawable.ic_rom_control_general)
+                    .setSmallIcon(R.drawable.ic_blackice_control_general)
                     .setWhen(System.currentTimeMillis())
                     .getNotification();
 
