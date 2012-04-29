@@ -74,4 +74,3 @@ public class WeatherInfo {
         return String.valueOf(Math.round(Float.parseFloat(speed)));
     }
 }
-
