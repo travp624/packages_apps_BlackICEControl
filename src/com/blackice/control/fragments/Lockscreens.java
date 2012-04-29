@@ -230,7 +230,7 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         }
 
         if (!hasHardwareButtons) {
-            ((PreferenceGroup) findPreference("misc")).removePreference(menuButtonLocation);
+            ((PreferenceGroup) findPreference("advanced_cat")).removePreference(menuButtonLocation);
         }
 
         mLockscreenTextColor = (ColorPickerPreference) findPreference(PREF_LOCKSCREEN_TEXT_COLOR);
