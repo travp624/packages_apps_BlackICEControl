@@ -230,8 +230,7 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         }
 
         if (!hasHardwareButtons) {
-            ((PreferenceGroup) findPreference("advanced_cat"))
-                    .removePreference(findPreference(Settings.System.LOCKSCREEN_ENABLE_MENU_KEY));
+            ((PreferenceGroup) findPreference("misc")).removePreference(menuButtonLocation);
         }
 
         mLockscreenTextColor = (ColorPickerPreference) findPreference(PREF_LOCKSCREEN_TEXT_COLOR);
