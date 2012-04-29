@@ -195,7 +195,7 @@ public class BlackICEPreferenceFragment extends PreferenceFragment implements Di
                                         + DialogCreatable.class.getName());
                     }
                 }
-                // This dialog fragment could be created from non-BlackICEPreferenceFragment
+                // This dialog fragment could be created from non-SettingsPreferenceFragment
                 if (mParentFragment instanceof BlackICEPreferenceFragment) {
                     // restore mDialogFragment in mParentFragment
                     ((BlackICEPreferenceFragment) mParentFragment).mDialogFragment = this;
@@ -228,7 +228,7 @@ public class BlackICEPreferenceFragment extends PreferenceFragment implements Di
         public void onDetach() {
             super.onDetach();
 
-            // This dialog fragment could be created from non-BlackICEPreferenceFragment
+            // This dialog fragment could be created from non-SettingsPreferenceFragment
             if (mParentFragment instanceof BlackICEPreferenceFragment) {
                 // in case the dialog is not explicitly removed by removeDialog()
                 if (((BlackICEPreferenceFragment) mParentFragment).mDialogFragment == this) {

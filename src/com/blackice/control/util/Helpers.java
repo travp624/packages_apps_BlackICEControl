@@ -205,6 +205,9 @@ public class Helpers {
         }       
         return true;
     }
+    public static void restartSystemUI() {
+        new CMDProcessor().su.run("pkill -TERM -f com.android.systemui");
+    }
 
     public static void setSystemProp(String prop, String val) {
         new CMDProcessor().su.run("setprop " + prop + " " + val);
@@ -224,10 +227,6 @@ public class Helpers {
         }
     }
 
-    public static void restartSystemUI() {
-        new CMDProcessor().su.run("pkill -TERM -f com.android.systemui");
-    }
-    
     /*
      * Mount System partition
      *

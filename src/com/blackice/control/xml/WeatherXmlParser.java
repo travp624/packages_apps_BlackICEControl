@@ -1,9 +1,6 @@
 
 package com.blackice.control.xml;
 
-import android.content.Context;
-import android.util.Log;
-
 import java.io.StringReader;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,6 +12,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import android.content.Context;
+import android.util.Log;
 
 import com.blackice.control.WeatherInfo;
 
@@ -42,10 +41,10 @@ public class WeatherXmlParser {
     private static final String ATT_YAHOO_TODAY_HIGH = "high";
     private static final String ATT_YAHOO_TODAY_LOW = "low";
     
+    private Context mContext;
 
-    private Context context;
-
-    public WeatherXmlParser() {
+    public WeatherXmlParser(Context context) {
+        mContext = context;
     }
 
     public WeatherInfo parseWeatherResponse(Document docWeather) {
@@ -96,6 +95,7 @@ public class WeatherXmlParser {
             if (conditionNode != null) {
                 strCondition = conditionNode.getNamedItem(ATT_YAHOO_TEXT).getNodeValue();
                 strCondition_code = conditionNode.getNamedItem(ATT_YAHOO_CODE).getNodeValue();
+                strCondition = WeatherInfo.getTranslatedConditionString(mContext, Integer.parseInt(strCondition_code), strCondition);
                 strTemp = conditionNode.getNamedItem(ATT_YAHOO_TEMP).getNodeValue();
                 strDate = conditionNode.getNamedItem(ATT_YAHOO_DATE).getNodeValue();
             }

@@ -229,6 +229,11 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
                     .removePreference(findPreference(Settings.System.ENABLE_FAST_TORCH));
         }
 
+        if (!hasHardwareButtons) {
+            ((PreferenceGroup) findPreference("advanced_cat"))
+                    .removePreference(findPreference(menuButtonLocation));
+        }
+
         mLockscreenTextColor = (ColorPickerPreference) findPreference(PREF_LOCKSCREEN_TEXT_COLOR);
         mLockscreenTextColor.setOnPreferenceChangeListener(this);
 

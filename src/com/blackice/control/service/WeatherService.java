@@ -1,33 +1,23 @@
 
 package com.blackice.control.service;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.List;
-import java.util.Locale;
-
-import org.xml.sax.SAXException;
-
 import android.app.IntentService;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.text.format.Time;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
-
-import org.w3c.dom.Document;
 
 import com.blackice.control.WeatherInfo;
 import com.blackice.control.util.WeatherPrefs;
 import com.blackice.control.xml.WeatherXmlParser;
+
+import org.w3c.dom.Document;
+
+import java.io.IOException;
 
 public class WeatherService extends IntentService {
 
@@ -63,6 +53,7 @@ public class WeatherService extends IntentService {
         String woeid = null;
 
         if (Settings.System.getInt(getContentResolver(), Settings.System.USE_WEATHER, 0) == 0) {
+            stopSelf();
             return;
         }
         
@@ -71,7 +62,7 @@ public class WeatherService extends IntentService {
             boolean useCustomLoc = WeatherPrefs.getUseCustomLocation(getApplicationContext());
             String customLoc = WeatherPrefs.getCustomLocation(getApplicationContext());
             if (customLoc != null && useCustomLoc) {
-                woeid = YahooPlaceFinder.GeoCode(customLoc);
+                woeid = YahooPlaceFinder.GeoCode(getApplicationContext(), customLoc);
                 // network location
             } else {
                 final LocationManager locationManager = (LocationManager) this
@@ -94,7 +85,7 @@ public class WeatherService extends IntentService {
                     loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
                 }
                 try {
-                    woeid = YahooPlaceFinder.reverseGeoCode(loc.getLatitude(),
+                    woeid = YahooPlaceFinder.reverseGeoCode(getApplicationContext(), loc.getLatitude(),
                             loc.getLongitude());
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -131,7 +122,7 @@ public class WeatherService extends IntentService {
 
     private WeatherInfo parseXml(Document wDoc) {
         try {
-            return new WeatherXmlParser().parseWeatherResponse(wDoc);
+            return new WeatherXmlParser(getApplicationContext()).parseWeatherResponse(wDoc);
         } catch (Exception e) {
             e.printStackTrace();
             Log.w(TAG, "Couldn't connect to Yahoo to get weather data.");
@@ -156,10 +147,9 @@ public class WeatherService extends IntentService {
         }
         getApplicationContext().sendBroadcast(broadcast);
     }
-
+    
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-	return super.onStartCommand(intent, flags, startId);
-    } 
-
+        return super.onStartCommand(intent, flags, startId);
+    }
 }

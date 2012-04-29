@@ -1,11 +1,6 @@
 
 package com.blackice.control.service;
 
-import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
-
-import com.blackice.control.util.WeatherPrefs;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -13,9 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.os.Binder;
 import android.os.IBinder;
-import android.util.Log;
+
+import com.blackice.control.util.WeatherPrefs;
+
+import java.util.Calendar;
 
 public class WeatherRefreshService extends Service {
 
@@ -53,7 +50,7 @@ public class WeatherRefreshService extends Service {
         i.setAction(WeatherService.INTENT_REQUEST_WEATHER);
 
         weatherRefreshIntent = PendingIntent.getService(getApplicationContext(), 0, i,
-                0);   
+                0);
 
         Calendar timeToStart = Calendar.getInstance();
         timeToStart.setTimeInMillis(System.currentTimeMillis());
@@ -79,11 +76,11 @@ public class WeatherRefreshService extends Service {
             }
         }
         cancelRefresh();
-	if (refreshIntervalInMinutes != 0) {
-	     scheduleRefresh();
-	}
-
-	stopSelf(); // so it won't run in the background eatin up RAM, ^ alarm will restart it
+        if (refreshIntervalInMinutes != 0) {
+            scheduleRefresh();
+        }
+        
+        stopSelf(); // so it won't run in the background eatin up RAM, ^ alarm will restart it
         return START_STICKY;
     }
 
