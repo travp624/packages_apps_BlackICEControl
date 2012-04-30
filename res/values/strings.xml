@@ -316,6 +316,7 @@
     <string name="weather_start_custom_app">Start custom app</string>
     <string name="weather_start_custom_app_summary">Start a custom app when clicking on the weather image.</string>
     <string name="weather_custom_app_title">Custom app</string>
+    <string name="weather_custom_app_summary">Custom app not set</string>
     <string name="weather_custom_app_dialog_title">Choose your app</string>
     <string name="weather_custom_app_dialog_message">Package name for now.</string>
     <string name="weather_refreshing">Requesting weather update!</string>
