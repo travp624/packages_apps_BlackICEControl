@@ -24,7 +24,6 @@
 	<string name="power_menu_optons">Power menu options</string>
 	<string name="functionality">Functionality</string>
 	<string name="power_saver">Power saver</string>
-	<string name="led_options">LED options</string>
 	<string name="statusbar">Statusbar</string>
 	<string name="general">General</string>
 	<string name="toggles_layout">Toggles</string>
@@ -45,8 +44,6 @@
 	<string name="header_summary_navigation_bar">Buttons to display, nav bar color, order</string>
 	<string name="header_summary_lockscreens">Custom lockscreen layouts and more</string>
 	<string name="header_summary_power_menu">What to display in your power menu</string>
-	<string name="header_summary_powersaver">Automatically disable data to save battery</string>
-	<string name="header_summary_led">Change default settings for Android to use</string>
 	<string name="header_summary_general">Settings button behavior</string>
 	<string name="header_summary_toggles">Customize toggles</string>
 	<string name="header_summary_clock">Clock location, AM/PM style, color</string>
@@ -199,7 +196,6 @@
     <string name="lockscreen_music_widget_summary">Pick the lockscreen music widget you want to use</string>
 
 	<!-- Power Menu -->
-	<string name="title_show_power_saver">Show power saver</string>
 	<string name="title_show_screenshot">Show screenshot</string>
 	<string name="title_show_torch_toggle">Show torch toggle</string>
 	<string name="title_show_airplane_toggle">Show airplane toggle</string>
