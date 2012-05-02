@@ -181,6 +181,8 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         mMusicStyle.setValue(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.MUSIC_WIDGET_TYPE, 0) + "");
 
+        ((PreferenceGroup) findPreference("advanced_cat")).removePreference(mMusicStyle);
+
         mLockscreenWallpaper = findPreference("wallpaper");
 
         mLockscreenCalendar = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_CALENDAR);
