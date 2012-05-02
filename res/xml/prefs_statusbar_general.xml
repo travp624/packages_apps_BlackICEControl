@@ -2,7 +2,9 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="custom carrier options">
+    <PreferenceCategory 
+        android:key="custom_carrier"
+        android:title="custom carrier options">
 
         <Preference
             android:key="custom_carrier_label"
@@ -34,7 +36,9 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="statusbar &amp; notification tweaks">
+    <PreferenceCategory 
+        android:key="statusbar_color"
+        android:title="statusbar &amp; notification tweaks">
 
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="status_bar_color" 
@@ -62,7 +66,9 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="status bar expanded settings">
+    <PreferenceCategory 
+        android:key="expanded_settings"
+        android:title="status bar expanded settings">
 
         <ListPreference
             android:key="status_bar_fontsize"

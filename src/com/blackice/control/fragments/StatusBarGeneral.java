@@ -14,6 +14,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
@@ -152,17 +153,18 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
                 0)));
 
         if (mTablet) {
-            PreferenceScreen prefs = getPreferenceScreen();
-            prefs.removePreference(mStatusColor);
-            prefs.removePreference(mTopCarrier);
-            prefs.removePreference(mTopCarrierColor);
-            prefs.removePreference(mStockCarrier);
-            prefs.removePreference(mStockCarrierColor);
-            prefs.removePreference(mStatusBarBrightnessToggle);
-            prefs.removePreference(mAutoHideToggles);
-            prefs.removePreference(mDefaultSettingsButtonBehavior);
-            prefs.removePreference(mTransparency);
-            prefs.removePreference(mLayout);
+            ((PreferenceGroup) findPreference("custom_carrier")).removePreference(mCustomLabel);
+            ((PreferenceGroup) findPreference("custom_carrier")).removePreference(mTopCarrier);
+            ((PreferenceGroup) findPreference("custom_carrier")).removePreference(mTopCarrierColor);
+            ((PreferenceGroup) findPreference("custom_carrier")).removePreference(mStockCarrier);
+            ((PreferenceGroup) findPreference("custom_carrier")).removePreference(mStockCarrierColor);
+            ((PreferenceGroup) findPreference("statusbar_color")).removePreference(mStatusColor);
+            ((PreferenceGroup) findPreference("statusbar_color")).removePreference(mTransparency);
+            ((PreferenceGroup) findPreference("expanded_settings")).removePreference(mStatusBarBrightnessToggle);
+            ((PreferenceGroup) findPreference("expanded_settings")).removePreference(mAutoHideToggles);
+            ((PreferenceGroup) findPreference("expanded_settings")).removePreference(mDefaultSettingsButtonBehavior);
+            ((PreferenceGroup) findPreference("expanded_settings")).removePreference(mLayout);
+            ((PreferenceGroup) findPreference("expanded_settings")).removePreference(mDateCalendar);
         }
     }
 
