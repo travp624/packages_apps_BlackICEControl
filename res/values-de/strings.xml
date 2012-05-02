@@ -8,8 +8,6 @@
     <string name="lockscreen_options">Bildschirmsperre</string>
     <string name="power_menu_optons">An-/Aus-Schalter Menü</string>
     <string name="functionality">Funktionen</string>
-    <string name="power_saver">Stromsparmodus</string>
-    <string name="led_options">LED Einstellungen</string>
     <string name="statusbar">Benachrichtungsleiste</string>
     <string name="general">Allgemein</string>
     <string name="toggles_layout">Schalter</string>
@@ -25,8 +23,6 @@
     <string name="header_summary_navigation_bar">Anzuzeigende Buttons, Farbe, Reihenfolge</string>
     <string name="header_summary_lockscreens">Starten von eigenen Apps, Layout</string>
     <string name="header_summary_power_menu">An-/Aus-Schalter-Menü bearbeiten</string>
-    <string name="header_summary_powersaver">Die Datenverbindung automatisch deaktivieren um Strom zu sparen</string>
-    <string name="header_summary_led">Standardeinstellungen von Android bearbeiten</string>
     <string name="header_summary_general">Verhalten des Einstellungs Buttons</string>
     <string name="header_summary_toggles">Schalter anpassen</string>
     <string name="header_summary_clock">Uhr Position, AM/PM anzeigen, Farbe</string>
@@ -196,37 +192,8 @@
     <string name="title_show_airplane_toggle">Flugmodus anzeigen</string>
     <string name="title_show_navbar_hide">Navigationsleiste anzeigen</string>
 
-    <!-- Power Saving -->
-    <string name="title_pref_powersaving_pref_mode">Stromsparmodus aktivieren</string>
-    <string name="summary_pref_powersaving_pref_mode">@null</string>
-
-    <string name="title_pref_powersaving_data_screen_off">Datenverbindung im Standby</string>
-    <string name="summary_pref_powersaving_data_screen_off">Was mit der Datenverbindung passieren soll, wenn der Bildschirm ausschaltet.</string>
-
-    <string name="title_pref_powersaving_data_screen_off_delay">Datenverbindung Aktions-Verzögerung</string>
-    <string name="summary_pref_powersaving_data_screen_off_delay">Wie lange gewartet werden soll, bevor die Aktion ausgeführt werden soll.</string>
-
-    <string name="title_pref_powersaving_sync_screen_off">Synchronisations Verhalten</string>
-    <string name="summary_pref_powersaving_sync_screen_off">Wie sich die Synchronisation verhalten soll</string>
-
-    <string name="title_pref_powersaving_sync_screen_off_delay">Synchronisations Intervall</string>
-    <string name="summary_pref_powersaving_sync_screen_off_delay">Wie lange zwischen zwei Synchronisierungen gewartet werden soll.</string>
-
-    <string name="powersaver_data_cat">Mobile Daten</string>
-    <string name="powersaver_sync_cat">Synchronisation</string>
-
-    <string name="screen_off_wifi_action">Bildschirm aus Wi-Fi Aktion</string>
-    <string name="sync_data_usage">Sync Datenverwendung</string>
-    <string name="sync_mobile_data_preference">Präferenz der mobilen Datensyncronisation</string>
-
     <!--  LED -->
-    <string name="title_led_on">LED AN Dauer</string>
-    <string name="summary_led_on">@null</string>
-    <string name="title_led_off">LED AUS Dauer</string>
-    <string name="summary_led_off">@null</string>
-    <string name="led_color_title">LED Farbe</string>
     <string name="title_led_screen_on">LED-Blitz während der Bildschirm aktiv ist</string>
-    <string name="summary_led_screen_on">@null</string>
 
     <!--  Statusbar | General -->
     <string name="title_settings_behavior">Standard-Verhalten verwenden</string>

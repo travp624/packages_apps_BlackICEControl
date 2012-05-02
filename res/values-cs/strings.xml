@@ -8,8 +8,6 @@
     <string name="lockscreen_options">Možnosti zamčené obrazovky</string>
     <string name="power_menu_optons">Možnosti menu napájení</string>
     <string name="functionality">Funkčnost</string>
-    <string name="power_saver">Spořič energie</string>
-    <string name="led_options">Možnosti LED</string>
     <string name="statusbar">Stavová lišta</string>
     <string name="general">Hlavní nastavení</string>
     <string name="toggles_layout">Přepínače</string>
@@ -25,8 +23,6 @@
     <string name="header_summary_navigation_bar">Tlačítka k zobrazení, barva navigační lišty, pořadí</string>
     <string name="header_summary_lockscreens">Spouštění vlastních aplikací, rozložení</string>
     <string name="header_summary_power_menu">Co se bude zobrazovat v menu napájení</string>
-    <string name="header_summary_powersaver">Automaticky vypíná data pro úsporu baterie</string>
-    <string name="header_summary_led">Změna výchozího nastavení Androidu</string>
     <string name="header_summary_general">Nastavení chování tlačítek</string>
     <string name="header_summary_toggles">Přizpůsobit přepínače</string>
 	<string name="header_summary_clock">Umístění hodin, AM/PM styl, barva</string>
@@ -183,42 +179,10 @@
     <string name="lockscreen_calendar_interval_summary">Zvolit rychlost střídání v sekundách.</string>
     
     <!-- Power Menu -->
-    <string name="title_show_power_saver">Zobrazovat spořič energie</string>
     <string name="title_show_screenshot">Zobrazovat snímek obrazovky</string>
     <string name="title_show_torch_toggle">Zobrazovat přepínač svítilny</string>
     <string name="title_show_airplane_toggle">Zobrazovat přepínač letového módu</string>
     <string name="title_show_navbar_hide">Zobrazovat přepínač navigační lišty</string>
-    
-    <!-- Power Saving -->
-    <string name="title_pref_powersaving_pref_mode">Zapnout spořič energie</string>
-    <string name="summary_pref_powersaving_pref_mode">@null</string>
-    
-    <string name="title_pref_powersaving_data_screen_off">Chování dat</string>
-    <string name="summary_pref_powersaving_data_screen_off">Prováděná akce s daty při vypnuté obrazovce</string>
-        
-    <string name="title_pref_powersaving_data_screen_off_delay">Prodleva provedené akce</string>
-    <string name="summary_pref_powersaving_data_screen_off_delay">Doba před provedením požadované akce</string>
-
-    <string name="title_pref_powersaving_sync_screen_off">Chování synchronizace</string>
-    <string name="summary_pref_powersaving_sync_screen_off">Prováděná akce se synchronizací při vypnuté obrazovce</string>
-    
-    <string name="title_pref_powersaving_sync_screen_off_delay">Interval synchronizace</string>
-    <string name="summary_pref_powersaving_sync_screen_off_delay">Doba před provedením vynucené synchronizace</string>
-    
-    <string name="powersaver_data_cat">Data</string>
-    <string name="powersaver_sync_cat">Synchronizace</string>
-    
-    <string name="screen_off_wifi_action">Wi-Fi při vypnuté obrazovce</string>
-    <string name="sync_data_usage">Datové spojení pro synchronizaci</string>
-    <string name="sync_mobile_data_preference">Mobilní data pro synchronizaci</string>
-    <!--  LED -->
-    <string name="title_led_on">Doba svícení LEDky</string>
-    <string name="summary_led_on">@null</string>
-    <string name="title_led_off">Doba mezi rozsvícením LEDky</string>
-    <string name="summary_led_off">@null</string>
-    <string name="led_color_title">Barva LEDky</string>
-    <string name="title_led_screen_on">Blikat LEDkou při zapnuté obrazovce</string>
-    <string name="summary_led_screen_on">@null</string>
 
     <!--  Statusbar | General -->
     <string name="title_settings_behavior">Použít standardní chování</string>

@@ -8,8 +8,6 @@
     <string name="lockscreen_options">Bloqueo de pantalla</string>
     <string name="power_menu_optons">Botón de encendio</string>
     <string name="functionality">Funciones</string>
-    <string name="power_saver">Ahorro de energía</string>
-    <string name="led_options">Opciones LED</string>
     <string name="statusbar">Barra de estado</string>
     <string name="general">General</string>
     <string name="toggles_layout">Interruptores</string>
@@ -76,13 +74,6 @@
     
     <string name="powersaver_data_cat">Trafico de datos</string>
     <string name="powersaver_sync_cat">Sincronización</string>
-
-    <!--  LED -->
-    <string name="title_led_on">Duración del LED encendido</string>
-    <string name="summary_led_on">@null</string>
-    <string name="title_led_off">Duración del LED apagado</string>
-    <string name="summary_led_off">@null</string>
-    <string name="led_color_title">Color del LED</string>
 
     <!--  Barra de estado | General -->
     <string name="title_settings_behavior">Use el comportamiento por defecto de configuración</string>

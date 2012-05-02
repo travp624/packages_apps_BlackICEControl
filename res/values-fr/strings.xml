@@ -8,8 +8,6 @@
     <string name="lockscreen_options">"Options de l'écran de verrouillage"</string>
     <string name="power_menu_optons">"Options de menu d'alimentation"</string>
     <string name="functionality">Fonctionnalité</string>
-    <string name="power_saver">"Économie d\'énergie"</string>
-    <string name="led_options">Options de la LED</string>
     <string name="statusbar">"Barre d'état"</string>
     <string name="general">Général</string>
     <string name="toggles_layout">Interrupteurs</string>
@@ -23,8 +21,6 @@
     <string name="header_summary_navigation_bar">Boutons d\'affichage, couleur barre de nav., ordre</string>
     <string name="header_summary_lockscreens">Paramètrer les app. du lockscreen, disposition</string>
     <string name="header_summary_power_menu">Quoi afficher dans le menu alimentation</string>
-    <string name="header_summary_powersaver">Désactiver automatiquement la data pour économiser la batterie</string>
-    <string name="header_summary_led">Modifier les paramètres par défaut d\'Android</string>
     <string name="header_summary_general">Comportement du bouton réglages</string>
     <string name="header_summary_toggles">Personnaliser les interrupteurs</string>
     <string name="header_summary_clock">Localisation de l\'horloge, AM/PM, couleur</string>    
@@ -123,32 +119,6 @@
     <!-- Power Menu -->
     <string name="title_show_power_saver">"Afficher l'économiseur d'énergie"</string>
     <string name="title_show_screenshot">"Afficher la capture d'écran"</string>
-    
-    <!-- Power Saving -->
-    <string name="title_pref_powersaving_pref_mode">"Activer l'économiseur d'énergie"</string>
-    <string name="summary_pref_powersaving_pref_mode">@null</string>
-    
-    <string name="title_pref_powersaving_data_screen_off">Données cellulaires</string>
-    <string name="summary_pref_powersaving_data_screen_off">"Économiseur d'énergie : comportement des données cellulaires lorsque l'écran est éteint"</string>
-        
-    <string name="title_pref_powersaving_data_screen_off_delay">"Délai de désactivation des données"</string>
-    <string name="summary_pref_powersaving_data_screen_off_delay">"Économiseur d'énergie : choisissez le délai avant de désactiver les données cellulaires"</string>
-
-    <string name="title_pref_powersaving_sync_screen_off">Synchonisation</string>
-    <string name="summary_pref_powersaving_sync_screen_off">"Économiseur d'énergie : comportement de la synchonisation lorsque l'écran est éteint"</string>
-    
-    <string name="title_pref_powersaving_sync_screen_off_delay">Délai entre chaque synchonisation</string>
-    <string name="summary_pref_powersaving_sync_screen_off_delay">Économiseur d\'énergie : choisissez le délai entre chaque synchonisation forcée</string>
-    
-    <string name="powersaver_data_cat">Données cellulaires</string>
-    <string name="powersaver_sync_cat">Synchonisation</string>
-
-    <!--  LED -->
-    <string name="title_led_on">"Durée d'activation de la LED"</string>
-    <string name="summary_led_on">"Temps pendant lequel la LED sera allumée lorsqu'elle clignote (notification)"</string>
-    <string name="title_led_off">Durée de pause de la LED</string>
-    <string name="summary_led_off">"Temps pendant lequel la LED sera éteinte lorsqu'elle clignote (notification)"</string>
-    <string name="led_color_title">Couleur de la LED</string>
 
     <!--  Statusbar | General -->
     <string name="title_settings_behavior">Utiliser le comportement par défaut</string>
