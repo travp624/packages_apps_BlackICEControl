@@ -261,10 +261,16 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
         } else if (preference == mTopCarrier) {
             Settings.System.putInt(getActivity().getContentResolver(), 
                     Settings.System.TOP_CARRIER_LABEL, Integer.parseInt((String) newValue));
+            if (Integer.parseInt((String) newValue) > 0) {
+                Helpers.restartSystemUI();
+            }
             return true;
         } else if (preference == mStockCarrier) {
             Settings.System.putInt(getActivity().getContentResolver(), 
                     Settings.System.USE_CUSTOM_CARRIER, Integer.parseInt((String)  newValue));
+            if (Integer.parseInt((String) newValue) > 0) {
+                Helpers.restartSystemUI();
+            }
             return true;
         } else if (preference == mTopCarrierColor) {
             String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
