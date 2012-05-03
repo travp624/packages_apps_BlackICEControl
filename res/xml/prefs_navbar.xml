@@ -5,7 +5,9 @@
         android:key="enable_nav_bar"
         android:title="Enable bar" />
 
-    <PreferenceCategory android:title="navbar style entries">
+    <PreferenceCategory 
+        android:key="navbar_style_entries"
+        android:title="navbar style entries">
 
         <ListPreference
             android:entries="@array/pref_navigation_menu_entries"
@@ -35,7 +37,9 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="navbar btns color &amp; transparency">
+    <PreferenceCategory 
+        android:key="navbar_color"
+        android:title="navbar btns color &amp; transparency">
 
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="nav_button_background_color"
