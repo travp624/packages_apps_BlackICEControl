@@ -77,10 +77,10 @@ public class StatusBarBattery extends PreferenceFragment implements
                 Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, 1))
                 + "");
 
-	mBatteryChargeTextColor = (ColorPickerPreference) findPreference("battery_charge_text_color");
+        mBatteryChargeTextColor = (ColorPickerPreference) findPreference("battery_charge_text_color");
         mBatteryChargeTextColor.setOnPreferenceChangeListener(this);
-	
-	mBatteryTextColor = (ColorPickerPreference) findPreference("battery_text_color");
+
+        mBatteryTextColor = (ColorPickerPreference) findPreference("battery_text_color");
         mBatteryTextColor.setOnPreferenceChangeListener(this);
     }
 
