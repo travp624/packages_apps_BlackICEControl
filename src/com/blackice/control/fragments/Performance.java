@@ -57,7 +57,7 @@ public class Performance extends BlackICEPreferenceFragment implements
     private SharedPreferences preferences;
     private boolean doneLoading = false;
 
-    CheckBoxPreference mFastCharge;
+    private CheckBoxPreference mFastCharge;
 
     /** Called when the activity is first created. */
     @Override
@@ -99,7 +99,7 @@ public class Performance extends BlackICEPreferenceFragment implements
         mScrollingCachePref = (ListPreference) findPreference(SCROLLINGCACHE_PREF);
         mScrollingCachePref.setValue(Helpers.getSystemProp(SCROLLINGCACHE_PERSIST_PROP, SCROLLINGCACHE_DEFAULT));
         mScrollingCachePref.setOnPreferenceChangeListener(this);
-        
+
         final int minFree = getMinFreeValue();
         final String values[] = getResources().getStringArray(R.array.minfree_values);
         String closestValue = preferences.getString(KEY_MINFREE, values[0]);
@@ -126,6 +126,7 @@ public class Performance extends BlackICEPreferenceFragment implements
         }
 
         mFastCharge = (CheckBoxPreference) findPreference(KEY_FASTCHARGE);
+        mFastCharge.setChecked(preferences.getBoolean(KEY_FASTCHARGE, false));
         if (!hasFastCharge) {
             ((PreferenceGroup) findPreference("kernel")).removePreference(mFastCharge);
         }
@@ -141,7 +142,7 @@ public class Performance extends BlackICEPreferenceFragment implements
 
         doneLoading = true;
     }
-    
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         String key = preference.getKey();
@@ -159,16 +160,19 @@ public class Performance extends BlackICEPreferenceFragment implements
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 preferences.edit().putBoolean(KEY_FASTCHARGE, false).apply();
+                                mFastCharge.setChecked(false);
                             }
                         })
                         .setPositiveButton(ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 preferences.edit().putBoolean(KEY_FASTCHARGE, true).apply();
+                                mFastCharge.setChecked(true);
                             }
                         })
                         .create()
                         .show();
+                return true;
             }
         }
 
