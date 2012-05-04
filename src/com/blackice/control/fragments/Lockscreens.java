@@ -107,6 +107,7 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
     Preference mCalendarSources;
     ListPreference mCalendarInterval;
     ListPreference mCalendarRange;
+    ListPreference mMusicStyle;
     CheckBoxPreference mLockscreenCalendarHideOngoing;
     CheckBoxPreference mLockscreenCalendarUseColors;
     CheckBoxPreference mLockscreen4tabSlider;
@@ -174,6 +175,11 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         mVolumeMusic = (CheckBoxPreference) findPreference(PREF_VOLUME_MUSIC);
         mVolumeMusic.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.VOLUME_MUSIC_CONTROLS, 0) == 1);
+
+        mMusicStyle = (ListPreference) findPreference(LOCKSCREEN_MUSIC_WIDGET);
+        mMusicStyle.setOnPreferenceChangeListener(this);
+        mMusicStyle.setValue(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.MUSIC_WIDGET_TYPE, 0) + "");
 
         mLockscreenWallpaper = findPreference("wallpaper");
 
@@ -710,6 +716,11 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
             long val = Long.parseLong((String) newValue);
             Settings.System.putLong(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_CALENDAR_RANGE, val);
+            return true;
+
+        } else if (preference == mMusicStyle) {
+             Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.MUSIC_WIDGET_TYPE, Integer.parseInt((String) newValue));
             return true;
 
         } else if (preference == mLockscreenTextColor) {
