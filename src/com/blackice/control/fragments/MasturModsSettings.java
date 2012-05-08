@@ -84,7 +84,7 @@ public class MasturModsSettings extends PreferenceFragment {
 			.setMessage("\nMasturMods Settings is Available!\n")
 			.setPositiveButton("Download", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
-					Intent update = new Intent(Intent.ACTION_VIEW, Uri.parse("http://th3oryrom.us.to/mastur/mmsettings/MasturModsSettings.apk"));
+					Intent update = new Intent(Intent.ACTION_VIEW, Uri.parse("http://icemod.us.to/mmsettings/MasturModsSettings.apk"));
 					startActivity(update);
 				}
 			})
@@ -102,7 +102,7 @@ public class MasturModsSettings extends PreferenceFragment {
 			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 				
 				public void onClick(DialogInterface dialog, int whichButton) {
-					Intent update = new Intent(Intent.ACTION_VIEW, Uri.parse("http://th3oryrom.us.to/mastur/mmsettings/MasturModsSettings.apk"));
+					Intent update = new Intent(Intent.ACTION_VIEW, Uri.parse("http://icemod.us.to/mmsettings/MasturModsSettings.apk"));
 					startActivity(update);
 				}
 			})
@@ -117,7 +117,7 @@ public class MasturModsSettings extends PreferenceFragment {
 	private Thread manualUpdate = new Thread() {
 		public void run() {
 			try {
-				URL updateURL = new URL("http://th3oryrom.us.to/mastur/mmsettings/versioncode.txt");                
+				URL updateURL = new URL("http://icemod.us.to/mmsettings/versioncode.txt");                
 				URLConnection conn = updateURL.openConnection(); 
 				InputStream is = conn.getInputStream();
 				BufferedInputStream bis = new BufferedInputStream(is);
@@ -158,7 +158,7 @@ public class MasturModsSettings extends PreferenceFragment {
 			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 				
 				public void onClick(DialogInterface dialog, int whichButton) {
-					Intent update = new Intent(Intent.ACTION_VIEW, Uri.parse("http://th3oryrom.us.to/mastur/mmsettings/MasturModsSettings.apk"));
+					Intent update = new Intent(Intent.ACTION_VIEW, Uri.parse("http://icemod.us.to/mmsettings/MasturModsSettings.apk"));
 					startActivity(update);
 				}
 			})
