@@ -43,6 +43,13 @@
 		android:title="@string/misc_short">
 
         <ListPreference
+            android:key="recent_app_switcher"
+            android:title="@string/recent_app_switcher_title"
+            android:summary="@string/recent_app_switcher_summary"
+            android:entries="@array/recent_app_switcher_entries"
+            android:entryValues="@array/recent_app_switcher_values" />
+
+        <ListPreference
             android:key="long_press_home"
             android:entries="@array/long_press_home_entries"
             android:entryValues="@array/long_press_home_values"
@@ -76,11 +83,6 @@
 			android:key="rotate_180"
 			android:title="@string/rotate_180_title"
 			android:summary="@string/rotate_180_summary" />
-
-		<CheckBoxPreference
-			android:key="horizontal_recents_task_panel"
-			android:title="@string/horizontal_recents_task_panel_title"
-			android:summary="@string/horizontal_recents_task_panel_summary" />
 
 		<CheckBoxPreference
 			android:key="led_screen_on"
