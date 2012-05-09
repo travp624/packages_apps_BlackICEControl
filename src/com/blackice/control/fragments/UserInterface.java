@@ -212,6 +212,7 @@ public class UserInterface extends BlackICEPreferenceFragment implements
                 new CMDProcessor().su
                         .runWaitFor("mv /system/media/bootanimation.blackice /system/media/bootanimation.zip");
                 Helpers.getMount("ro");
+                preference.setSummary("");
             }
             return true;
 
