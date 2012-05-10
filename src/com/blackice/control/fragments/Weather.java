@@ -233,7 +233,7 @@ public class Weather extends BlackICEPreferenceFragment implements
 
         if (WeatherPrefs.setCustomApp(mContext, uri)) {
             mCustomWeatherApp.setSummary(friendlyName);
-        } else if (!WeatherPrefs.setCustomApp(mContext, uri)){
+        } else {
             mCustomWeatherApp.setSummary(R.string.weather_custom_app_summary);
         }
     }

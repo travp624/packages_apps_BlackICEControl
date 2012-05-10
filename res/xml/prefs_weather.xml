@@ -64,6 +64,6 @@
             android:title="@string/weather_custom_app_title"
             android:dependency="use_custom_app" />
 
-	</PreferenceCategory>
+    </PreferenceCategory>
 
 </PreferenceScreen>
