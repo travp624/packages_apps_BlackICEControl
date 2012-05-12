@@ -167,7 +167,7 @@ public class Navbar extends BlackICEPreferenceFragment implements
         if (mTablet) {
             Log.e("NavBar", "is tablet");
             ((PreferenceGroup) findPreference("navbar_style_entries")).removePreference(menuDisplayLocation);
-            ((PreferenceGroup) findPreference("navbar_color")).removePreference(mNavigationBarColor);
+            ((PreferenceGroup) findPreference("navbar_color")).removePreference(mNavigationBarBackgroundColor);
             ((PreferenceGroup) findPreference("advanced_cat")).removePreference(mNavigationBarHeight);
             ((PreferenceGroup) findPreference("advanced_cat")).removePreference(mNavigationBarWidth);
         }
