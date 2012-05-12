@@ -30,6 +30,7 @@ import com.blackice.control.R;
 import com.blackice.control.BlackICEPreferenceFragment;
 import com.blackice.control.service.WeatherRefreshService;
 import com.blackice.control.service.WeatherService;
+import com.blackice.control.util.Helpers;
 import com.blackice.control.util.WeatherPrefs;
 import com.blackice.control.util.ShortcutPickerHelper;
 
@@ -152,6 +153,8 @@ public class Weather extends BlackICEPreferenceFragment implements
                         WeatherRefreshService.class);
                 i.setAction(WeatherService.INTENT_REQUEST_WEATHER);
                 getActivity().getApplicationContext().startService(i);
+                Helpers.msgShort(getActivity().getApplicationContext(),
+                        getString(R.string.weather_refreshing));
                 return true;
             default:
                 return super.onContextItemSelected(item);
