@@ -224,6 +224,10 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         ((PreferenceGroup) findPreference("advanced_cat"))
                 .removePreference(findPreference(Settings.System.LOCKSCREEN_HIDE_NAV));
 
+        if (mTablet) {
+            ((PreferenceGroup) findPreference("advanced_cat")).removePreference(mMusicStyle);
+        }
+
         if (!hasTorch) {
             ((PreferenceGroup) findPreference("advanced_cat"))
                     .removePreference(findPreference(Settings.System.ENABLE_FAST_TORCH));
