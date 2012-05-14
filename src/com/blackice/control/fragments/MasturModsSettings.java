@@ -60,10 +60,6 @@ public class MasturModsSettings extends PreferenceFragment {
             Intent launch = new Intent(Intent.ACTION_MAIN);
             launch.setClassName(MASTURMODS_SETTINGS, HOME);
 
-            Intent home = new Intent(getActivity(), ControlActivity.class);
-            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-            getActivity().startActivity(home);
             getActivity().startActivity(launch);
         } else {
             mHandler.sendEmptyMessage(NOT_INSTALLED);
@@ -85,10 +81,6 @@ public class MasturModsSettings extends PreferenceFragment {
                 Intent intent = new Intent(Intent.ACTION_VIEW); 
                 intent.setDataAndType(Uri.fromFile(INSTALL_APP), "application/vnd.android.package-archive");
 
-                Intent home = new Intent(getActivity(), ControlActivity.class);
-                home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                getActivity().startActivity(home);
                 startActivity(intent); 
                 break;
             }
