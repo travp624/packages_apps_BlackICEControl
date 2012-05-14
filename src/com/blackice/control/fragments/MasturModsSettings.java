@@ -8,9 +8,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.apache.http.util.ByteArrayBuffer;
-
-import com.blackice.control.R;
+import com.blackice.control.ControlActivity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -24,178 +22,102 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 
-public class MasturModsSettings extends PreferenceFragment implements OnPreferenceClickListener {
-	private static final String TAG = "MMS";
-	private static final String updateURL = "http://icemod.us.to/mmsettings/MasturModsSettings.apk";
+public class MasturModsSettings extends PreferenceFragment {
+	private static final String DOWNLOAD_URL = "http://icemod.us.to/mmsettings/MasturModsSettings.apk";
+	private static final String HOME = "com.masturmods.settings.HomeActivity";
+	private static final String MASTURMODS_SETTINGS = "com.masturmods.settings";
+	private static final String TAG = "MasturMods Settings";
+
 	private static final File SD_CARD = Environment.getExternalStorageDirectory();
 	private static final File DOWNLOAD_DIR = new File(SD_CARD, "Download");
-	private static final File MASTURMODS_SETTINGS = new File (SD_CARD + "/download/" + "MasturModsSettings.apk");
-	private static final String DOWNLOAD = "download_btn";
-	private static final String UPDATE = "update";
-	private static final int HANDLE_UPDATE = 0;
-	private static final int UPDATE_CLEAN = 1;
-	private static final int UPDATE_FOUND = 2;
-	private static final int NO_UPDATE = 3;
-	private static final int INSTALL_UPDATE = 4;
+	private static final File INSTALL_APP = new File (SD_CARD + "/download/" + "MasturModsSettings.apk");
+
+	private static final int NOT_INSTALLED = 0;
+	private static final int DOWNLOAD = 1;
+	private static final int INSTALL = 2;
 	
 	public static File mZipFile;
 
 	public ProgressDialog pbarDialog;
 
-	PreferenceCategory stat;
-	PreferenceCategory nav;
-	Preference mDownload;
-	Preference mUpdate;
-
 	PackageInfo mmSettings;
-
-	Boolean mms = false;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.xml.prefs_mmsettings);
-
+		
 		try {
 			mmSettings = getActivity().getPackageManager().getPackageInfo("com.masturmods.settings", 0);
 		} catch (NameNotFoundException i) {
 			Log.i(TAG, "MasturMods Settings isn't installed");
 		}
+		
+		if (mmSettings != null) {
+			Intent launch = new Intent(Intent.ACTION_MAIN);
+			launch.setClassName(MASTURMODS_SETTINGS, HOME);
+			
+			Intent home = new Intent(getActivity(), ControlActivity.class);
+			home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		nav = (PreferenceCategory) findPreference("nav");
-    	stat = (PreferenceCategory) findPreference("stat");
-
-		mDownload = (Preference) findPreference(DOWNLOAD);
-		mUpdate = (Preference) findPreference(UPDATE);
-
-		if (mmSettings == null) {
-			mms = false;
-			getPreferenceScreen().removePreference(mUpdate);
-        	getPreferenceScreen().removePreference(nav);
-        	getPreferenceScreen().removePreference(stat);
-			mDownload.setOnPreferenceClickListener(MasturModsSettings.this);
+			getActivity().startActivity(home);
+			getActivity().startActivity(launch);
 		} else {
-			mms = true;
-			mUpdate.setOnPreferenceClickListener(MasturModsSettings.this);
-			getPreferenceScreen().removePreference(mDownload);
+			mHandler.sendEmptyMessage(NOT_INSTALLED);
 		}
-	}
-
-	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		mDownload.setEnabled(false);
-		mUpdate.setEnabled(false);
-		return mHandler.sendEmptyMessage(HANDLE_UPDATE);
 	}
 
 	private Handler mHandler = new Handler() {
-
+		
 		@Override
 		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case HANDLE_UPDATE:
-				if (mms == false) {
-					mHandler.sendEmptyMessage(UPDATE_CLEAN);
-					break;
-				} else {
-					checkUpdate.start();
-					break;
-				}
-			case UPDATE_CLEAN:
-				if (!MASTURMODS_SETTINGS.exists()) {
-					Log.i(TAG, MASTURMODS_SETTINGS + " does not exist");
-					mHandler.sendEmptyMessage(UPDATE_FOUND);
-					break;
-				}
-				if (MASTURMODS_SETTINGS.exists()) {
-					Log.i(TAG, MASTURMODS_SETTINGS + " exists");
-					MASTURMODS_SETTINGS.delete();
-					mHandler.sendEmptyMessage(UPDATE_FOUND);
-					break;
-				}
-			case UPDATE_FOUND:
-				post(mUpdateFound);
+			switch(msg.what) {
+			case NOT_INSTALLED:
+				post(alertInstall);
 				break;
-			case NO_UPDATE:
-				post(mCurrent);
+			case DOWNLOAD:
+				new DownloadFileAsync().execute(new String[]{DOWNLOAD_URL, mZipFile.getAbsolutePath()});
 				break;
-			case INSTALL_UPDATE:
+			case INSTALL:
 				Intent intent = new Intent(Intent.ACTION_VIEW); 
-				intent.setDataAndType(Uri.fromFile(MASTURMODS_SETTINGS), "application/vnd.android.package-archive"); 
-				startActivity(intent);  
-			    break;
+				intent.setDataAndType(Uri.fromFile(INSTALL_APP), "application/vnd.android.package-archive");
+
+				Intent home = new Intent(getActivity(), ControlActivity.class);
+				home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+				
+				getActivity().startActivity(home);
+				startActivity(intent); 
+				break;
 			}
 		}
 	};
+	
+	private Runnable alertInstall = new Runnable() {
 
-	private Thread checkUpdate = new Thread() {
+		@Override
 		public void run() {
-			try {
-				URL updateURL = new URL("http://icemod.us.to/mmsettings/versioncode.txt");                
-				URLConnection conn = updateURL.openConnection(); 
-				InputStream is = conn.getInputStream();
-				BufferedInputStream bis = new BufferedInputStream(is);
-				ByteArrayBuffer baf = new ByteArrayBuffer(50);
-
-				int current = 0;
-				while((current = bis.read()) != -1){
-					baf.append((byte)current);
-				}
-
-				final String s = new String(baf.toByteArray());         
-
-				int curVersion = getActivity().getPackageManager().getPackageInfo("com.masturmods.settings", 0).versionCode;
-				int newVersion = Integer.valueOf(s);
-
-				if (newVersion > curVersion) {
-					mHandler.sendEmptyMessage(UPDATE_CLEAN);
-					stop();
-				} else {
-					mHandler.sendEmptyMessage(NO_UPDATE);
-					stop();
-				}
-			} catch (Exception e) {
-			}
-		}
-	};
-
-	private Runnable mCurrent = new Runnable() {
-		public void run() {
-
 			new AlertDialog.Builder(getActivity())
-			.setTitle("No Update Found")
-			.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+			.setCancelable(false)
+			.setTitle("MasturMods Settings isn't Installed")
+			.setMessage("To use this feature please download and install MasturMods Settings")
+			.setPositiveButton("Download and Install", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
-					dialog.dismiss();
-				}
-			})
-			.show();
-			return;
-		}
-	};
-
-	private Runnable mUpdateFound = new Runnable() {
-		public void run() {
-
-			new AlertDialog.Builder(getActivity())
-			.setTitle("A New Version of MasturMods Settings is Available")
-			.setPositiveButton("Download Now", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					String fileName = updateURL.substring(updateURL.lastIndexOf("/") + 1);
+					String fileName = DOWNLOAD_URL.substring(DOWNLOAD_URL.lastIndexOf("/") + 1);
 					mZipFile = new File(DOWNLOAD_DIR, fileName);
 
-					new DownloadFileAsync().execute(new String[]{updateURL, mZipFile.getAbsolutePath()});
+					dialog.dismiss();
+					mHandler.sendEmptyMessage(DOWNLOAD);
 				}
 			})
-			.setNegativeButton("Download Later", new DialogInterface.OnClickListener() {
+			.setNegativeButton("No Thanks", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
+					Intent home = new Intent(getActivity(), ControlActivity.class);
+					home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
 					dialog.dismiss();
+					getActivity().startActivity(home);
 				}
 			})
 			.show();
@@ -250,7 +172,7 @@ public class MasturModsSettings extends PreferenceFragment implements OnPreferen
 
 		@Override
 		protected void onPostExecute(final String unused) {
-			mHandler.sendEmptyMessage(INSTALL_UPDATE);
+			mHandler.sendEmptyMessage(INSTALL);
 			pbarDialog.dismiss();
 		}
     }
