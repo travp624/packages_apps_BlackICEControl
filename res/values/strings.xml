@@ -569,6 +569,51 @@
 	<string name="mmsettings">MasturMods Settings</string>
 	<string name="launch_mmsettings">Launch MasturMods Settings</string>
 
+    <!-- Backup Restore -->
+    <string name="backup_string">Backup restore</string>
+    <string name="backup_string_summary">Easy way to backup blackice control settings</string>
+    <string name="backup_alert_title">Filename</string>
+    <string name="backup_alert_message">Name your settings file</string>
+    <string name="backup_category_title">Backup</string>
+    <string name="restore_category_title">Restore</string>
+    <string name="theme_category_title">Theme</string>
+    <string name="backup_title">Backup BlackICE settings</string>
+    <string name="backup_summary">save your settings</string>
+    <string name="restore_title">Restore BlackICE settings</string>
+    <string name="restore_summary">apply your backup</string>
+    <string name="name_theme_title">Name your theme!</string>
+    <string name="positive_button">Make Theme</string>
+    <string name="positive_thanks_button">Thanks</string>
+    <string name="positive_theme_button">Theme</string>
+    <string name="negative_button">I\'m scared</string>
+    <string name="negative_theme_button">Backup</string>
+    <string name="delete_button">Delete Theme (final)</string>
+    <string name="apply_button">Apply Theme</string>
+    <string name="title_prompt">Title: </string>
+    <string name="summary_prompt">Summary: </string>
+    <string name="want_to_make_theme_message">Theme or backup</string>
+    <string name="want_to_make_theme_title">What would you like to do?</string>
+    <string name="what_happened_title">So whats going on?</string>
+    <string name="delete_or_apply">Apply or delete theme?</string>
+
+    <!-- File Picker -->
+    <string name="clear">Clear screen</string>
+    <string name="empty_text">No Data</string>
+    <string name="filename_text">Filename: </string>
+    <string name="new_file_title">Save text to new file?</string>
+    <string name="open_button_text">Open</string>
+    <string name="ro_fail_notice">Couldn\'t write to that destination</string>
+    <string name="save">Save</string>
+    <string name="save_blank">Can\'t save a blank document</string>
+    <string name="save_button_text">Create file</string>
+    <string name="prompt_title">{%s}</string>
+    <string name="file_selection_error_write">We can\'t write to {%s}</string>
+    <string name="file_selection_error_read">We can\'t read {%s}</string>
+    <string name="save_prompt">Save as?</string>
+    <string name="open_prompt">Open?</string>
+    <string name="no_filename_save_error">No filename detected ...Please enter a filename to save</string>
+    <string name="location_tracker">Location: %s</string>
+
     <!-- Weather Codes -->
     <string name="weather_0">Tornado</string>
     <string name="weather_1">Tropical Storm</string>

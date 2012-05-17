@@ -98,7 +98,7 @@
 		android:summary="@string/header_summary_signal" />
 	
 	<header android:title="@string/tools" />
-	
+
 	<header
 		android:id="@+id/propmodder_initd"
 		android:title="@string/propmodder_title"
@@ -112,5 +112,12 @@
 		android:summary="@string/ps_performance"
 		android:fragment="com.blackice.control.fragments.Performance"
 		android:icon="@drawable/ic_blackice_control_performance" />
+
+    <header
+        android:id="@+id/backup"
+        android:title="@string/backup_string"
+        android:summary="@string/backup_string_summary"
+        android:icon="@drawable/ic_blackice_control_backup"
+        android:fragment="com.blackice.control.fragments.BackupRestore" />
 
 </preference-headers>

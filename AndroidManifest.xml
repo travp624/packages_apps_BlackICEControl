@@ -184,7 +184,15 @@
 		    <intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 		    </intent-filter>
-		</activity>   
+		</activity>
+        <activity android:name=".fragments.BackupRestore"
+            android:label="Backup Restore"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 		<activity
 		    android:name=".fragments.Thanks"
 		    android:label="@string/blackice">
@@ -199,6 +207,11 @@
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".tools.FilePicker">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
 		<activity 
