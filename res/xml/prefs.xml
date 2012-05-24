@@ -48,33 +48,6 @@
 	</PreferenceCategory>
 
 	<PreferenceCategory
-		android:key="functionality"
-		android:title="@string/functionality">
-
-		<Preference
-			android:key="powersaver_pref"
-			android:title="@string/power_saver">
-
-			<intent
-				android:action="android.intent.action.MAIN"
-				android:targetClass="com.blackice.control.activities.PowerSaver"
-				android:targetPackage="com.blackice.control" />
-		</Preference>
-
-		<Preference
-			android:key="led_prefs"
-			android:title="@string/led_options">
-
-			<intent
-				android:action="android.intent.action.MAIN"
-				android:targetClass="com.blackice.control.activities.LED"
-				android:targetPackage="com.blackice.control" />
-		</Preference>
-
-
-	</PreferenceCategory>
-
-	<PreferenceCategory
 		android:key="statusbar"
 		android:title="@string/statusbar">
 

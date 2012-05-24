@@ -92,15 +92,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".fragments.PowerSaver"
-            android:label="Power Saver" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="com.blackice.control.SHORTCUT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".fragments.Lockscreens"
             android:label="Lockscreens" >
             <intent-filter>

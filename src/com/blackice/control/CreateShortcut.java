@@ -59,10 +59,6 @@ public class CreateShortcut extends LauncherActivity {
 
         if (c.equals("Performance"))
             return R.drawable.ic_blackice_control_performance;
-        else if (c.equals("PowerSaver"))
-            return R.drawable.ic_blackice_control_power_menu;
-        else if (c.equals("Led"))
-            return R.drawable.ic_blackice_control_led;
         else if (c.equals("Lockscreens"))
             return R.drawable.ic_blackice_control_lockscreens;
         else if (c.equals("Navbar"))

@@ -4,7 +4,6 @@ package com.blackice.control.fragments;
 import java.util.ArrayList;
 
 import android.app.AlertDialog;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
@@ -13,14 +12,12 @@ import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,24 +26,23 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.internal.telephony.Phone;
 import com.blackice.control.R;
 import com.blackice.control.widgets.TouchInterceptor;
+import com.scheffsblend.smw.Preferences.ImageListPreference;
 
-public class StatusBarToggles extends PreferenceFragment implements
-        OnPreferenceChangeListener {
+public class StatusBarToggles extends PreferenceFragment implements OnPreferenceChangeListener {
 
     private static final String TAG = "TogglesLayout";
 
     private static final String PREF_ENABLE_TOGGLES = "enable_toggles";
     private static final String PREF_BRIGHTNESS_LOC = "brightness_location";
     private static final String PREF_TOGGLES_STYLE = "toggle_style";
-    private static final String PREF_ALT_BUTTON_LAYOUT = "alternate_button_layout";
+    private static final String PREF_ALT_BUTTON_LAYOUT = "toggles_layout_preference";
 
     Preference mEnabledToggles;
     Preference mLayout;
     ListPreference mBrightnessLocation;
-    CheckBoxPreference mAlternateButtonLayout;
+    ImageListPreference mTogglesLayout;
     ListPreference mToggleStyle;
     Preference mResetToggles;
 
@@ -62,19 +58,15 @@ public class StatusBarToggles extends PreferenceFragment implements
         mBrightnessLocation = (ListPreference) findPreference(PREF_BRIGHTNESS_LOC);
         mBrightnessLocation.setOnPreferenceChangeListener(this);
         mBrightnessLocation.setValue(Integer.toString(Settings.System.getInt(getActivity()
-                .getContentResolver(), Settings.System.STATUSBAR_TOGGLES_BRIGHTNESS_LOC,
-                1)));
+                .getContentResolver(), Settings.System.STATUSBAR_TOGGLES_BRIGHTNESS_LOC, 1)));
 
         mToggleStyle = (ListPreference) findPreference(PREF_TOGGLES_STYLE);
         mToggleStyle.setOnPreferenceChangeListener(this);
         mToggleStyle.setValue(Integer.toString(Settings.System.getInt(getActivity()
-                .getContentResolver(), Settings.System.STATUSBAR_TOGGLES_STYLE,
-                3)));
+                .getContentResolver(), Settings.System.STATUSBAR_TOGGLES_STYLE, 3)));
 
-        mAlternateButtonLayout = (CheckBoxPreference) findPreference(PREF_ALT_BUTTON_LAYOUT);
-        mAlternateButtonLayout.setChecked(Settings.System.getInt(
-                getActivity().getContentResolver(),
-                Settings.System.STATUSBAR_TOGGLES_USE_BUTTONS, 0) == 1);
+        mTogglesLayout = (ImageListPreference) findPreference(PREF_ALT_BUTTON_LAYOUT);
+        mTogglesLayout.setOnPreferenceChangeListener(this);
 
         mLayout = findPreference("toggles");
 
@@ -83,8 +75,7 @@ public class StatusBarToggles extends PreferenceFragment implements
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
-            Preference preference) {
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mEnabledToggles) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -104,38 +95,31 @@ public class StatusBarToggles extends PreferenceFragment implements
 
             builder.setTitle(R.string.toggles_display_dialog);
             builder.setCancelable(true);
-            builder.setPositiveButton(R.string.toggles_display_close, new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            builder.setMultiChoiceItems(values,
-                    checkedToggles,
-                    new OnMultiChoiceClickListener() {
+            builder.setPositiveButton(R.string.toggles_display_close,
+                    new DialogInterface.OnClickListener() {
 
                         @Override
-                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                            String toggleKey = (finalArray[which]);
-
-                            if (isChecked)
-                                addToggle(getActivity(), toggleKey);
-                            else
-                                removeToggle(getActivity(), toggleKey);
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
                         }
                     });
+            builder.setMultiChoiceItems(values, checkedToggles, new OnMultiChoiceClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                    String toggleKey = (finalArray[which]);
+
+                    if (isChecked)
+                        addToggle(getActivity(), toggleKey);
+                    else
+                        removeToggle(getActivity(), toggleKey);
+                }
+            });
 
             AlertDialog d = builder.create();
 
             d.show();
 
-            return true;
-        } else if (preference == mAlternateButtonLayout) {
-
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.STATUSBAR_TOGGLES_USE_BUTTONS,
-                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
         } else if (preference == mLayout) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -167,6 +151,13 @@ public class StatusBarToggles extends PreferenceFragment implements
             result = Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_TOGGLES_STYLE, val);
 
+        } else if (preference == mTogglesLayout) {
+            int val = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_TOGGLES_STYLE, val == 0 ? 3 : 2);
+            result = Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_TOGGLES_USE_BUTTONS,
+                    val);
         }
         return result;
     }
@@ -202,8 +193,8 @@ public class StatusBarToggles extends PreferenceFragment implements
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             // Inflate the layout for this fragment
-            View v = inflater.inflate(
-                    R.layout.order_power_widget_buttons_activity, container, false);
+            View v = inflater.inflate(R.layout.order_power_widget_buttons_activity, container,
+                    false);
 
             return v;
         }
