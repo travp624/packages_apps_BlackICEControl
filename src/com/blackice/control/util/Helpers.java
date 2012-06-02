@@ -13,6 +13,8 @@ import java.util.Properties;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -24,7 +26,7 @@ public class Helpers {
 
     /**
      * Checks device for SuperUser permission
-     * 
+     *
      * @return If SU was granted or denied
      */
     public static boolean checkSu() {
@@ -50,8 +52,29 @@ public class Helpers {
     }
 
     /**
+     * Checks device for network connectivity
+     *
+     * @return If the device has data connectivity
+    */
+    public static boolean isNetworkAvailable(final Context c) {
+        boolean state = false;
+        if (c != null) {
+            ConnectivityManager cm = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if(netInfo != null && netInfo.isConnected()) {
+                Log.i(TAG, "The device currently has data connectivity");
+                state = true;
+            } else {
+                Log.i(TAG, "The device does not currently have data connectivity");
+                state = false;
+            }
+        }
+        return state;
+    }
+
+    /**
      * Checks to see if Busybox is installed in "/system/"
-     * 
+     *
      * @return If busybox exists
      */
     public static boolean checkBusybox() {
@@ -87,16 +110,16 @@ public class Helpers {
                 }
             }
             br.close();
-        } 
+        }
         catch (FileNotFoundException e) {
             Log.d(TAG, "/proc/mounts does not exist");
-        } 
+        }
         catch (IOException e) {
             Log.d(TAG, "Error reading /proc/mounts");
         }
         return null;
     }
-    
+
     public static boolean getMount(final String mount)
     {
         final CMDProcessor cmd = new CMDProcessor();
@@ -114,7 +137,7 @@ public class Helpers {
         }
         return ( cmd.su.runWaitFor("busybox mount -o remount," + mount + " /system").success() );
     }
-    
+
     public static String getFile(final String filename) {
         String s = "";
         final File f = new File(filename);
@@ -136,7 +159,7 @@ public class Helpers {
         }
         return s;
     }
-    
+
     public static void writeNewFile(String filePath, String fileContents) {
         File f = new File(filePath);
         if (f.exists()) {
@@ -144,20 +167,20 @@ public class Helpers {
         }
 
         try{
-            // Create file 
+            // Create file
             FileWriter fstream = new FileWriter(f);
             BufferedWriter out = new BufferedWriter(fstream);
             out.write(fileContents);
             //Close the output stream
             out.close();
         }catch (Exception e){
-            Log.d( TAG, "Failed to create " + filePath + " File contents: " + fileContents);  
+            Log.d( TAG, "Failed to create " + filePath + " File contents: " + fileContents);
         }
     }
-    
+
     /**
      * Long toast message
-     * 
+     *
      * @param c Application Context
      * @param msg Message to send
      */
@@ -169,7 +192,7 @@ public class Helpers {
 
     /**
      * Short toast message
-     * 
+     *
      * @param c Application Context
      * @param msg Message to send
      */
@@ -181,7 +204,7 @@ public class Helpers {
 
     /**
      * Long toast message
-     * 
+     *
      * @param c Application Context
      * @param msg Message to send
      */
@@ -190,19 +213,19 @@ public class Helpers {
             msgLong(c, msg);
         }
     }
-    
+
     public static boolean isPackageInstalled(final String packageName,
             final PackageManager pm)
     {
         String mVersion;
         try {
-            mVersion = pm.getPackageInfo(packageName, 0).versionName;           
+            mVersion = pm.getPackageInfo(packageName, 0).versionName;
             if (mVersion.equals(null)) {
                 return false;
             }
         } catch (NameNotFoundException e) {
             return false;
-        }       
+        }
         return true;
     }
     public static void restartSystemUI() {

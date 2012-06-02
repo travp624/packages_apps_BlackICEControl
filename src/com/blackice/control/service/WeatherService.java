@@ -8,10 +8,13 @@ import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.blackice.control.R;
 import com.blackice.control.WeatherInfo;
+import com.blackice.control.util.Helpers;
 import com.blackice.control.util.WeatherPrefs;
 import com.blackice.control.xml.WeatherXmlParser;
 
@@ -20,6 +23,7 @@ import org.w3c.dom.Document;
 import java.io.IOException;
 
 public class WeatherService extends IntentService {
+    Handler mMainThreadHandler = null;
 
     public static final String TAG = "WeatherService";
 
@@ -43,6 +47,19 @@ public class WeatherService extends IntentService {
     public WeatherService() {
         super("WeatherService");
         httpRetriever = new HttpRetriever();
+
+        mMainThreadHandler = new Handler();
+    }
+
+    // Fix for a stupid AsyncTask bug
+    // See http://code.google.com/p/android/issues/detail?id=20915
+    private void makeToast(final String msg) {
+        mMainThreadHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Helpers.msgShort(getApplicationContext(), msg);
+            }
+        });
     }
 
     @Override
@@ -51,15 +68,16 @@ public class WeatherService extends IntentService {
         String extra = null;
         String action = intent.getAction();
         String woeid = null;
+        Context context = getApplicationContext();
 
         if (Settings.System.getInt(getContentResolver(), Settings.System.USE_WEATHER, 0) == 0) {
             stopSelf();
             return;
         }
 
-        if (!Settings.Secure.isLocationProviderEnabled(getContentResolver(),
-                LocationManager.NETWORK_PROVIDER) && !WeatherPrefs
-                    .getUseCustomLocation(getApplicationContext())) {
+        if (!Settings.Secure.isLocationProviderEnabled(
+                getContentResolver(), LocationManager.NETWORK_PROVIDER)
+                && !WeatherPrefs.getUseCustomLocation(getApplicationContext())) {
             stopSelf();
             return;
         }
@@ -72,30 +90,39 @@ public class WeatherService extends IntentService {
                 woeid = YahooPlaceFinder.GeoCode(getApplicationContext(), customLoc);
                 // network location
             } else {
-                final LocationManager locationManager = (LocationManager) this
-                        .getSystemService(Context.LOCATION_SERVICE);
-                if (!intent.hasExtra("newlocation")) {
-                    intent.putExtra("newlocation", true);
-                    PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0, intent,
-                            PendingIntent.FLAG_CANCEL_CURRENT);
-                    locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, pi);
-                    return;
-                }
+                // do not attempt to get a location without data
+                boolean networkAvailable = Helpers.isNetworkAvailable(getApplicationContext());
+                if(networkAvailable) {
+                    makeToast(context.getString(R.string.weather_refreshing));
+                    final LocationManager locationManager = (LocationManager) this
+                            .getSystemService(Context.LOCATION_SERVICE);
+                    if (!intent.hasExtra("newlocation")) {
+                        intent.putExtra("newlocation", true);
+                        PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0, intent,
+                                PendingIntent.FLAG_CANCEL_CURRENT);
+                        locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, pi);
+                        return;
+                    }
 
-                Criteria crit = new Criteria();
-                crit.setAccuracy(Criteria.ACCURACY_COARSE);
-                String bestProvider = locationManager.getBestProvider(crit, true);
-                Location loc = null;
-                if (bestProvider != null) {
-                    loc = locationManager.getLastKnownLocation(bestProvider);
+                    Criteria crit = new Criteria();
+                    crit.setAccuracy(Criteria.ACCURACY_COARSE);
+                    String bestProvider = locationManager.getBestProvider(crit, true);
+                    Location loc = null;
+                    if (bestProvider != null) {
+                        loc = locationManager.getLastKnownLocation(bestProvider);
+                    } else {
+                        loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                    }
+                    try {
+                        woeid = YahooPlaceFinder.reverseGeoCode(getApplicationContext(), loc.getLatitude(),
+                        loc.getLongitude());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } else {
-                    loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-                }
-                try {
-                    woeid = YahooPlaceFinder.reverseGeoCode(getApplicationContext(), loc.getLatitude(),
-                            loc.getLongitude());
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    makeToast(context.getString(R.string.location_unavailable));
+                    stopSelf();
+                    return;
                 }
             }
             try {
@@ -154,7 +181,7 @@ public class WeatherService extends IntentService {
         }
         getApplicationContext().sendBroadcast(broadcast);
     }
-    
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         return super.onStartCommand(intent, flags, startId);

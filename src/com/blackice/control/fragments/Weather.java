@@ -153,8 +153,6 @@ public class Weather extends BlackICEPreferenceFragment implements
                         WeatherRefreshService.class);
                 i.setAction(WeatherService.INTENT_REQUEST_WEATHER);
                 getActivity().getApplicationContext().startService(i);
-                Helpers.msgShort(getActivity().getApplicationContext(),
-                        getString(R.string.weather_refreshing));
                 return true;
             default:
                 return super.onContextItemSelected(item);
@@ -240,7 +238,7 @@ public class Weather extends BlackICEPreferenceFragment implements
             mCustomWeatherApp.setSummary(R.string.weather_custom_app_summary);
         }
     }
-    
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == ShortcutPickerHelper.REQUEST_PICK_SHORTCUT

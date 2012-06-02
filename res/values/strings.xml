@@ -93,7 +93,7 @@
 
     <!-- UI -->
     <string name="rotation_animation_delay_title">Rotation delay</string>
-    <string name="rotation_animation_delay_summary">The number of milliseconds for which the device posture must be stable before an orientation change occurs. 200 ms default.	</string>
+    <string name="rotation_animation_delay_summary">The number of milliseconds for which the device posture must be stable before an orientation change occurs. 200 ms default. </string>
     <string name="ime_switcher_title">Show IME Switcher</string>
     <string name="ime_switcher_summary">In statusbar, while typing (requires reboot)</string>
     <string name="custom_carrier_label_title">Custom carrier label</string>
@@ -134,9 +134,9 @@
     <!-- Lockscreens -->
     <string name="pref_lockscreen_layout_title">Lockscreen style</string>
     <string name="pref_lockscreen_layout_summary">Remember to scroll down and change your targets after changing styles</string>
-    <string name="title_pref_lockscreen_quad_targets">Quad Targets</string>	
+    <string name="title_pref_lockscreen_quad_targets">Quad Targets</string>
     <string name="summary_pref_lockscreen_quad_targets">Adds Phone and Messaging shortcuts on the lock screen</string>
-    <string name="title_pref_lockscreen_octo_targets">Octo Targets</string>	
+    <string name="title_pref_lockscreen_octo_targets">Octo Targets</string>
     <string name="summary_pref_lockscreen_octo_targets">Adds too many shortcuts on the lock screen</string>
     <string name="title_pref_lockscreen_menu_unlock">Menu unlock</string>
     <string name="summary_pref_lockscreen_menu_unlock">Legacy menu icon unlocks screen (requires reboot)</string>
@@ -284,8 +284,8 @@
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
-    <string name="press_color_to_apply">Press on Color to apply</string>   
-    <string name="arrow_right">→</string> 
+    <string name="press_color_to_apply">Press on Color to apply</string>
+    <string name="arrow_right">→</string>
     <string name="arrow_down">↓</string>
     <string name="hex">Hex:</string>
     <string name="hex_hint">#FF000000</string>
@@ -367,7 +367,7 @@
     <string name="pt_set_cpu_activity">Set CPU</string>
     <string name="pt_free_memory">Free memory</string>
     <string name="pt_free_memory_boot">Set at boot</string>
-    
+
     <!-- Cpu -->
     <string name="pt_set_max">Max CPU</string>
     <string name="pt_set_min">Min CPU</string>
@@ -412,7 +412,7 @@
     <string name="ps_clear_cache">Clear data cache on each boot</string>
     <string name="ps_enable_sysctl">Enable sysctl tweaks on boot</string>
     <string name="ps_enable_cron">Enable scheduled cron jobs</string>
-    
+
     <!-- PropModder -->
     <string name="propmodder_title">PropModder &amp; Init.D tweaks</string>
     <string name="propmodder_title_summary">Edit build prop settings and init.d tweak settings</string>
@@ -421,7 +421,7 @@
 
     <!-- WARN THE MASSES THIS CAN BE DANGEROUS!!! -->
     <string name="main_warning_title">YOU HAVE BEEN WARNED</string>
-    <string name="main_warning_summary">This area makes changes to your build.prop.  It hacks your \'/system/build.prop\' WE ARE NOT RESPONSIBLE FOR YOUR ACTIONS! Your device 	your responsibility</string>
+    <string name="main_warning_summary">This area makes changes to your build.prop.  It hacks your \'/system/build.prop\' WE ARE NOT RESPONSIBLE FOR YOUR ACTIONS! Your device  your responsibility</string>
     <string name="pref_wifi_scan_interval_title">Wifi scan interval</string>
     <string name="pref_wifi_scan_interval_summary">The time between wifi scans when no stored access points are available (requires reboot)</string>
     <string name="pref_wifi_scan_alt_summary">Time between wifi scans: %s</string>
@@ -488,7 +488,7 @@
     <string name="ps_set_min">Set min CPU scaling frequency\nCurrent: %s</string>
     <string name="ps_set_gov">Set current scaling governor\nCurrent: %s</string>
     <string name="ps_cpu_boot">Apply CPU at boot</string>
-    
+
     <!-- Performance -->
     <string name="ps_set_cpu_activity">Set min/max frequencies and scaling governor
     </string>
@@ -514,7 +514,7 @@
     <string name="set_boot">Set On Boot</string>
     <string name="apply_values">Apply Values</string>
     <string name="dpi">DPI</string>
-    
+
     <!--  Kernel Tweaks -->
     <string name="pt_fast_charge_boot">Fast Charge</string>
     <string name="ps_fast_charge_boot">Enable fast charge at boot</string>
@@ -531,11 +531,11 @@
     <string name="color_green_title">Green</string>
     <string name="color_blue_title">Blue</string>
     <string name="reset_defaults">Reset to defaults</string>
-    
+
     <!-- Volume Options to Volume rocker -->
     <string name="enable_volume_options">Enable Volume Options</string>
     <string name="enable_volume_options_summary">Adds clickable btn to volume slider</string>
-    
+
     <!-- #teamkang stuff -->
     <string name="donate_roman">https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=MZD7JLRX6P99Y</string>
     <string name="donate_whitehawk">https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=8W7F2Y7S7KRM6</string>
@@ -555,7 +555,7 @@
     <string name="aokp_irc_summary">#teamkang @ irc.freenode.net</string>
     <string name="about_aokp">About AOKP &amp; #teamkang</string>
     <string name="about_aokp_summary">@null</string>
-    
+
     <!-- thanks from BlackICE -->
     <string name="blackice">BlackICE AOKP source infused</string>
     <string name="blackice_summary">@null</string>
@@ -674,5 +674,8 @@
     <string name="weather_47">Isolated Thundershowers</string>
     <!-- Forecase unavailable -->
     <string name="weather_3200"></string>
+
+    <!-- Miscellaneous -->
+    <string name="location_unavailable">Unable to retrieve location information for weather update</string>
 
 </resources>
