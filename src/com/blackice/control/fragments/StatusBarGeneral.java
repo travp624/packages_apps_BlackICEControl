@@ -48,12 +48,14 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     private static final String NOTIFICATION_COLOR = "notification_color";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final String PREF_FONTSIZE = "status_bar_fontsize";
+    private static final String PREF_STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
 
     CheckBoxPreference mDefaultSettingsButtonBehavior;
     CheckBoxPreference mAutoHideToggles;
     CheckBoxPreference mStatusBarBrightnessToggle;
     CheckBoxPreference mDateCalendar;
     CheckBoxPreference mAdbIcon;
+    CheckBoxPreference mStatusBarNotifCount;
     ListPreference mLayout;
     ListPreference mTopCarrier;
     ListPreference mStockCarrier;
@@ -67,7 +69,7 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     SeekBarPreference mNotificationAlpha;
 
     Context mContext;
-    
+
     String mCustomLabelText = null;
 
     @Override
@@ -140,6 +142,11 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
                 .getContentResolver(), Settings.System.STATUS_BAR_TRANSPARENCY,
                 100)));
 
+        mStatusBarNotifCount = (CheckBoxPreference) findPreference(PREF_STATUS_BAR_NOTIF_COUNT);
+        mStatusBarNotifCount.setChecked(Settings.System.getInt(mContext
+                .getContentResolver(), Settings.System.STATUS_BAR_NOTIF_COUNT,
+                0) == 1);
+
         mFontsize = (ListPreference) findPreference(PREF_FONTSIZE);
         mFontsize.setOnPreferenceChangeListener(this);
         mFontsize.setValue(Integer.toString(Settings.System.getInt(getActivity()
@@ -149,7 +156,7 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
         mLayout = (ListPreference) findPreference(PREF_LAYOUT);
         mLayout.setOnPreferenceChangeListener(this);
         mLayout.setValue(Integer.toString(Settings.System.getInt(getActivity()
-                .getContentResolver(), Settings.System.STATUS_BAR_LAYOUT, 
+                .getContentResolver(), Settings.System.STATUS_BAR_LAYOUT,
                 0)));
 
         if (mTablet) {
@@ -210,6 +217,12 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
                     Settings.Secure.ADB_ICON, checked ? 1 : 0);
             return true;
 
+        } else if (preference == mStatusBarNotifCount) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.STATUS_BAR_NOTIF_COUNT,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
+
         } else if (preference == mDateCalendar) {
             value = mDateCalendar.isChecked();
             Settings.System.putInt(getContentResolver(),
@@ -249,7 +262,7 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean result = false;
         if (preference == mTransparency) {;
-            int val = Integer.parseInt((String) newValue);                
+            int val = Integer.parseInt((String) newValue);
             result = Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_TRANSPARENCY, val);
             Helpers.restartSystemUI();
@@ -259,14 +272,14 @@ public class StatusBarGeneral extends BlackICEPreferenceFragment implements
                     Settings.System.STATUS_BAR_LAYOUT, val);
             Helpers.restartSystemUI();
         } else if (preference == mTopCarrier) {
-            Settings.System.putInt(getActivity().getContentResolver(), 
+            Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.TOP_CARRIER_LABEL, Integer.parseInt((String) newValue));
             if (Integer.parseInt((String) newValue) > 0) {
                 Helpers.restartSystemUI();
             }
             return true;
         } else if (preference == mStockCarrier) {
-            Settings.System.putInt(getActivity().getContentResolver(), 
+            Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.USE_CUSTOM_CARRIER, Integer.parseInt((String)  newValue));
             if (Integer.parseInt((String) newValue) > 0) {
                 Helpers.restartSystemUI();
