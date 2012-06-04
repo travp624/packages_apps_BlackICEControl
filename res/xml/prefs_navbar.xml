@@ -5,7 +5,7 @@
         android:key="enable_nav_bar"
         android:title="Enable bar" />
 
-    <PreferenceCategory 
+    <PreferenceCategory
         android:key="navbar_style_entries"
         android:title="navbar style entries">
 
@@ -37,7 +37,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory 
+    <PreferenceCategory
         android:key="navbar_color"
         android:title="navbar btns color &amp; transparency">
 
@@ -75,7 +75,7 @@
             android:entryValues="@array/glow_times_values"
             android:title="@string/glow_times_title"
             android:summary="@string/glow_times_summary"
-			android:defaultValue="100|10" />
+            android:defaultValue="100|10" />
 
         <ListPreference
             android:key="navigation_bar_width"
@@ -90,6 +90,17 @@
             android:entryValues="@array/navigation_bar_height"
             android:title="@string/navigation_bar_height_title"
             android:summary="@string/navigation_bar_height_summary" />
+
+        <CheckBoxPreference
+            android:key="combined_bar_auto_hide"
+            android:title="@string/combined_bar_auto_hide_title"
+            android:summary="@string/combined_bar_auto_hide_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="navbar_widgets"
+        android:title="@string/navbar_widgets">
 
     </PreferenceCategory>
 
