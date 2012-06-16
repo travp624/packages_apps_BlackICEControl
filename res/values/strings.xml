@@ -219,6 +219,11 @@
     <string name="title_show_torch_toggle">Show torch toggle</string>
     <string name="title_show_airplane_toggle">Show airplane toggle</string>
     <string name="title_show_navbar_hide">Show navigation bar toggle</string>
+
+    <!-- Share to Clipboard -->
+    <string name="clipboard_notification">Copied to clipboard.</string>
+
+    <!-- Profiles -->
     <string name="title_show_profile_chooser">Show profile chooser</string>
 
     <!--  Statusbar | General -->
