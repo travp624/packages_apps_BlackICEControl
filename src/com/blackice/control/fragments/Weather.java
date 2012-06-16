@@ -151,7 +151,8 @@ public class Weather extends BlackICEPreferenceFragment implements
             case R.id.get_weather:
                 Intent i = new Intent(getActivity().getApplicationContext(),
                         WeatherRefreshService.class);
-                i.setAction(WeatherService.INTENT_REQUEST_WEATHER);
+                i.setAction(WeatherService.INTENT_WEATHER_REQUEST);
+                i.putExtra(WeatherService.INTENT_EXTRA_ISMANUAL, true);
                 getActivity().getApplicationContext().startService(i);
                 return true;
             default:
@@ -166,7 +167,8 @@ public class Weather extends BlackICEPreferenceFragment implements
             boolean check = ((CheckBoxPreference) preference).isChecked();
             Intent i = new Intent(getActivity().getApplicationContext(),
                     WeatherRefreshService.class);
-            i.setAction(WeatherService.INTENT_REQUEST_WEATHER);
+            i.setAction(WeatherService.INTENT_WEATHER_REQUEST);
+            i.putExtra(WeatherService.INTENT_EXTRA_ISMANUAL, true);
             PendingIntent weatherRefreshIntent = PendingIntent.getService(getActivity(), 0, i, 0);
             if (!check) {
                 AlarmManager alarms = (AlarmManager) getActivity().getSystemService(
