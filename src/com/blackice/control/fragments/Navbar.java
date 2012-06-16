@@ -227,6 +227,7 @@ public class Navbar extends BlackICEPreferenceFragment implements
 
         refreshSettings();
         setHasOptionsMenu(true);
+        updateGlowTimesSummary();
 
         IntentFilter filter = new IntentFilter(ACTION_SEND_ID);
         mContext.registerReceiver(mWidgetIdReceiver, filter);
@@ -404,18 +405,17 @@ public class Navbar extends BlackICEPreferenceFragment implements
             return true;
         } else if (preference == mGlowTimes) {
             // format is (on|off) both in MS
-            int breakIndex = ((String) newValue).indexOf("|");
             String value = (String) newValue;
+            String[] breakIndex = value.split("\\|");
 
-            int offTime = Integer.parseInt(value.substring(breakIndex + 1));
-            int onTime = Integer.parseInt(value.substring(0, breakIndex));
+            int onTime = Integer.valueOf(breakIndex[0]);
+            int offTime = Integer.valueOf(breakIndex[1]);
 
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_GLOW_DURATION[0],
-                    offTime);
+                    Settings.System.NAVIGATION_BAR_GLOW_DURATION[0], offTime);
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_GLOW_DURATION[1],
-                    onTime);
+                    Settings.System.NAVIGATION_BAR_GLOW_DURATION[1], onTime);
+            updateGlowTimesSummary();
             return true;
         } else if (preference == mButtonAlpha) {
             float val = Float.parseFloat((String) newValue);
@@ -484,6 +484,31 @@ public class Navbar extends BlackICEPreferenceFragment implements
                 Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, isBarOn ? 0 : 1);
         Settings.System.putInt(mContext.getContentResolver(),
                 Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, isBarOn ? 1 : 0);
+    }
+
+    private void updateGlowTimesSummary() {
+        int resId;
+        String combinedTime = Settings.System.getString(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_GLOW_DURATION[1]) + "|" +
+                Settings.System.getString(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_GLOW_DURATION[0]);
+
+        String[] glowArray = getResources().getStringArray(R.array.glow_times_values);
+
+        if (glowArray[0].equals(combinedTime)) {
+            resId = R.string.glow_times_off;
+            mGlowTimes.setValueIndex(0);
+        } else if (glowArray[1].equals(combinedTime)) {
+            resId = R.string.glow_times_superquick;
+            mGlowTimes.setValueIndex(1);
+        } else if (glowArray[2].equals(combinedTime)) {
+            resId = R.string.glow_times_quick;
+            mGlowTimes.setValueIndex(2);
+        } else {
+            resId = R.string.glow_times_normal;
+            mGlowTimes.setValueIndex(3);
+        }
+        mGlowTimes.setSummary(getResources().getString(resId));
     }
 
     public int mapChosenDpToPixels(int dp) {

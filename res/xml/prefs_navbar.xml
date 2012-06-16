@@ -74,8 +74,8 @@
             android:entries="@array/glow_times_entries"
             android:entryValues="@array/glow_times_values"
             android:title="@string/glow_times_title"
-            android:summary="@string/glow_times_summary"
-            android:defaultValue="100|10" />
+            android:defaultValue="100|10"
+            android:persistent="false" />" />
 
         <ListPreference
             android:key="navigation_bar_width"
