@@ -31,7 +31,6 @@ public class UserInterface extends BlackICEPreferenceFragment implements
 
     public static final String TAG = "UserInterface";
 
-    private static final String PREF_LED_SCREEN_ON = "led_screen_on";
     private static final String PREF_CRT_ON = "crt_on";
     private static final String PREF_CRT_OFF = "crt_off";
     private static final String PREF_IME_SWITCHER = "ime_switcher";
@@ -41,6 +40,8 @@ public class UserInterface extends BlackICEPreferenceFragment implements
     private static final String PREF_180 = "rotate_180";
     private static final String PREF_HOME_LONGPRESS = "long_press_home";
     private static final String PREF_RECENT_APP_SWITCHER = "recent_app_switcher";
+    private static final String PREF_LESS_NOTIFICATION_SOUNDS = "less_notification_sounds";
+    private static final String PREF_LED_SCREEN_ON = "led_screen_on";
 
     CheckBoxPreference mCrtOnAnimation;
     CheckBoxPreference mCrtOffAnimation;
@@ -50,11 +51,13 @@ public class UserInterface extends BlackICEPreferenceFragment implements
     CheckBoxPreference mAllow180Rotation;
     ListPreference mAnimationRotationDelay;
     ListPreference mHomeLongpress;
-    ListPreference mRecentAppSwitcher;
     Preference mLcdDensity;
     CheckBoxPreference mDisableBootAnimation;
+    CheckBoxPreference mDisableBootAudio;
     CheckBoxPreference mDisableBugMailer;
     CheckBoxPreference mLedScreenOn;
+    ListPreference mRecentAppSwitcher;
+    ListPreference mAnnoyingNotifications;
 
     int newDensityValue;
 
@@ -104,6 +107,12 @@ public class UserInterface extends BlackICEPreferenceFragment implements
                 .getContentResolver(), Settings.System.RECENT_APP_SWITCHER,
                 0)));
 
+        mAnnoyingNotifications = (ListPreference) findPreference(PREF_LESS_NOTIFICATION_SOUNDS);
+        mAnnoyingNotifications.setOnPreferenceChangeListener(this);
+        mAnnoyingNotifications.setValue(Integer.toString(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD,
+                0)));
+
         mLedScreenOn = (CheckBoxPreference) findPreference(PREF_LED_SCREEN_ON);
         mLedScreenOn.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.LED_SCREEN_ON, 0) == 1);
@@ -122,6 +131,19 @@ public class UserInterface extends BlackICEPreferenceFragment implements
         mDisableBootAnimation.setChecked(!new File("/system/media/bootanimation.zip").exists());
         if (mDisableBootAnimation.isChecked())
             mDisableBootAnimation.setSummary(R.string.disable_bootanimation_summary);
+
+        mDisableBootAudio = (CheckBoxPreference) findPreference("disable_bootaudio");
+
+        if(!new File("/system/media/boot_audio.mp3").exists() &&
+                !new File("/system/media/boot_audio.unicorn").exists() ) {
+            mDisableBootAudio.setEnabled(false);
+            mDisableBootAudio.setSummary(R.string.disable_bootaudio_summary_disabled);
+        } else {
+            mDisableBootAudio.setChecked(!new File("/system/media/boot_audio.mp3").exists());
+            if (mDisableBootAudio.isChecked())
+                mDisableBootAudio.setSummary(R.string.disable_bootaudio_summary);
+        }
+
 
         mDisableBugMailer = (CheckBoxPreference) findPreference("disable_bugmailer");
         mDisableBugMailer.setChecked(!new File("/system/bin/bugmailer.sh").exists());
@@ -157,48 +179,36 @@ public class UserInterface extends BlackICEPreferenceFragment implements
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             Preference preference) {
         if (preference == mCrtOffAnimation) {
-
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.CRT_OFF_ANIMATION, checked ? 1 : 0);
             return true;
-
         } else if (preference == mCrtOnAnimation) {
-
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.CRT_ON_ANIMATION, checked ? 1 : 0);
             return true;
-            
         } else if (preference == mShowImeSwitcher) {
-
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.SHOW_STATUSBAR_IME_SWITCHER, checked ? 1 : 0);
             return true;
-
         } else if (preference == mEnableVolumeOptions) {
-
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.ENABLE_VOLUME_OPTIONS, checked ? 1 : 0);
             return true;
-
         } else if (preference == mLongPressToKill) {
-
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.KILL_APP_LONGPRESS_BACK, checked ? 1 : 0);
             return true;
-
         } else if (preference == mAllow180Rotation) {
-
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.ACCELEROMETER_ROTATION_ANGLES, checked ? (1 | 2 | 4 | 8)
                             : (1 | 2 | 8));
             return true;
-
         } else if (preference == mDisableBootAnimation) {
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             if (checked) {
@@ -215,7 +225,21 @@ public class UserInterface extends BlackICEPreferenceFragment implements
                 preference.setSummary("");
             }
             return true;
-
+        } else if (preference == mDisableBootAudio) {
+            boolean checked = ((CheckBoxPreference) preference).isChecked();
+            if (checked) {
+                Helpers.getMount("rw");
+                new CMDProcessor().su
+                        .runWaitFor("mv /system/media/boot_audio.mp3 /system/media/boot_audio.blackice");
+                Helpers.getMount("ro");
+                preference.setSummary(R.string.disable_bootaudio_summary);
+            } else {
+                Helpers.getMount("rw");
+                new CMDProcessor().su
+                        .runWaitFor("mv /system/media/boot_audio.blackice /system/media/boot_audio.mp3");
+                Helpers.getMount("ro");
+            }
+            return true;
         } else if (preference == mDisableBugMailer) {
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             if (checked) {
@@ -255,7 +279,6 @@ public class UserInterface extends BlackICEPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.ACCELEROMETER_ROTATION_SETTLE_TIME,
                     Integer.parseInt((String) newValue));
-
             return true;
         } else if (preference == mHomeLongpress) {
             Settings.System.putInt(getActivity().getContentResolver(),
@@ -267,6 +290,11 @@ public class UserInterface extends BlackICEPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                 Settings.System.RECENT_APP_SWITCHER, val);
             Helpers.restartSystemUI();
+            return true;
+        } else if (preference == mAnnoyingNotifications) {
+            int val = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD, val);
             return true;
         }
         return false;
