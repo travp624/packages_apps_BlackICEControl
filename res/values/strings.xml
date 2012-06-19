@@ -118,7 +118,9 @@
     <string name="custom_carrier_label_title">Custom carrier label</string>
     <string name="longpress_to_kill_title">Hold back to kill</string>
     <string name="longpress_to_kill_summary">Holding back will kill the current activity</string>
+    <!-- Volume Options to Volume rocker in UI -->
     <string name="enable_volume_options">Enable Volume Options</string>
+    <string name="enable_volume_options_summary">Adds clickable btn to volume slider</string>
     <string name="less_notification_sounds_title">Less Frequent Notification Sounds</string>
     <string name="less_notification_sounds_summary">Limit each app\'s notification sounds to play once per the set value</string>
     <string name="rotate_180_title">Allow 180° rotation</string>
@@ -564,10 +566,6 @@
     <string name="color_green_title">Green</string>
     <string name="color_blue_title">Blue</string>
     <string name="reset_defaults">Reset to defaults</string>
-
-    <!-- Volume Options to Volume rocker -->
-    <string name="enable_volume_options">Enable Volume Options</string>
-    <string name="enable_volume_options_summary">Adds clickable btn to volume slider</string>
 
     <!-- #teamkang stuff -->
     <string name="donate_roman">https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=MZD7JLRX6P99Y</string>
