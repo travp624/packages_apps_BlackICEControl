@@ -100,10 +100,6 @@
             android:title="@string/title_led_screen_on"
             android:summary="@string/summary_led_screen_on" />
 
-        <CheckBoxPreference
-            android:key="enable_volume_options"
-            android:title="@string/enable_volume_options" />
-
     </PreferenceCategory>
 
 </PreferenceScreen>
