@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Properties;
 
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -214,6 +216,23 @@ public class Helpers {
         }
     }
 
+    /**
+     * Return a timestamp
+     * 
+     * @param c Application Context
+     */
+    public static String getTimestamp(final Context context) {
+        String timestamp;
+        timestamp = "unknown";
+        Date now = new Date();
+        java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
+        java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(context);
+        if(dateFormat != null && timeFormat != null) {
+            timestamp = dateFormat.format(now) + " " + timeFormat.format(now);
+        }
+        return timestamp;
+    }
+    
     public static boolean isPackageInstalled(final String packageName,
             final PackageManager pm)
     {
