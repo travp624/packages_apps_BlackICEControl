@@ -40,7 +40,7 @@ public class WeatherXmlParser {
     private static final String ATT_YAHOO_DIRECTION = "direction";
     private static final String ATT_YAHOO_TODAY_HIGH = "high";
     private static final String ATT_YAHOO_TODAY_LOW = "low";
-    
+
     private Context mContext;
 
     public WeatherXmlParser(Context context) {
@@ -69,13 +69,13 @@ public class WeatherXmlParser {
         try {
             Element root = docWeather.getDocumentElement();
             root.normalize();
-            
+
             NamedNodeMap locationNode = root.getElementsByTagName(PARAM_YAHOO_LOCATION).item(0)
                     .getAttributes();
             if (locationNode != null) {
                 strCity = locationNode.getNamedItem(ATT_YAHOO_CITY).getNodeValue();
             }
-            
+
             NamedNodeMap unitNode = root.getElementsByTagName(PARAM_YAHOO_UNIT).item(0)
                     .getAttributes();
 
@@ -104,9 +104,10 @@ public class WeatherXmlParser {
                     .getAttributes();
             if (temNode != null) {
                 strWindSpeed = temNode.getNamedItem(ATT_YAHOO_SPEED).getNodeValue();
-                strWindDir = temNode.getNamedItem(ATT_YAHOO_DIRECTION).getNodeValue();
+                strWindDir = WeatherInfo.getTranslatedDirectionString(mContext,
+                    temNode.getNamedItem(ATT_YAHOO_DIRECTION).getNodeValue());
             }
-            
+
             NamedNodeMap fcNode = root.getElementsByTagName(PARAM_YAHOO_FORECAST).item(0).getAttributes();
             if (fcNode != null) {
                 strHigh = fcNode.getNamedItem(ATT_YAHOO_TODAY_HIGH).getNodeValue();
@@ -137,7 +138,7 @@ public class WeatherXmlParser {
             NodeList attrsList = resultNode.getChildNodes();
 
             for (int i = 0; i < attrsList.getLength(); i++) {
-                
+
                 Node node = attrsList.item(i);
                 Node firstChild = node.getFirstChild();
 
