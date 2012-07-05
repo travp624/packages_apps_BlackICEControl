@@ -116,17 +116,25 @@ public class WeatherService extends IntentService {
                     }
                     final LocationManager locationManager = (LocationManager) this
                             .getSystemService(Context.LOCATION_SERVICE);
-                    if (!intent.hasExtra(INTENT_EXTRA_NEWLOCATION)) {
-                        intent.putExtra(INTENT_EXTRA_NEWLOCATION, true);
-                        PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0, intent,
-                                PendingIntent.FLAG_CANCEL_CURRENT);
-                        locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, pi);
-                        return;
-                    }
 
                     Criteria crit = new Criteria();
                     crit.setAccuracy(Criteria.ACCURACY_COARSE);
                     String bestProvider = locationManager.getBestProvider(crit, true);
+
+                    if (!intent.hasExtra(INTENT_EXTRA_NEWLOCATION)) {
+                        intent.putExtra(INTENT_EXTRA_NEWLOCATION, true);
+                        PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0, intent,
+                                PendingIntent.FLAG_CANCEL_CURRENT);
+                        if (bestProvider != null) {
+                            locationManager.requestSingleUpdate(bestProvider, pi);
+                        } else {
+                            if (manual) {
+                                makeToast(context.getString(R.string.location_unavailable));
+                            }
+                        }
+                        return;
+                    }
+
                     Location loc = null;
                     if (bestProvider != null) {
                         loc = locationManager.getLastKnownLocation(bestProvider);
@@ -135,7 +143,7 @@ public class WeatherService extends IntentService {
                     }
                     try {
                         woeid = YahooPlaceFinder.reverseGeoCode(getApplicationContext(), loc.getLatitude(),
-                        loc.getLongitude());
+                                loc.getLongitude());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
