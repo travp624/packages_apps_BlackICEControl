@@ -224,8 +224,8 @@
     <string name="lockscreen_4tab_slider_summary">Enabling this gives you the 4tab slider with one custom app launcher</string>
     <string name="lockscreen_extra_title">Enable apps for ring lock</string>
     <string name="lockscreen_extra_summary">Checking this gives you custom apps on ring lock ***only custom apps***</string>
-    <string name="lockscreen_music_widget_title">Music Widget Type</string>
-    <string name="lockscreen_music_widget_summary">Pick the lockscreen music widget you want to use</string>
+    <string name="lockscreen_stock_music_layout_title">Stock music layout</string>
+    <string name="lockscreen_stock_music_layout_summary">Use the stock layout when playing music.</string>
 
     <!-- Power Menu -->
     <string name="title_show_screenshot">Show screenshot</string>

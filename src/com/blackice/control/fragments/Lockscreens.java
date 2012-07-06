@@ -67,7 +67,7 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
 
     private static final String PREF_VOLUME_WAKE = "volume_wake";
     private static final String PREF_VOLUME_MUSIC = "volume_music_controls";
-    private static final String LOCKSCREEN_MUSIC_WIDGET = "lockscreen_music_widget";
+    private static final String PREF_STOCK_MUSIC_LAYOUT = "lockscreen_stock_music_layout";
 
     private static final String PREF_LOCKSCREEN_BATTERY = "lockscreen_battery";
     private static final String PREF_LOCKSCREEN_WEATHER = "lockscreen_weather";
@@ -109,9 +109,9 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
     Preference mCalendarSources;
     ListPreference mCalendarInterval;
     ListPreference mCalendarRange;
-    ListPreference mMusicStyle;
     CheckBoxPreference mLockscreenCalendarHideOngoing;
     CheckBoxPreference mLockscreenCalendarUseColors;
+    CheckBoxPreference mStockMusicLayout;
     CheckBoxPreference mLockscreen4tabSlider;
     CheckBoxPreference mLockExtra;
 
@@ -183,10 +183,9 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
         mVolumeMusic.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.VOLUME_MUSIC_CONTROLS, 0) == 1);
 
-        mMusicStyle = (ListPreference) findPreference(LOCKSCREEN_MUSIC_WIDGET);
-        mMusicStyle.setOnPreferenceChangeListener(this);
-        mMusicStyle.setValue(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.MUSIC_WIDGET_TYPE, 0) + "");
+        mStockMusicLayout = (CheckBoxPreference) findPreference(PREF_STOCK_MUSIC_LAYOUT);
+        mStockMusicLayout.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_STOCK_MUSIC_LAYOUT, 0) == 1);
 
         mLockscreenWallpaper = findPreference("wallpaper");
 
@@ -230,10 +229,6 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
 
         ((PreferenceGroup) findPreference("advanced_cat"))
                 .removePreference(findPreference(Settings.System.LOCKSCREEN_HIDE_NAV));
-
-        if (mTablet) {
-            ((PreferenceGroup) findPreference("advanced_cat")).removePreference(mMusicStyle);
-        }
 
         if (!hasTorch) {
             ((PreferenceGroup) findPreference("advanced_cat"))
@@ -305,6 +300,12 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
 
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.VOLUME_WAKE_SCREEN,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
+        } else if (preference == mStockMusicLayout) {
+
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_STOCK_MUSIC_LAYOUT,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
         } else if (preference == mVolumeMusic) {
@@ -727,11 +728,6 @@ public class Lockscreens extends BlackICEPreferenceFragment implements
             long val = Long.parseLong((String) newValue);
             Settings.System.putLong(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_CALENDAR_RANGE, val);
-            return true;
-
-        } else if (preference == mMusicStyle) {
-             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.MUSIC_WIDGET_TYPE, Integer.parseInt((String) newValue));
             return true;
 
         } else if (preference == mLockscreenTextColor) {
